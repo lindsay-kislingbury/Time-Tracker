@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel ="stylesheet" href="/css/styles.css" type="text/css">
+        <title>Register</title>
+    </head>
+    <body>
+        <form action="/auth/signup" method="post">
+            <div class="imgcontainer">
+                <h1>Register</h1>
+              <img src="img/cat.jpg" alt="cat" class="avatar">
+            </div>
+            <div class="formcontainer">
+                <label><b>Email</b></label>
+                <input type="email" placeholder="Enter Email" name="username" required> <br>
+                <label><b>Name</b></label>
+                <input type="text" placeholder="Enter Name" name="name" required> <br>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <label><b>Confirm Password</b></label>
+                <input type="password" placeholder="Enter Password Again" name="confirmPassword" required>
+            </div>
+            <input type="submit" value="Submit">
+          </form>   
+          <div class="registercontainer">
+            <a href="#" class="registerbtn" role="button">Register</a>
+          </div>       
+    </body>
+</html>
