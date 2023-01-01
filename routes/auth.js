@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
-
+router.use(express.static(__dirname + '/public'));
 
 // /api/auth/signup
 router.post(
