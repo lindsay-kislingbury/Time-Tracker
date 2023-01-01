@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <link rel ="stylesheet" href="/css/styles.css" type="text/css">
-        <title>Register</title>
+      <%- include('partials/head') %>
     </head>
     <body>
+      <div class="cardcontainer">
         <form action="/auth/signup" method="post">
-            <div class="imgcontainer">
-                <h1>Register</h1>
-              <img src="img/cat.jpg" alt="cat" class="avatar">
-            </div>
-            <div class="formcontainer">
-                <label><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="username" required> <br>
-                <label><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="name" required> <br>
-                <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-                <label><b>Confirm Password</b></label>
-                <input type="password" placeholder="Enter Password Again" name="confirmPassword" required>
-            </div>
-            <input type="submit" value="Submit">
-          </form>   
-          <div class="registercontainer">
-            <a href="#" class="registerbtn" role="button">Register</a>
-          </div>       
+          <div class= "titlecontainer"><%- title %></div>
+          <div class="imgcontainer">
+              <img src="img/catbox.jpg" alt="cat" class="avatar">
+          </div>
+          <label><b>Email</b></label><br>
+          <input type="email" placeholder="Enter Email" name="username" required> 
+          <br>
+          <label><b>Name</b></label><br>
+          <input type="text" placeholder="Enter Name" name="name" required> 
+          <br>
+          <label><b>Password</b></label><br>
+          <input type="password" placeholder="Enter Password" name="password" required>
+          <br>
+          <label><b>Confirm Password</b></label><br>
+          <input type="password" placeholder="Enter Password Again" name="confirmPassword" required>
+          <br>
+          <input type="submit" value="Submit">
+          <br><br>
+          <a href="/">back to login</a>
+        </form>    
+      </div>  
     </body>
 </html>

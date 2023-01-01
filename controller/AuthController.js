@@ -1,7 +1,10 @@
 const User = require("../models/User");
 
 const login = (req, res) => {
-    return res.status(200).json({msg: "user successfully logged in"});
+    const name= req.user.name;
+    console.log(name);
+    res.render('dashboard', {user: name});
+    //return res.status(200).json({msg: "user successfully logged in"});
 };
 
 const signup = async (req, res) => {

@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <link rel ="stylesheet" href="/css/styles.css" type="text/css">
-        <title>Time Tracker</title>
+      <%- include('partials/head.ejs') %>
     </head>
     <body>
+      <div class="cardcontainer">
         <form action="/auth/login" method="post">
+          <div class= "titlecontainer"><%- title %></div>
             <div class="imgcontainer">
-              <img src="img/cat.jpg" alt="cat" class="avatar">
+              <img src="img/sleepingcat.jpg" alt="cat" class="avatar">
             </div>
-            <div class="formcontainer">
-              <label><b>Email</b></label>
-              <input type="email" placeholder="Enter Email" name="username" required> <br>
-              <label><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" name="password" required>
-            </div>
+            <label><b>Email</b></label><br>
+            <input type="email" placeholder="Enter Email" name="username" required>
+            <br>
+            <label><b>Password</b></label><br>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <br>
             <input type="submit" value="Submit">
-          </form>   
-          <div class="registercontainer">
-            <a href="#" class="registerbtn" role="button">Register</a>
-          </div>       
+            <br><br>
+            <a href="/register">click here to register</a>
+          </form>      
+        </div>  
     </body>
 </html>

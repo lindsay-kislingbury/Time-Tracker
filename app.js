@@ -53,11 +53,17 @@ mongoose
 
 //Home Page
 app.get('/', function (req, res) {
-    res.render('index')
+    res.render('index', {title: 'Login'})
 })
 
+//Register Page
 app.get('/register', function(req, res) {
-    res.render('register')
+    res.render('register', {title: 'Register'})
+})
+
+//Dashboard
+app.get('/dashboard', function(req, res) {
+    res.render('dashboard', {title: 'Dashboard', })
 })
 
 app.listen(4000), () => {
