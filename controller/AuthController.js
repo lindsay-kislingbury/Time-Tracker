@@ -1,5 +1,15 @@
 const User = require("../models/User");
 
+//TODO: ? DO I STILL NEED THIS?
+const loginCheck = (req, res) => {
+    if(!req.user)
+        return res.render('index', {title: "Login"});
+    else{
+        const name=req.user.name;
+        res.render('dashboard', {user: name});
+    }
+};
+
 const login = (req, res) => {
     const name= req.user.name;
     res.render('dashboard', {user: name});
@@ -11,10 +21,9 @@ const signup = async (req, res) => {
     try{
         let user = await User.findOne({username});
         if(!user) {
-            let newUser = new User({name, username, password});
+            let newUser = new User({username, name, password});
             await newUser.save();
-            const name = user.name;
-            return res.render('dashboard', {user: name});
+            return res.redirect('/');
         }
         //TODO: return alert box instead of json
         return res
@@ -27,20 +36,18 @@ const signup = async (req, res) => {
         }
     };
 
-const logout = (req, res) => {
-    req.logout();
-    res.stat(200).json({msg: "logged out"});
-};
-
-//TODO: ? DO I STILL NEED THIS?
-const me = (req, res) => {
-    if(!req.user)
-        return res.status(403).json({errors: ["login to get the info"]});
+const logout = (req, res, next) => {
+    req.logout(function(err){
+        if(err){
+            return next(err);
+        }
+        res.redirect('/');
+    });
 };
 
 module.exports = {
     login,
     signup,
     logout,
-    me,
+    loginCheck,
   };

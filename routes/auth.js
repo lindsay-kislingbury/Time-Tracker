@@ -3,7 +3,7 @@ const passport = require("passport");
 const bodyParser = require('body-parser');
 const {check, validationResult} = require("express-validator");
 
-const {login, logout, signup, me} = require("../controller/AuthController");
+const {login, logout, signup, loginCheck} = require("../controller/AuthController");
 
 const router = express.Router();
 
@@ -11,7 +11,17 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(express.static(__dirname + '/public'));
 
+// /auth
+router.get('/', loginCheck);
+
+// /auth/logout
+router.get('/logout', logout);
+
 // /auth/signup
+router.get('/register', (req, res) => {
+    res.render('register', {title: 'Register'});
+})
+
 router.post(
     "/signup",
     [
@@ -49,7 +59,6 @@ router.post(
     signup
 );
 
-
 // /auth/login
 router.post(
     "/login",
@@ -60,9 +69,8 @@ router.post(
     login
 );
 
-// /auth/me
-//Used to get the logged in user's info
-//DO I STILL NEED THIS?
-router.get("/me", me);
+
+
+
 
 module.exports = router;

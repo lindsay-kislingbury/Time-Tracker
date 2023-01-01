@@ -53,12 +53,7 @@ mongoose
 
 //Home Page
 app.get('/', function (req, res) {
-    res.render('index', {title: 'Login'})
-})
-
-//Register Page
-app.get('/register', function(req, res) {
-    res.render('register', {title: 'Register'})
+    res.redirect('/auth');
 })
 
 //Dashboard
