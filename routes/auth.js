@@ -11,7 +11,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(express.static(__dirname + '/public'));
 
-// /api/auth/signup
+// /auth/signup
 router.post(
     "/signup",
     [
@@ -56,11 +56,13 @@ router.post(
     passport.authenticate("local", {
       failureMessage: "Invalid username or password",
     }),
+    // use login controller
     login
 );
 
-// /api/auth/me
+// /auth/me
 //Used to get the logged in user's info
+//DO I STILL NEED THIS?
 router.get("/me", me);
 
 module.exports = router;

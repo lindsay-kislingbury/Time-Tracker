@@ -2,7 +2,6 @@ const User = require("../models/User");
 
 const login = (req, res) => {
     const name= req.user.name;
-    console.log(name);
     res.render('dashboard', {user: name});
     //return res.status(200).json({msg: "user successfully logged in"});
 };
@@ -14,15 +13,16 @@ const signup = async (req, res) => {
         if(!user) {
             let newUser = new User({name, username, password});
             await newUser.save();
-            return res.status(200).json({msg: "user successfully created"});
+            const name = user.name;
+            return res.render('dashboard', {user: name});
         }
+        //TODO: return alert box instead of json
         return res
             .status(422)
             .json({errors: ["the user with this email already exists"] });
         }
         catch(error){
             console.error(error);
-
             return res.status(500).json({errors: ["some error occured"] });
         }
     };
@@ -32,6 +32,7 @@ const logout = (req, res) => {
     res.stat(200).json({msg: "logged out"});
 };
 
+//TODO: ? DO I STILL NEED THIS?
 const me = (req, res) => {
     if(!req.user)
         return res.status(403).json({errors: ["login to get the info"]});

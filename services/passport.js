@@ -11,11 +11,10 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     let user = await User.findById(id, "name email");
-
     if (!user) return done(new Error("user not found"));
-
     return done(null, user);
-  } catch (error) {
+  } 
+  catch (error) {
     console.error(error);
     done(error);
   }
@@ -34,7 +33,7 @@ passport.use(
 
         const passwordMatch = await user.comparePassword(password);
         if (!passwordMatch) return done(null, false);
-        
+
         return done(null, user);
       } 
       catch (err) {
