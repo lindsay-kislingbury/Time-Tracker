@@ -1,31 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-      <%- include('partials/head') %>
+      <%- include('partials/head.ejs') %>
+      <title>Register</title>
     </head>
     <body>
-      <div class="cardcontainer">
-        <form action="/auth/signup" method="post">
-          <div class= "titlecontainer"><%- title %></div>
-          <div class="imgcontainer">
-              <img src="/img/catbox.jpg" alt="cat" class="avatar">
-          </div>
-          <label><b>Email</b></label><br>
-          <input type="email" placeholder="Enter Email" name="username" required> 
-          <br>
-          <label><b>Name</b></label><br>
-          <input type="text" placeholder="Enter Name" name="name" required> 
-          <br>
-          <label><b>Password</b></label><br>
-          <input type="password" placeholder="Enter Password" name="password" required>
-          <br>
-          <label><b>Confirm Password</b></label><br>
-          <input type="password" placeholder="Enter Password Again" name="confirmPassword" required>
-          <br>
-          <input type="submit" value="Submit">
-          <br><br>
-          <a href="/">back to login</a>
-        </form>    
-      </div>  
+      <main>
+        <%- include('partials/navbar.ejs') %>
+        <%- include('partials/registerForm.ejs'); %>
+      </main>
+        <%- include('partials/footer.ejs') %>
     </body>
 </html>

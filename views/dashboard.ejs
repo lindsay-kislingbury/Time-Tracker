@@ -4,15 +4,19 @@
       <%- include('partials/head.ejs') %>
     </head>
     <body>
-      <div class="cardcontainer">
-        <div class= "titlecontainer">Welcome <%- user %>!</div>
-        <div class="imgcontainer">
-            <img src="/img/cat.jpg" alt="cat" class="avatar">
-        </div>
-        <div>
-          <a href="/auth/logout">click here to sign out</a>
-        </div>
-                 
-        </div>  
+      <div class = "outer-container">
+        <div class="card-container">
+          <div class= "title-container">
+            <h1>Welcome <%- user %>!</h1>
+          </div>
+          <div class="img-container">
+              <img src="/img/cat.jpg" alt="cat" class="avatar">
+          </div>
+          <div>
+            <a href="/auth/logout">click here to sign out</a>
+          </div>
+                  
+          </div>  
+      </div>
     </body>
 </html>

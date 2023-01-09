@@ -5,7 +5,9 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("./services/passport");
 const AuthRoute = require("./routes/auth");
+const TimeRoute = require("./routes/time");
 const path = require('path');
+
 
 //deprecated
 mongoose.set('strictQuery', true);
@@ -23,6 +25,7 @@ const app = express()
 //JSON
 app.use(express.json());
 
+
 //Configure Session
 app.use(
     session({
@@ -38,8 +41,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Auth endpoint
+//Endpoints
 app.use("/auth", AuthRoute);
+app.use("/time", TimeRoute);
 
 //Set Views
 app.use(express.static(__dirname + '/public'));
