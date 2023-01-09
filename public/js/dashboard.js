@@ -1,3 +1,4 @@
+//Dashboard Layout Helpers
 homeDiv = document.getElementById('home');
 statsDiv = document.getElementById('stats');
 settingsDiv = document.getElementById('settings');
@@ -19,9 +20,6 @@ const showSettings = () => {
     statsDiv.style.display = 'none';
     homeDiv.style.display = 'none';
 }
-
-
-
 document.getElementById('homeButton').addEventListener('click', showHome);
 document.getElementById('settingsButton').addEventListener('click', showSettings);
 document.getElementById('statsButton').addEventListener('click', showStats);

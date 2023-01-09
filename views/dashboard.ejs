@@ -11,39 +11,42 @@
         <div class="container-fluid">
           <div class="row">
               <!--Sidebar-->
-              <div class="col-sm-auto bg-light sticky-top">
-                <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
-                    <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center justify-content-between w-100 px-3 align-items-center">
-                        <li class="nav-item">
-                            <a id="homeButton" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-                                <i class="bi-house fs-1"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="statsButton" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                                <i class="bi bi-clipboard-data fs-1"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="settingsButton" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-                                <i class="bi bi-gear fs-1"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-              </div>
+              <%- include('partials/dashboard-sidebar.ejs') %>
               <div class="col-sm p-3 min-vh-100">
-                  <!-- content -->
+                  <!-- Content -->
                   <div><h1 class = "text-capitalize"><%-user %></h1></div>
                   <hr>
                   <div id="home" style="display:block;">
-                    <p>home content</p>
+                    <!--Start Home Content-->
+                    <div class="card text-center">
+                      <div class="card-header">Track Time</div>
+                      <div class="card-body">
+                        <div class="time">
+                          <h1><span class="badge bg-secondary" id="minute">00</span>
+                          <span class="badge bg-secondary" id="second">00</span>
+                          <span class="badge bg-secondary" id="ms">00</span></h1>
+                         </div>
+                         <a id = 'startButton' title="Start">
+                          <i class="bi bi-play" style="font-size: 2rem;"></i>
+                        </a>
+                        <a id = 'stopButton' title="Stop">
+                          <i class="bi bi-stop" style="font-size: 2rem;"></i>
+                        </a>
+                        <a id = 'sendButton' title="Save">
+                          <i class="bi bi-save" style="font-size: 2rem;"></i>
+                        </a>
+                      </div>
+                      <div class="card-footer text-muted">
+                        footer
+                      </div>
+                    </div>
                   </div>
+                    <!--End Home Content-->
                   <div id="stats" style="display:none;">
                     <p>stats content</p>
                   </div>
                   <div id="settings" style="display:none;">
-                    <p>other content</p>
+                    <p>settings content</p>
                   </div>
                   <!-- content -->
               </div>
@@ -52,5 +55,6 @@
       </main>
         <%- include('partials/footer.ejs') %>
         <script type = "text/javascript" src="/js/dashboard.js"></script>
-    </body>
+        <script type = "text/javascript" src = "/js/stopwatch.js"></script>
+      </body>
 </html>
