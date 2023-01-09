@@ -4,9 +4,9 @@
       <%- include('partials/head.ejs') %>
       <title>Login</title>
     </head>
-    <body>
+    <%- include('partials/navbar.ejs') %>
+    <body class = "auth-container">
       <main>
-        <%- include('partials/navbar.ejs') %>
         <%- include('partials/loginForm.ejs'); %>
       </main>
         <%- include('partials/footer.ejs') %>

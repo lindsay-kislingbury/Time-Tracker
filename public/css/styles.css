@@ -1,11 +1,22 @@
-html,
-body {
+
+/*Global*/
+.hidden {
+  display: none;
+}
+
+/*Outer Container for login and register pages*/
+.auth-container{
   display: flex;
   flex-flow: column;
   justify-content: space-between;
   height: 100%;
   font-family: 'Nunito', sans-serif;
   background-color: #f5f5f5;
+}
+
+/*Outer Container for dashboard*/
+.dashboard-container{
+  font-size: .875rem;
 }
 
 /*Form*/
@@ -76,20 +87,4 @@ body {
     fill: currentColor;
   }
 
-  .nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden;
-  }
-
-  .nav-scroller .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-bottom: 1rem;
-    margin-top: -1px;
-    overflow-x: auto;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
+/*Dashboard*/

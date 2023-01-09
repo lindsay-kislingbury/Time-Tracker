@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
+    "bootstrap-icons": "^1.10.3",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "date-and-time": "^2.4.1",

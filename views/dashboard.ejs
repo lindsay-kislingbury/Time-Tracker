@@ -1,22 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
       <%- include('partials/head.ejs') %>
+      <title>Dashboard</title>
     </head>
+    <%- include('partials/navbar.ejs') %>
     <body>
-      <div class = "outer-container">
-        <div class="card-container">
-          <div class= "title-container">
-            <h1>Welcome <%- user %>!</h1>
+      <main>
+        <!--Outer Container-->
+        <div class="container-fluid">
+          <div class="row">
+              <!--Sidebar-->
+              <div class="col-sm-auto bg-light sticky-top">
+                <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
+                    <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center justify-content-between w-100 px-3 align-items-center">
+                        <li class="nav-item">
+                            <a id="homeButton" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+                                <i class="bi-house fs-1"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="statsButton" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+                                <i class="bi bi-clipboard-data fs-1"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="settingsButton" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+                                <i class="bi bi-gear fs-1"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+              </div>
+              <div class="col-sm p-3 min-vh-100">
+                  <!-- content -->
+                  <div><h1 class = "text-capitalize"><%-user %></h1></div>
+                  <hr>
+                  <div id="home" style="display:block;">
+                    <p>home content</p>
+                  </div>
+                  <div id="stats" style="display:none;">
+                    <p>stats content</p>
+                  </div>
+                  <div id="settings" style="display:none;">
+                    <p>other content</p>
+                  </div>
+                  <!-- content -->
+              </div>
           </div>
-          <div class="img-container">
-              <img src="/img/cat.jpg" alt="cat" class="avatar">
-          </div>
-          <div>
-            <a href="/auth/logout">click here to sign out</a>
-          </div>
-                  
-          </div>  
       </div>
+      </main>
+        <%- include('partials/footer.ejs') %>
+        <script type = "text/javascript" src="/js/dashboard.js"></script>
     </body>
 </html>

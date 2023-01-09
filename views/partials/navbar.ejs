@@ -1,3 +1,14 @@
-<nav class="navbar navbar-dark bg-dark px-2 mb-5">
-    <a class="navbar-brand" href="#">Time Tracker</a>
+<nav class="navbar navbar-dark bg-dark px-2">
+    <div class = "container">
+        <a class="navbar-brand" href="/">Time Tracker</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <% if(title == "Dashboard"){ %>
+                <div class="btn-nav">
+                    <a class="btn btn-secondary btn-small navbar-btn" href="/auth/logout">Sign Out</a>
+                </div>
+                <% } %>
+            </li>
+        </ul>
+    </div>
 </nav>
