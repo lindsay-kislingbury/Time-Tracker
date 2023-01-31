@@ -2,7 +2,7 @@ const date = require('date-and-time');
 
 const stamp = (req, res) => {
    const {startTime, stopTime} = req.body;
-  
+   console.log("req: ", req.body);
    start = new Date(startTime);
    stop = new Date(stopTime);
 

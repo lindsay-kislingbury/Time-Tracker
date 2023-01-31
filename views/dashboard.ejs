@@ -14,43 +14,105 @@
               <%- include('partials/dashboard-sidebar.ejs') %>
               <div class="col-sm p-3 min-vh-100">
                   <!-- Content -->
-                  <div><h1 class = "text-capitalize"><%-user %></h1></div>
+                  <div><h1 class="text-capitalize"><%-user %></h1></div>
                   <hr>
+                  <!--Start Home Content-->
                   <div id="home" style="display:block;">
-                    <!--Start Home Content-->
+                    <!--Stopwatch Card-->
                     <div class="card text-center">
                       <div class="card-header">Track Time</div>
-                      <div class="card-body">
-                        <div class="time">
-                          <h1><span class="badge bg-secondary" id="minute">00</span>
-                          <span class="badge bg-secondary" id="second">00</span>
-                          <span class="badge bg-secondary" id="ms">00</span></h1>
-                         </div>
-                         <a id = 'startButton' title="Start">
-                          <i class="bi bi-play" style="font-size: 2rem;"></i>
-                        </a>
-                        <a id = 'stopButton' title="Stop">
-                          <i class="bi bi-stop" style="font-size: 2rem;"></i>
-                        </a>
-                        <a id = 'sendButton' title="Save">
-                          <i class="bi bi-save" style="font-size: 2rem;"></i>
-                        </a>
-                      </div>
-                      <div class="card-footer text-muted">
-                        footer
+
+                      <!--Timer Container-->
+                        <div class="card-body align-items-center justify-content-center">
+                          
+                              <!--Time-->
+                              <div class="d-flex align-items-center justify-content-around">
+                                <div class="d-inline-block" style="min-width: 150px;">
+                                  <h3><span id="minute">00</span>&nbsp;:
+                                  <span id="second">00</span>&nbsp;:
+                                  <span id="ms">00</span></h3>
+                                <div>
+                              
+                                <div class="d-flex align-items-center justify-content-around">
+                                <a id = 'startButton' title="Start" style="font-size: 2rem; color: cornflowerblue;">
+                                  <i class="bi bi-play"></i>
+                                </a>
+                                <a id = 'stopButton' title="Stop" style="font-size: 2rem; color: darkred;">
+                                  <i class="bi bi-stop"></i>
+                                </a>
+
+                                 <!--Send Button-->
+                                <a id = 'sendButton' title="Save">
+                                  <i class="bi bi-save" style="font-size: 2rem;"></i>
+                                </a>
+
+                              </div>
+                            </div>
+
+                            </div>
+                        
+                          <!--Title Input-->
+                          <div class="d-flex flex-column">
+                          <div class="px-2">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                          </div>
+
+                          <!--Category Input-->
+                          <div class="px-2">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Category</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                          </div>
+                        </div>
+
+
+
                       </div>
                     </div>
-                  </div>
-                    <!--End Home Content-->
+                    <!--Table-->
+                      <div class="table-responsive pt-3">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr class = "table-dark">
+                              <th scope="col">Date</th>
+                              <th scope="col">Title</th>
+                              <th scope="col">Time</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">01/02/2023</th>
+                              <td>Study</td>
+                              <td>23 mins</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">01/09/2023</th>
+                              <td>Study</td>
+                              <td>10 mins</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>            
+
+                  <!--End Home Content-->
                   <div id="stats" style="display:none;">
                     <p>stats content</p>
                   </div>
                   <div id="settings" style="display:none;">
                     <p>settings content</p>
                   </div>
-                  <!-- content -->
-              </div>
-          </div>
+
+            </div>
+        </div>
       </div>
       </main>
         <%- include('partials/footer.ejs') %>
