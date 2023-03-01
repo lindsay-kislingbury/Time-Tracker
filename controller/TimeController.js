@@ -1,20 +1,42 @@
+const mongoose = require('mongoose');
 const date = require('date-and-time');
+const User = require('../models/User');
 
-const stamp = (req, res) => {
+const stamp = async (req, res) => {
    const {startTime, stopTime} = req.body;
-   console.log("req: ", req.body);
-   start = new Date(startTime);
-   stop = new Date(stopTime);
+   let start = new Date(startTime);
+   let end = new Date(stopTime);
 
-   //account for 2 second difference between function calls
-   //in client side js
-   let tempTime = date.addSeconds(stop, -2);
-   stop = tempTime;
+   console.log("start time: ", start);
+   console.log("end time: ", end);
 
-   let output = date.subtract(stop, start).toSeconds();
-
-   console.log(output);
    
+   let elapsedTime = date.subtract(end, start).toSeconds();
+   
+   console.log("elapsed time: ", elapsedTime);
+
+   let timestamp = {
+      title: "Temp title",
+      category: "Temp Category",
+      start: start,
+      end: end,
+   }
+
+   console.log(mongoose.isValidObjectId(req.user.id));
+
+   
+   let user = await User.findById(req.user.id);
+   
+   user.timestamps.push(timestamp);
+   await user.save();
+   
+
+   console.log("found user: ", user);
+   
+
+   
+
+   //**working on getting this to work */
 };
 
 module.exports = stamp;

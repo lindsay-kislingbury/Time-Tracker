@@ -5,9 +5,15 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
     {
-        username: {type: String},
-        name: {type: String},
-        password: {type: String},
+        username: String,
+        name: String,
+        password: String,
+        timestamps: [ {
+            title: String,
+            category: String,
+            start: Date,
+            end: Date,
+        }],
     },
     {
         collection: 'users'
@@ -39,5 +45,15 @@ UserSchema.methods.comparePassword = async function(password) {
         return false;
     }
 };
+
+UserSchema.methods.addTimestamp = async function(title, category, start, end){
+    const user = this;
+    user.timestamps.push({
+        title: title,
+        category: category,
+        start: start,
+        end: end,
+    })
+}
 
 module.exports = mongoose.model("user", UserSchema);
