@@ -79,7 +79,7 @@ const signup = async (req, res) => {
         });
     }
     catch(error){
-        msg = "some error occured";
+        msg = "some error occurred";
         return res.render('register', {
             message: msg,
             title: "Register"

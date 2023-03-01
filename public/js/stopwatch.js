@@ -16,9 +16,9 @@ push each interval to the array
 
 
 const start = () => {
-    stop(); //clear interval
+    //stop(); //clear interval
     startTime = new Date(); //store dateTime
-
+    clearInterval(timerInterval);
     timerInterval = setInterval(function() {
         timer += 1/60;
         msVal = Math.floor((timer - Math.floor(timer))*100);
