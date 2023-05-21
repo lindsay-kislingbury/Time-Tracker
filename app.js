@@ -14,12 +14,11 @@ mongoose.set('strictQuery', true);
 
 //Database config
 const {MONGO_URI, SECRET} = require("./config");
-const { application } = require('express');
 
 //Port
 const PORT = process.env.PORT || 4000;
 
-//Intialize App
+//Initialize App
 const app = express()
 
 //JSON
@@ -65,6 +64,6 @@ app.get('/dashboard', function(req, res) {
     res.render('dashboard', {title: 'Dashboard', })
 })
 
-app.listen(4000), () => {
+app.listen(4000, '0.0.0.0'), () => {
     console.log(`listening on ${PORT}`)
 }

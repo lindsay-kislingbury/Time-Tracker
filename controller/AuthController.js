@@ -1,9 +1,10 @@
 const User = require("../models/User");
+const date = require('date-and-time');
 let msg = "valid";
 
 
 //Check if user is already logged in 
-const loginCheck = (req, res) => {
+const loginCheck = async (req, res) => {
     if(!req.user){
         msg = "valid";
         return res.render('index', 
@@ -13,11 +14,19 @@ const loginCheck = (req, res) => {
         });
     }
     else{
-        const name=req.user.name;
+        user = req.user;
+        userData = await User.findById(user.id);
+        count = userData.timestamps.length; 
+        
+        console.log("user timestamps: ", count);
         res.render('dashboard', 
-        {
-            user: name,
-            title: "Dashboard"
+        {   
+            count: count,
+            user: user.name,
+            title: "Dashboard",
+            category: category,
+            date: date,
+            timestamps: user.timestamps,
         });
     }
 };
@@ -32,16 +41,6 @@ const invalidLogin = (req, res) => {
     });
 }
 
-
-//Logged in dashboard
-const login = (req, res, next) => {
-    const name= req.user.name;
-    res.render('dashboard', 
-    {
-        user: name,
-        title: "Dashboard",
-    });
-};
 
 //Get register form
 const signupCheck = (req, res) => {
@@ -98,7 +97,6 @@ const logout = (req, res, next) => {
 };
 
 module.exports = {
-    login,
     signup,
     logout,
     loginCheck,

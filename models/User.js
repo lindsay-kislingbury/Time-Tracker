@@ -11,8 +11,8 @@ const UserSchema = new Schema(
         timestamps: [ {
             title: String,
             category: String,
-            start: Date,
-            end: Date,
+            date: Date,
+            elapsedTime: Number,
         }],
     },
     {
@@ -37,7 +37,6 @@ UserSchema.pre("save", async function(next) {
 UserSchema.methods.comparePassword = async function(password) {
     try{
         let result = await bcrypt.compare(password, this.password);
-        console.log("result: ", result);
         return result;
     }
     catch (error) {
@@ -45,15 +44,5 @@ UserSchema.methods.comparePassword = async function(password) {
         return false;
     }
 };
-
-UserSchema.methods.addTimestamp = async function(title, category, start, end){
-    const user = this;
-    user.timestamps.push({
-        title: title,
-        category: category,
-        start: start,
-        end: end,
-    })
-}
 
 module.exports = mongoose.model("user", UserSchema);

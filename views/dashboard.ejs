@@ -12,94 +12,57 @@
           <div class="row">
             <!--Sidebar-->
             <%- include('partials/dashboard-sidebar.ejs') %>
-            <!-- Content -->
+              <!-- Content -->
               <div class="col-sm p-3 min-vh-100">
-                  <div>
-                    <h1 class="text-capitalize"><%-user %></h1>
+                <div>
+                  <h1 class="text-capitalize"><%-user %></h1>
+                </div>
+                <hr>
+                <!--Start Home Content-->
+                <div id="home" style="display:block;">
+                  <!--Start Card-->
+                  
+                    <!--Stopwatch-->
+                    <%- include('partials/stopwatch.ejs') %>
+                    
+
+
+
+                  <!--Start Table-->
+                  
+                 
+                  
+                  <div class="table-responsive pt-3">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr class = 'table-dark'>
+                          <th scope = 'col'>Date</th>
+                          <th scope = 'col'>Category</th>
+                          <th scope = 'col'>Title</th>
+                          <th scope = 'col'>Time</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <%if(count > 0){ %>
+                        <% for (var i=0; i<count; i++){ %>
+                            <tr>
+                              <th scope="row"><%%></th>
+                              <td><%-timestamps[i].title%></td>
+                              <tc><%-timestamps[i].category%><td>
+                              <td><%-timestamps[i].elapsedTime%></td>
+                            </tr>
+                        <% } %>
+                      <%}%>
+                      
+                      </tbody>
+                    </table>
                   </div>
-                  <hr>
-                  <!--Start Home Content-->
-                  <div id="home" style="display:block;">
-                    <!--Start Card-->
-                    <div class="card text-center">
-                      <div class="card-header">
-                        Track Time
-                      </div>
-                      <!--Start Card Body-->
-                      <div class="card-body align-items-center justify-content-center">
-                      <!--Title Input-->
-                      <div class="d-flex flex-column">
-                        <div class="px-2">
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                          </div>
-                        </div>
-                        <!--Category Input-->
-                        <div class="px-2">
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="inputGroup-sizing-default">Category</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                          </div>
-                        </div>
-                      </div>
-                        <!--Time Container-->
-                        <div class="d-flex flex-row align-items-center justify-content-center bg-light p-3 rounded-3">
-                          <div class="d-flex flex-column align-items-center justify-content-center">
-                            <!--Time-->
-                            <div class="d-inline-block" style="min-width: 200px;">
-                              <h3><span id="minute">00</span>&nbsp;:
-                              <span id="second">00</span>&nbsp;:
-                              <span id="ms">00</span></h3>
-                            </div> 
-                            <!--Start/Stop Buttons-->
-                            <div class="d-flex align-items-center justify-content-start">
-                              <a id = 'startButton' title="Start" style="font-size: 2rem; color: cornflowerblue;">
-                                <i class="bi bi-play"></i>
-                              </a>
-                              <a id = 'stopButton' title="Stop" style="font-size: 2rem; color: darkred;">
-                                <i class="bi bi-stop"></i>
-                              </a>
-                            </div>
-                          </div>
-                            <!--Send Button-->
-                            <a id = 'sendButton' title="Save">
-                              <i class="bi bi-save" style="font-size: 2rem;"></i>
-                            </a>
-                        </div>
-                      </div>
-                    </div>
-                    <!--End Card-->
-                    <!--Start Table-->
-                    <div class="table-responsive pt-3">
-                      <table class="table table-hover">
-                        <thead>
-                          <tr class = "table-dark">
-                            <th scope="col">Date</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Time</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">01/02/2023</th>
-                            <td>Study</td>
-                            <td>23 mins</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">01/09/2023</th>
-                            <td>Study</td>
-                            <td>10 mins</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <!--End Table-->
-                  </div>
+                  
+                  <!--End Table-->
+
+
+
+                </div>
                   <!--End Home Content-->                  
                 <div id="stats" style="display:none;">
                   <p>stats content</p>
@@ -114,5 +77,9 @@
         <%- include('partials/footer.ejs') %>
         <script type = "text/javascript" src="/js/dashboard.js"></script>
         <script type = "text/javascript" src = "/js/stopwatch.js"></script>
+        <script type="module">
+          import date from '/path/to/date-and-time.es.min.js';
+          //let formattedDate = date.format);
+        </script>
     </body>
 </html>

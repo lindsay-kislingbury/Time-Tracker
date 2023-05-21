@@ -2,11 +2,12 @@ let startTime;
 let stopTime;
 let timer = 0;
 let timerInterval;
-
-
-let ms = document.getElementById('ms'); //miliseconds 
+let ms = document.getElementById('ms'); 
 let second = document.getElementById('second');
 let minute = document.getElementById('minute');
+
+let title = document.getElementById('title').value;
+let category = document.getElementById('category').value;
 
 //on page load
 /*
@@ -18,6 +19,7 @@ push each interval to the array
 const start = () => {
     //stop(); //clear interval
     startTime = new Date(); //store dateTime
+    console.log("start time: ", startTime);
     clearInterval(timerInterval);
     timerInterval = setInterval(function() {
         timer += 1/60;
@@ -33,6 +35,7 @@ const start = () => {
 
 const stop = () => {
     stopTime = new Date(); //Store stop time
+    console.log("stop time: ", stopTime);
     clearInterval(timerInterval); //Clear interval
     timerInterval = null;
 }
@@ -42,7 +45,7 @@ const send = () =>{
     let xhr = new window.XMLHttpRequest();
     xhr.open('POST', '/time/stamp', true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.send(JSON.stringify({"startTime": startTime, "stopTime": stopTime}));
+    xhr.send(JSON.stringify({"title": title, "category": category, "startTime": startTime, "stopTime": stopTime}));
 }
 
 document.getElementById("startButton").addEventListener("click", start);
