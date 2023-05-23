@@ -6,8 +6,7 @@ let ms = document.getElementById('ms');
 let second = document.getElementById('second');
 let minute = document.getElementById('minute');
 
-let title = document.getElementById('title').value;
-let category = document.getElementById('category').value;
+
 
 //on page load
 /*
@@ -47,6 +46,9 @@ const send = () =>{
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     xhr.send(JSON.stringify({"title": title, "category": category, "startTime": startTime, "stopTime": stopTime}));
 }
+
+let title = document.getElementById('title').value;
+let category = document.getElementById('category').value;
 
 document.getElementById("startButton").addEventListener("click", start);
 document.getElementById("stopButton").addEventListener("click", stop);

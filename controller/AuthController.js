@@ -21,12 +21,8 @@ const loginCheck = async (req, res) => {
         console.log("user timestamps: ", count);
         res.render('dashboard', 
         {   
-            count: count,
-            user: user.name,
-            title: "Dashboard",
-            category: category,
-            date: date,
-            timestamps: user.timestamps,
+            title: user.title,
+            timestamps: user.timestamps
         });
     }
 };

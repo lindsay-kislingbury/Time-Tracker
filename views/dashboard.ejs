@@ -15,7 +15,7 @@
               <!-- Content -->
               <div class="col-sm p-3 min-vh-100">
                 <div>
-                  <h1 class="text-capitalize"><%-user %></h1>
+                  <h1 class="text-capitalize"><%-user.name %></h1>
                 </div>
                 <hr>
                 <!--Start Home Content-->
@@ -43,12 +43,12 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <%if(count > 0){ %>
-                        <% for (var i=0; i<count; i++){ %>
+                      <%if(timestamps){ %>
+                        <% for (var i=0; i<timestamps.length; i++){ %>
                             <tr>
-                              <th scope="row"><%%></th>
+                              <th scope="row"><%-timestamps[i].date%></th>
+                              <td><%-timestamps[i].category%></td>
                               <td><%-timestamps[i].title%></td>
-                              <tc><%-timestamps[i].category%><td>
                               <td><%-timestamps[i].elapsedTime%></td>
                             </tr>
                         <% } %>

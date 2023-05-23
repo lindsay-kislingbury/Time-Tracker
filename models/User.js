@@ -11,7 +11,7 @@ const UserSchema = new Schema(
         timestamps: [ {
             title: String,
             category: String,
-            date: Date,
+            date: String,
             elapsedTime: Number,
         }],
     },
