@@ -17,11 +17,10 @@ const loginCheck = async (req, res) => {
         user = req.user;
         userData = await User.findById(user.id);
         count = userData.timestamps.length; 
-        
-        console.log("user timestamps: ", count);
         res.render('dashboard', 
         {   
-            title: user.title,
+            title: 'Dashboard',
+            name: user.name,
             timestamps: user.timestamps
         });
     }

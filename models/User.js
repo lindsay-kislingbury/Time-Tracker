@@ -12,7 +12,7 @@ const UserSchema = new Schema(
             title: String,
             category: String,
             date: String,
-            elapsedTime: Number,
+            elapsedTime: String,
         }],
     },
     {

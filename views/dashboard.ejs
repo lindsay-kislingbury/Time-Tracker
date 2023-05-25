@@ -4,82 +4,59 @@
       <%- include('partials/head.ejs') %>
       <title>Dashboard</title>
     </head>
-    <%- include('partials/navbar.ejs') %>
     <body>
+      <%- include('partials/navbar.ejs') %>
       <main>
         <!--Outer Container-->
         <div class="container-fluid">
           <div class="row">
-            <!--Sidebar-->
-            <%- include('partials/dashboard-sidebar.ejs') %>
-              <!-- Content -->
-              <div class="col-sm p-3 min-vh-100">
-                <div>
-                  <h1 class="text-capitalize"><%-user.name %></h1>
-                </div>
-                <hr>
-                <!--Start Home Content-->
-                <div id="home" style="display:block;">
-                  <!--Start Card-->
-                  
-                    <!--Stopwatch-->
-                    <%- include('partials/stopwatch.ejs') %>
-                    
-
-
-
-                  <!--Start Table-->
-                  
-                 
-                  
-                  <div class="table-responsive pt-3">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr class = 'table-dark'>
-                          <th scope = 'col'>Date</th>
-                          <th scope = 'col'>Category</th>
-                          <th scope = 'col'>Title</th>
-                          <th scope = 'col'>Time</th>
+          <!-- Content -->
+          <div><h1 class="text-lowercase">Hi, <%-name %>!</h1></div>
+          <hr>
+          <!--Start Home Content-->
+          <div id="home" style="display:block;">
+            <!--Stopwatch-->
+            <%- include('partials/stopwatch.ejs') %>
+            <!--Start Table-->
+            <div class="table-responsive pt-3">
+              <table class="table table-hover">
+                <thead>
+                  <tr class = 'table-dark'>
+                    <th scope = 'col'>Date</th>
+                    <th scope = 'col'>Category</th>
+                    <th scope = 'col'>Title</th>
+                    <th scope = 'col'>Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%if(timestamps){ %>
+                  <% for (var i=0; i<timestamps.length; i++){ %>
+                      <tr>
+                        <th scope="row"><%-timestamps[i].date%></th>
+                        <td><%-timestamps[i].category%></td>
+                        <td><%-timestamps[i].title%></td>
+                        <td><%-timestamps[i].elapsedTime%></td>
                       </tr>
-                      </thead>
-                      <tbody>
-                      <%if(timestamps){ %>
-                        <% for (var i=0; i<timestamps.length; i++){ %>
-                            <tr>
-                              <th scope="row"><%-timestamps[i].date%></th>
-                              <td><%-timestamps[i].category%></td>
-                              <td><%-timestamps[i].title%></td>
-                              <td><%-timestamps[i].elapsedTime%></td>
-                            </tr>
-                        <% } %>
-                      <%}%>
-                      
-                      </tbody>
-                    </table>
-                  </div>
-                  
-                  <!--End Table-->
-
-
-
-                </div>
-                  <!--End Home Content-->                  
-                <div id="stats" style="display:none;">
-                  <p>stats content</p>
-                </div>
-                <div id="settings" style="display:none;">
-                  <p>settings content</p>
-                </div>
-              </div>
+                  <% } %>
+                <%}%>
+                </tbody>
+              </table>
+            </div>
+            <!--End Table-->
+          </div>
+          <!--End Home Content-->                  
+          <div id="stats" style="display:none;">
+            <p>stats content</p>
+          </div>
+          <div id="settings" style="display:none;">
+            <p>settings content</p>
+          </div>
               <!--End Content-->  
         </div>
-      </main>
-        <%- include('partials/footer.ejs') %>
-        <script type = "text/javascript" src="/js/dashboard.js"></script>
-        <script type = "text/javascript" src = "/js/stopwatch.js"></script>
-        <script type="module">
-          import date from '/path/to/date-and-time.es.min.js';
-          //let formattedDate = date.format);
-        </script>
-    </body>
+      </div>
+    </main>
+  </body>
+  <%- include('partials/footer.ejs') %>
+  <script type = "text/javascript" src="/js/dashboard.js"></script>
+  <script type = "text/javascript" src = "/js/stopwatch.js"></script>
 </html>

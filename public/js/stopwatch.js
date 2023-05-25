@@ -1,55 +1,98 @@
-let startTime;
-let stopTime;
-let timer = 0;
-let timerInterval;
-let ms = document.getElementById('ms'); 
-let second = document.getElementById('second');
-let minute = document.getElementById('minute');
+var startTimerButton = document.querySelector('.startTimer');
+var pauseTimerButton = document.querySelector('.pauseTimer');
+var timerDisplay = document.querySelector('.timer');
 
+var startTime;
+var updatedTime;
+var difference;
+var tInterval;
+var savedTime;
+var elapsedTime;
+var paused = 0;
+var running = 0;
 
-
-//on page load
-/*
-time submissions array
-push each interval to the array
-*/
-
-
-const start = () => {
-    //stop(); //clear interval
-    startTime = new Date(); //store dateTime
-    console.log("start time: ", startTime);
-    clearInterval(timerInterval);
-    timerInterval = setInterval(function() {
-        timer += 1/60;
-        msVal = Math.floor((timer - Math.floor(timer))*100);
-        secondVal = Math.floor(timer) - Math.floor(timer/60) * 60;
-        minuteVal = Math.floor(timer/60);
-
-        ms.innerHTML = secondVal < 10 ? "0" + msVal.toString() : msVal;
-        second.innerHTML = secondVal < 10 ? "0" + secondVal.toString() : secondVal;
-        minute.innerHTML = minuteVal < 10 ? "0" + minuteVal.toString() : minuteVal;
-    }, 1000/60);
+function startTimer(){
+    if(!running){
+        startTime = new Date().getTime();
+        tInterval = setInterval(getShowTime, 1);// change 1 to 1000 above to run script every second instead of every millisecond. one other change will be needed in the getShowTime() function below for this to work. see comment there.   
+        paused = 0;
+        running = 1;timerDisplay.style.background = "#FF0000";
+        timerDisplay.style.cursor = "auto";
+        timerDisplay.style.color = "yellow";
+        startTimerButton.classList.add('lighter');
+        pauseTimerButton.classList.remove('lighter');
+        startTimerButton.style.cursor = "auto";
+        pauseTimerButton.style.cursor = "pointer";
+    }
 }
 
-const stop = () => {
-    stopTime = new Date(); //Store stop time
-    console.log("stop time: ", stopTime);
-    clearInterval(timerInterval); //Clear interval
-    timerInterval = null;
+function pauseTimer(){
+    if (!difference){
+    // if timer never started, don't allow pause button to do anything
+    } else if (!paused) {
+        clearInterval(tInterval);
+        savedTime = difference;
+        paused = 1;
+        running = 0;
+        timerDisplay.style.background = "#A90000";
+        timerDisplay.style.color = "#690000";
+        timerDisplay.style.cursor = "pointer";
+        startTimerButton.classList.remove('lighter');
+        pauseTimerButton.classList.add('lighter');
+        startTimerButton.style.cursor = "pointer";
+        pauseTimerButton.style.cursor = "auto";
+    } else {// if the timer was already paused, when they click pause again, start the timer againstartTimer();
 }
 
-//Send post req
-const send = () =>{
-    let xhr = new window.XMLHttpRequest();
+
+}function resetTimer(){
+    clearInterval(tInterval);
+    savedTime = 0;
+    difference = 0;
+    paused = 0;
+    running = 0;
+    timerDisplay.innerHTML = 'Start Timer!';
+    timerDisplay.style.background = "#A90000";
+    timerDisplay.style.color = "#fff";
+    timerDisplay.style.cursor = "pointer";
+    startTimerButton.classList.remove('lighter');
+    pauseTimerButton.classList.remove('lighter');
+    startTimerButton.style.cursor = "pointer";
+    pauseTimerButton.style.cursor = "auto";
+}
+
+function getShowTime(){
+    updatedTime = new Date().getTime();
+    if (savedTime){
+        difference = (updatedTime - startTime) + savedTime;
+    } else {
+        difference =  updatedTime - startTime;
+    }
+    // var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    var milliseconds = Math.floor((difference % (1000 * 60)) / 100);hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+    milliseconds = (milliseconds < 100) ? (milliseconds < 10) ? "00" + milliseconds : "0" + milliseconds : milliseconds;
+    elapsedTime = hours + ':' + minutes + ':' + seconds + ':' + milliseconds;
+    timerDisplay.innerHTML = elapsedTime;
+}
+
+function send(){
+    console.log("elapsedTime:", elapsedTime);
+    var title = document.getElementById('title').value;
+    var category = document.getElementById('category').value;
+    var dateOptions = {
+        month: "short",
+        day: "2-digit",
+        year: "numeric"
+    }
+    var date = new Date().toLocaleDateString('en-US', dateOptions);
+    var xhr = new window.XMLHttpRequest();
     xhr.open('POST', '/time/stamp', true);
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.send(JSON.stringify({"title": title, "category": category, "startTime": startTime, "stopTime": stopTime}));
+    xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
+    xhr.send(JSON.stringify({"title": title, "category": category, "date": date, "elapsedTime": elapsedTime}));
 }
 
-let title = document.getElementById('title').value;
-let category = document.getElementById('category').value;
-
-document.getElementById("startButton").addEventListener("click", start);
-document.getElementById("stopButton").addEventListener("click", stop);
-document.getElementById("sendButton").addEventListener("click", send);

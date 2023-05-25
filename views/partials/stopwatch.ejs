@@ -1,7 +1,5 @@
 <div class="card text-center">
-    <div class="card-header">
-      Track Time
-    </div>
+  <div class="card-header">Track Time</div>
     <div class="card-body align-items-center justify-content-center">
     <!--Title Input-->
     <div class="d-flex flex-column">
@@ -24,29 +22,19 @@
       </div>
     </div>
     <!--Time Container-->
-    <div class="d-flex flex-row align-items-center justify-content-center bg-light p-3 rounded-3">
-        <div class="d-flex flex-column align-items-center justify-content-center">
-            <!--Time-->
-            <div class="d-inline-block" style="min-width: 200px;">
-                <h3><span id="minute">00</span>&nbsp;:
-                <span id="second">00</span>&nbsp;:
-                <span id="ms">00</span></h3>
-            </div> 
-            <!--Start/Stop Buttons-->
-            <div class="d-flex align-items-center justify-content-start">
-                <a id = 'startButton' title="Start" style="font-size: 2rem; color: cornflowerblue;">
-                    <i class="bi bi-play"></i>
-                </a>
-                <a id = 'stopButton' title="Stop" style="font-size: 2rem; color: darkred;">
-                    <i class="bi bi-stop"></i>
-                </a>
-            </div>
+    <div id="timerContainer">
+      <div class="timer" onclick="startTimer()">Start Timer!</div>
+      <div class="startTimer reset" onclick="startTimer()" >
+      <i class="fas fa-play"></i>
     </div>
-    <!--Send Button-->
-    <a id = 'sendButton' title="Save">
-    <i class="bi bi-save" style="font-size: 2rem;"></i>
-    </a>
+    <div class="pauseTimer reset" onclick="pauseTimer()" >
+      <i class="fas fa-pause"></i>
     </div>
-</div>
+    <div class="resetTimer reset" onclick="resetTimer()">Reset</div>
+    </div>
+    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="send()">
+      Send!
+    </button>
+  </div>
 </div>
   <!--End Card-->

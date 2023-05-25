@@ -8,11 +8,6 @@ router.use(express.static(__dirname + '/public'));
 const stamp = require("../controller/TimeController");
 
 
-// /time
-router.get('/', (req, res) => {
-    res.render('timetracker');
-});
-
 router.post('/stamp', stamp);
 
 module.exports = router;
