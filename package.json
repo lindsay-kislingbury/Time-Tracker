@@ -4,8 +4,6 @@
   "description": "Time Tracker",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    //"start": "nodemon app.js"//
   },
   "author": "Lindsay Kislingbury",
   "license": "ISC",
