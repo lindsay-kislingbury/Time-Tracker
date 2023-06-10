@@ -13,7 +13,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.use(express.static(__dirname + '/public'));
 
 
-// /auth
+// /#
 router.get('/', loginCheck);
 
 // /auth/logout

@@ -10,7 +10,7 @@ const loginCheck = async (req, res) => {
         return res.render('index', 
         {
             message: msg,
-            title: "Login"
+            title: "Home"
         });
     }
     else{
@@ -20,8 +20,9 @@ const loginCheck = async (req, res) => {
         res.render('dashboard', 
         {   
             title: 'Dashboard',
-            name: user.name,
-            timestamps: user.timestamps
+            name: userData.name,
+            count: count,
+            timestamps: userData.timestamps,
         });
     }
 };
@@ -32,7 +33,7 @@ const invalidLogin = (req, res) => {
     res.render('index', 
     {
         message: msg,
-        title: "Login"
+        title: "Home"
     });
 }
 
@@ -40,22 +41,23 @@ const invalidLogin = (req, res) => {
 //Get register form
 const signupCheck = (req, res) => {
     msg = "valid";
-    res.render('register', 
+    res.render('index', 
     {
         message: msg,
-        title: "Register"
+        title: "Home"
     });
 }
+
 
 //Create user
 const signup = async (req, res) => {
     const {username, name, password} = req.body;
     if(req.body.password != req.body.confirmPassword){
         let msg = "confirm password does not match";
-        return res.render('register', 
+        return res.render('index', 
         {
             message: msg,
-            title: "Register"
+            title: "Home"
         });
     }
     try{
@@ -66,17 +68,17 @@ const signup = async (req, res) => {
             return res.redirect('/');
         }
         let msg = "the user with this email already exists"
-        return res.render('register', 
+        return res.render('index', 
         {
             message: msg,
-            title: "Register"
+            title: "Home"
         });
     }
     catch(error){
         msg = "some error occurred";
-        return res.render('register', {
+        return res.render('index', {
             message: msg,
-            title: "Register"
+            title: "Home"
         });
     }
 };

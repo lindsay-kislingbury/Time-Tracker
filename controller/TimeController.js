@@ -4,14 +4,14 @@ const date = require('date-and-time');
 
 const stamp = async (req, res) => {
    console.log(req.body);
-   const {title, category, date, elapsedTime} = req.body;
+   const {title, tags, date, elapsedTime} = req.body;
    console.log("elapsed time: ", elapsedTime);
    console.log("date:", date);
    
 
    let timestamp = {
       title: title,
-      category: category,
+      tags: tags,
       date: date,
       elapsedTime: elapsedTime
    }

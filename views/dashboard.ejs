@@ -4,46 +4,66 @@
       <%- include('partials/head.ejs') %>
       <title>Dashboard</title>
     </head>
+    <%- include('partials/navbar.ejs') %>
+
     <body>
-      <%- include('partials/navbar.ejs') %>
       <main>
         <!--Outer Container-->
-        <div class="container-fluid">
-          <div class="row">
+        <div class="row m-0">
           <!-- Content -->
-          <div><h1 class="text-lowercase">Hi, <%-name %>!</h1></div>
-          <hr>
-          <!--Start Home Content-->
-          <div id="home" style="display:block;">
+            <div class="display-5 text-start text-dark ps-3px-2 py-2 flex-grow-1">
+              <p class="gradient-icon" style="font-size: 2rem;"><i class="fa-solid fa-user-clock"></i></p> 
+              <%-name %>
+            </div>
+            <!--Start Home Content-->
+            <div class="outer-container">
             <!--Stopwatch-->
             <%- include('partials/stopwatch.ejs') %>
             <!--Start Table-->
-            <div class="table-responsive pt-3">
-              <table class="table table-hover">
-                <thead>
-                  <tr class = 'table-dark'>
-                    <th scope = 'col'>Date</th>
-                    <th scope = 'col'>Category</th>
+            <div class="table-responsive-md mt-2 w-100">
+            <div class="scrolling-tbody">
+              <table class="table table-borderless rounded">
+                <thead class="sticky-top text-bg-dark">
+                  <tr>
                     <th scope = 'col'>Title</th>
                     <th scope = 'col'>Time</th>
-                </tr>
+                    <th scope = 'col'>Date</th>
+                  </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-borderless text-bg-light" style="--bs-bg-opacity: .3;">
                 <%if(timestamps){ %>
-                  <% for (var i=0; i<timestamps.length; i++){ %>
-                      <tr>
-                        <th scope="row"><%-timestamps[i].date%></th>
-                        <td><%-timestamps[i].category%></td>
-                        <td><%-timestamps[i].title%></td>
-                        <td><%-timestamps[i].elapsedTime%></td>
+                  <% for (var i=0; i<count; i++){ %>
+                      <tr class="bg-transparent text-dark">
+                        <td class="py-0 my-0 text-capitalize fw-bold"><%-timestamps[i].title%></td>
+                        <td class="text-end py-0 my-0">
+                          <%if(timestamps[i].elapsedTime.hours!="00"){%>
+                            <%-timestamps[i].elapsedTime.hours%>:<%-timestamps[i].elapsedTime.minutes%>:<%-timestamps[i].elapsedTime.seconds%>:<%-timestamps[i].elapsedTime.milliseconds%>
+                          <%}else if(timestamps[i].elapsedTime.minutes!="00"){%>
+                            <%-timestamps[i].elapsedTime.minutes%>:<%-timestamps[i].elapsedTime.seconds%>:<%-timestamps[i].elapsedTime.milliseconds%>
+                          <%}else if(timestamps[i].elapsedTime.seconds!="00"){%>
+                            <%-timestamps[i].elapsedTime.seconds%>:<%-timestamps[i].elapsedTime.milliseconds%>
+                          <%}else {%>
+                            <%-timestamps[i].elapsedTime.milliseconds%>
+                          <%}%>
+                        </td>
+                        <td class="py-0 my-0"><%-timestamps[i].date%></td>
+                      </tr>
+                      <tr> 
+                        <td colspan="3" class="py-0 my-0">
+                          <% for (var j=0; j<timestamps[i].tags.length; j++){ %>
+                            <span class="badge rounded-pill text-bg-dark"><%-timestamps[i].tags[j]%></span>
+                          <% } %>
+                          <hr class="border border-dark border-2 border-opacity-60 mt-1 mb-2">
+                        </td>
                       </tr>
                   <% } %>
-                <%}%>
+                <% } %>
                 </tbody>
               </table>
             </div>
+            </div>
             <!--End Table-->
-          </div>
+          
           <!--End Home Content-->                  
           <div id="stats" style="display:none;">
             <p>stats content</p>
@@ -53,10 +73,9 @@
           </div>
               <!--End Content-->  
         </div>
-      </div>
     </main>
-  </body>
-  <%- include('partials/footer.ejs') %>
-  <script type = "text/javascript" src="/js/dashboard.js"></script>
-  <script type = "text/javascript" src = "/js/stopwatch.js"></script>
+    <%- include('partials/footer.ejs') %>
+    <script type = "text/javascript" src="/js/dashboard.js"></script>
+    <script type = "text/javascript" src = "/js/stopwatch.js"></script>
+</body>
 </html>

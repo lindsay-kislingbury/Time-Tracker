@@ -10,9 +10,14 @@ const UserSchema = new Schema(
         password: String,
         timestamps: [ {
             title: String,
-            category: String,
+            tags: [String],
             date: String,
-            elapsedTime: String,
+            elapsedTime: {
+                hours: String,
+                minutes: String,
+                seconds: String,
+                milliseconds: String
+            }
         }],
     },
     {

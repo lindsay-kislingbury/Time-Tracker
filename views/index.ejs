@@ -2,12 +2,27 @@
 <html lang="en">
     <head>
       <%- include('partials/head.ejs') %>
-      <title>Login</title>
+    <title>Home</title>
     </head>
     <%- include('partials/navbar.ejs') %>
-    <body class = "auth-container">
+    <% if(message != "valid"){ %>
+      <div class="container-sm">
+        <div class="alert alert-danger rounded-0 border-white bg-transparent alert-dismissible fade show d-flex align-items-center" role="alert">
+              <div class="container-sm text-center"><%- message %></div>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>  
+      </div>
+    <% } %>
+    <body>
       <main>
-        <%- include('partials/loginForm.ejs'); %>
+        <div class="container-sm text-center mt-3">
+          <p class="gradient-icon" style="font-size: 6rem;"><i class="fa-solid fa-stopwatch"></i></p>
+          <h1 class="display-1 fs-1 my-0">track<span class="gradient-text"> time</span> <br>
+          for any reason, anywhere.</h1>
+          <p class="text">Track time spent on activities and gain insight into Lorem ipsum </p>
+        </div>
+        
+
       </main>
         <%- include('partials/footer.ejs') %>
     </body>
