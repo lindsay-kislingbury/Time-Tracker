@@ -4,6 +4,7 @@
   "description": "Time Tracker",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js"
   },
   "author": "Lindsay Kislingbury",
   "license": "ISC",

@@ -133,27 +133,33 @@ p, table{
   font-weight: 400 !important;
 }
 
-/*Phones*/
-@media (min-width:320px)  {
+/*Phones, Tablets*/
+@media only screen and (min-width:320px)  {
   .outer-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+
   }
   .stopwatch{
     display:inline-block;
-    width:50vw;
+    width:100%;
   }
 
 }
 
 /*Desktop*/
-@media (min-width:961px)  {
+@media (min-width:768px)  {
   .outer-container{
     display: flex;
     flex-wrap: nowrap;
   }
+  .stopwatch{
+    display:inline-block;
+    width:50vw;
+  }
+  
 }
 
 

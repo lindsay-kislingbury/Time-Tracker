@@ -8,7 +8,6 @@ const stamp = async (req, res) => {
    console.log("elapsed time: ", elapsedTime);
    console.log("date:", date);
    
-
    let timestamp = {
       title: title,
       tags: tags,
