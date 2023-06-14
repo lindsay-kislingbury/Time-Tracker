@@ -17,9 +17,6 @@ const stamp = async (req, res) => {
    let user = await User.findById(req.user.id);
    user.timestamps.push(timestamp);
    await user.save();
-
-
-   //refresh timesamp list
 };
 
 const remove = async(req, res) => {
@@ -30,9 +27,14 @@ const remove = async(req, res) => {
    console.log("deleted: ", deleteId);
 }
 
+const update = async(req, res) => {
+   let user = await User.findById(req.user.id);
+   res.send(user);
+}
 
 
 module.exports = {
    stamp,
-   remove
+   remove,
+   update
 };

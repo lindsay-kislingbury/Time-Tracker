@@ -9,7 +9,6 @@ function remove(){
     xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
     xhr.send(JSON.stringify({"deleteId": deleteButton.value}));
     
-    
 }
 
 
