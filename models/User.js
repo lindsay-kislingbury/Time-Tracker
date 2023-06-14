@@ -12,12 +12,7 @@ const UserSchema = new Schema(
             title: String,
             tags: [String],
             date: String,
-            elapsedTime: {
-                hours: String,
-                minutes: String,
-                seconds: String,
-                milliseconds: String
-            }
+            elapsedTime: String
         }],
     },
     {

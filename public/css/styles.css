@@ -21,7 +21,7 @@ p, table{
   font-family: 'Rubik', sans-serif;
 }
 
-.scrolling-tbody{
+.stamps{
   max-height: clamp(400px, 85vw, 700px);
   overflow: none;
 }

@@ -5,12 +5,14 @@ let msg = "valid";
 
 //Check if user is already logged in 
 const loginCheck = async (req, res) => {
+    console.log(req.body);
     if(!req.user){
         msg = "valid";
         return res.render('index', 
         {
             message: msg,
             title: "Home"
+            
         });
     }
     else{
@@ -21,7 +23,6 @@ const loginCheck = async (req, res) => {
         {   
             title: 'Dashboard',
             name: userData.name,
-            count: count,
             timestamps: userData.timestamps,
         });
     }

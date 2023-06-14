@@ -21,32 +21,30 @@
             <%- include('partials/stopwatch.ejs') %>
             <!--Start Table-->
             <div class="table-responsive-md mt-2 w-100">
-            <div class="scrolling-tbody">
+            <div class="stamps" id="stamps">
               <table class="table table-borderless rounded">
                 <thead class="sticky-top text-bg-dark">
                   <tr>
                     <th scope = 'col'>Title</th>
                     <th scope = 'col'>Time</th>
                     <th scope = 'col'>Date</th>
+                    <th scope = 'col'></th>
                   </tr>
                 </thead>
                 <tbody class="table-borderless text-bg-light" style="--bs-bg-opacity: .3;">
                 <%if(timestamps){ %>
-                  <% for (var i=0; i<count; i++){ %>
+                  <% for (var i=0; i<timestamps.length; i++){ %>
                       <tr class="bg-transparent text-dark">
                         <td class="py-0 my-0 text-capitalize fw-bold"><%-timestamps[i].title%></td>
                         <td class="text-end py-0 my-0">
-                          <%if(timestamps[i].elapsedTime.hours!="00"){%>
-                            <%-timestamps[i].elapsedTime.hours%>:<%-timestamps[i].elapsedTime.minutes%>:<%-timestamps[i].elapsedTime.seconds%>:<%-timestamps[i].elapsedTime.milliseconds%>
-                          <%}else if(timestamps[i].elapsedTime.minutes!="00"){%>
-                            <%-timestamps[i].elapsedTime.minutes%>:<%-timestamps[i].elapsedTime.seconds%>:<%-timestamps[i].elapsedTime.milliseconds%>
-                          <%}else if(timestamps[i].elapsedTime.seconds!="00"){%>
-                            <%-timestamps[i].elapsedTime.seconds%>:<%-timestamps[i].elapsedTime.milliseconds%>
-                          <%}else {%>
-                            <%-timestamps[i].elapsedTime.milliseconds%>
-                          <%}%>
+                          <%-timestamps[i].elapsedTime%>
                         </td>
                         <td class="py-0 my-0"><%-timestamps[i].date%></td>
+                        <td>
+                          <button class="btn btn-sm btn-dark" id="deleteButton" value="<%-timestamps[i]._id%>">
+                            <i class="fa-solid fa-trash fa-sm"></i>
+                          </span>
+                        </td>
                       </tr>
                       <tr> 
                         <td colspan="3" class="py-0 my-0">
@@ -77,9 +75,26 @@
           </div>
               <!--End Content-->  
         </div>
+
+    <!--Modal-->
+<div class="modal fade " id="exampleModal" data-bs-theme="light" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+    </div>
+  </div>
+</div>
+
     </main>
     <%- include('partials/footer.ejs') %>
-    <script type = "text/javascript" src="/js/dashboard.js"></script>
+    <script type = "text/javascript" src ="/js/dashboard.js"></script>
     <script type = "text/javascript" src = "/js/stopwatch.js"></script>
+    <script type = "text/javascript" src = "/js/stamps.js"></script> 
 </body>
 </html>

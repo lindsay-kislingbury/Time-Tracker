@@ -7,6 +7,10 @@ var updatedTime;
 var difference;
 var tInterval;
 var savedTime;
+var hours;
+var minutes;
+var seconds;
+var milliseconds;
 var elapsedTime;
 var paused = 0;
 var running = 0;
@@ -61,10 +65,10 @@ function getShowTime(){
     } else {
         difference =  updatedTime - startTime;
     }
-    var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-    var milliseconds = Math.floor((difference % (1000 * 60)) / 100);hours = (hours < 10) ? "0" + hours : hours;
+    hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    milliseconds = Math.floor((difference % (1000 * 60)) / 100);hours = (hours < 10) ? "0" + hours : hours;
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
     milliseconds = (milliseconds < 100) ? (milliseconds < 10) ? "00" + milliseconds : "0" + milliseconds : milliseconds;
@@ -82,12 +86,8 @@ function send(){
         year: "numeric"
     }
     timeParts = elapsedTime.split(':');
-    var time = {
-        hours: timeParts[0],
-        minutes: timeParts[1],
-        seconds: timeParts[2],
-        milliseconds: timeParts[3]
-    }
+    var time = new Date("00","0","0",hours,minutes,seconds,milliseconds);
+    console.log(time);
     var date = new Date().toLocaleDateString('en-US', dateOptions);
     var xhr = new window.XMLHttpRequest();
     xhr.open('POST', '/time/stamp', true);
@@ -96,12 +96,5 @@ function send(){
 }
 
 
-//Saved Modal
-const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-})
 
 
