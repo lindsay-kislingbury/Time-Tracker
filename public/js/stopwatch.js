@@ -76,7 +76,7 @@ function getShowTime(){
     timerDisplay.innerHTML = elapsedTime;
 }
 
-function send(){
+async function send(){
     var title = document.getElementById('title').value;
     var options = document.getElementById('tags').selectedOptions;
     var tags = Array.from(options).map(({value})=> value);
@@ -85,14 +85,33 @@ function send(){
         day: "2-digit",
         year: "numeric"
     }
-    timeParts = elapsedTime.split(':');
     var time = new Date("00","0","0",hours,minutes,seconds,milliseconds);
-    console.log(time);
     var date = new Date().toLocaleDateString('en-US', dateOptions);
-    var xhr = new window.XMLHttpRequest();
+    
+    var postData = {
+        title: title,
+        tags: tags,
+        time: time,
+        date: date
+    }
+    var post = JSON.stringify(postData);
+    var xhr = new XMLHttpRequest();
     xhr.open('POST', '/time/stamp', true);
     xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-    xhr.send(JSON.stringify({"title": title, "tags": tags, "date": date, "elapsedTime": time}));
+    xhr.send(post);    
+    update();
+}
+
+function update(){
+    $.ajax({
+        type: 'GET',
+        dataType: 'json', 
+        url: '/time/update',
+        success: function(data){
+            $("#stamps").load(location.href+" #stamps>*","");
+            console.log(data);
+        }
+    })
 }
 
 
