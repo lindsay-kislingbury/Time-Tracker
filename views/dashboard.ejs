@@ -27,23 +27,36 @@
                   <tr>
                     <th scope = 'col'>Title</th>
                     <th scope = 'col'>Time</th>
-                    <th scope = 'col'>Date</th>
                     <th scope = 'col'></th>
                   </tr>
                 </thead>
                 <tbody class="table-borderless text-bg-light" style="--bs-bg-opacity: .3;">
-                <%if(timestamps){ %>
-                  <% for (var i=0; i<timestamps.length; i++){ %>
+                <%if(timestamps.length>0){ %>
+                  <% for (var i=timestamps.length-1; i>=0; i--){ %>
                       <tr class="bg-transparent text-dark">
-                        <td class="py-0 my-0 text-capitalize fw-bold"><%-timestamps[i].title%></td>
-                        <td class="text-end py-0 my-0">
-                          <%-timestamps[i].elapsedTime%>
-                        </td>
-                        <td class="py-0 my-0"><%-timestamps[i].date%></td>
-                        <td>
-                          <button class="btn btn-sm btn-dark" id="deleteButton" value="<%-timestamps[i]._id%>">
-                            <i class="fa-solid fa-trash fa-sm"></i>
+                        <td class="col-6 py-0 my-0">
+                          <span class="text-capitalize fw-bold">
+                            <%-timestamps[i].title%>
                           </span>
+                          <br>
+                          <span>
+                            <%-timestamps[i].date%>
+                          </span>
+                        </td>
+                        <td class="col-4 px-0 py-0 text-start py-0 my-0">
+                          <span class="fs-5">
+                            <%-timestamps[i].elapsedTime%>
+                          </span>
+                        </td>
+                        <td class="col-2 d-flex align-items-center">
+                          <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <button class="btn btn-sm btn-secondary" id="editButton" value="<%-timestamps[i]._id%>" onclick="edit()">
+                              <i class="fa-solid fa-pen fa-sm"></i>
+                            </button>
+                            <button class="btn btn-sm btn-dark" id="deleteButton" value="<%-timestamps[i]._id%>" onclick="remove()">
+                              <i class="fa-solid fa-trash fa-sm"></i>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                       <tr> 
@@ -95,6 +108,5 @@
     <%- include('partials/footer.ejs') %>
     <script type = "text/javascript" src ="/js/dashboard.js"></script>
     <script type = "text/javascript" src = "/js/stopwatch.js"></script>
-    <script type = "text/javascript" src = "/js/stamps.js"></script> 
 </body>
 </html>

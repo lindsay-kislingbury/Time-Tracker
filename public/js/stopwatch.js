@@ -85,35 +85,61 @@ async function send(){
         day: "2-digit",
         year: "numeric"
     }
-    var time = new Date("00","0","0",hours,minutes,seconds,milliseconds);
+    var time = elapsedTime.substr(0,elapsedTime.lastIndexOf(":"));
     var date = new Date().toLocaleDateString('en-US', dateOptions);
-    
     var postData = {
         title: title,
         tags: tags,
-        time: time,
+        elapsedTime: time,
         date: date
     }
     var post = JSON.stringify(postData);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/time/stamp', true);
     xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-    xhr.send(post);    
-    update();
+    xhr.send(post);
+    clearInputs();    
+    updateDiv();
 }
 
-function update(){
+//EDIT STAMPS
+function remove(){
+    var xhr = new window.XMLHttpRequest();
+    xhr.open('POST', '/time/remove', true);
+    xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
+    xhr.send(JSON.stringify({"deleteId": deleteButton.value}));
+    updateDiv();
+}
+
+function edit(){
+    console.log("inside edit client side");
+    var xhr = new window.XMLHttpRequest();
+    xhr.open('POST', '/time/edit', true);
+    xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
+    xhr.send(JSON.stringify({"editId": editButton.value}));
+}
+
+function clearInputs(){
+    $('#title').val('');
+    $("#tags").empty();
+}
+
+
+function updateDiv(){
     $.ajax({
         type: 'GET',
         dataType: 'json', 
         url: '/time/update',
         success: function(data){
             $("#stamps").load(location.href+" #stamps>*","");
-            console.log(data);
+            
         }
-    })
+    });
 }
 
+
+//const myModal = document.getElementById('modal');
+//const myInput = document.getElementById('myInput');
 
 
 

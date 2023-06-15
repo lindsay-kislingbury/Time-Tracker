@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const {check, validationResult} = require("express-validator"); //  TODO: ADD VALIDATION
 
 //Controller Functions
-const {logout, signup, loginCheck, signupCheck, invalidLogin} = require("../controller/AuthController");
+const {logout, dashboard, signup, loginCheck, signupCheck, invalidLogin} = require("../controller/AuthController");
 
 //Initalize Router
 const router = express.Router();
@@ -15,6 +15,8 @@ router.use(express.static(__dirname + '/public'));
 
 // /#
 router.get('/', loginCheck);
+
+router.get('/dashboard', dashboard);
 
 // /auth/logout
 router.get('/logout', logout);
@@ -32,7 +34,6 @@ router.post(
       failureRedirect: "/auth/invalidLogin",
       failureFlash: true
     }),
-    // use login controller
     loginCheck
 );
 

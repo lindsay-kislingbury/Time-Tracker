@@ -1,9 +1,7 @@
 const User = require("../models/User");
-const date = require('date-and-time');
 let msg = "valid";
 
 
-//Check if user is already logged in 
 const loginCheck = async (req, res) => {
     console.log(req.body);
     if(!req.user){
@@ -16,19 +14,22 @@ const loginCheck = async (req, res) => {
         });
     }
     else{
-        user = req.user;
-        userData = await User.findById(user.id);
-        count = userData.timestamps.length; 
-        res.render('dashboard', 
-        {   
-            title: 'Dashboard',
-            name: userData.name,
-            timestamps: userData.timestamps,
-        });
+        return res.redirect('/auth/dashboard');
     }
 };
 
-//Invalid Login 
+const dashboard = async(req, res) => {
+    user = req.user;
+    userData = await User.findById(user.id);
+    count = userData.timestamps.length; 
+    res.render('dashboard', 
+    {   
+        title: 'Dashboard',
+        name: userData.name,
+        timestamps: userData.timestamps,
+    });
+}
+
 const invalidLogin = (req, res) => {
     msg = "Incorrect Email or Password";
     res.render('index', 
@@ -38,8 +39,6 @@ const invalidLogin = (req, res) => {
     });
 }
 
-
-//Get register form
 const signupCheck = (req, res) => {
     msg = "valid";
     res.render('index', 
@@ -49,8 +48,6 @@ const signupCheck = (req, res) => {
     });
 }
 
-
-//Create user
 const signup = async (req, res) => {
     const {username, name, password} = req.body;
     if(req.body.password != req.body.confirmPassword){
@@ -84,7 +81,6 @@ const signup = async (req, res) => {
     }
 };
 
-//Logout
 const logout = (req, res, next) => {
     req.logout(function(err){
         if(err){
@@ -96,6 +92,7 @@ const logout = (req, res, next) => {
 
 module.exports = {
     signup,
+    dashboard,
     logout,
     loginCheck,
     signupCheck,
