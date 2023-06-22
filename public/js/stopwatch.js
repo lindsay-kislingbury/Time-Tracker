@@ -1,3 +1,4 @@
+
 var startTimerButton = document.querySelector('.startTimer');
 var pauseTimerButton = document.querySelector('.pauseTimer');
 var timerDisplay = document.querySelector('.timer');
@@ -80,13 +81,10 @@ async function send(){
     var title = document.getElementById('title').value;
     var options = document.getElementById('tags').selectedOptions;
     var tags = Array.from(options).map(({value})=> value);
-    var dateOptions = {
-        month: "short",
-        day: "2-digit",
-        year: "numeric"
-    }
     var time = elapsedTime.substr(0,elapsedTime.lastIndexOf(":"));
-    var date = new Date().toLocaleDateString('en-US', dateOptions);
+    var date = new Date().toISOString().slice(0, 10);
+    
+    console.log(date);
     var postData = {
         title: title,
         tags: tags,
@@ -113,16 +111,19 @@ function remove(){
 
 function edit(){
     console.log("inside edit client side");
-    var xhr = new window.XMLHttpRequest();
-    xhr.open('POST', '/time/edit', true);
-    xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-    xhr.send(JSON.stringify({"editId": editButton.value}));
+    
+    //var xhr = new window.XMLHttpRequest();
+    //xhr.open('POST', '/time/edit', true);
+    //xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
+    //xhr.send(JSON.stringify({"editValue": editValue,"editId": editButton.value}));
 }
+
 
 function clearInputs(){
     $('#title').val('');
     $("#tags").empty();
 }
+
 
 
 function updateDiv(){
@@ -132,14 +133,14 @@ function updateDiv(){
         url: '/time/update',
         success: function(data){
             $("#stamps").load(location.href+" #stamps>*","");
-            
         }
     });
 }
 
 
-//const myModal = document.getElementById('modal');
-//const myInput = document.getElementById('myInput');
+
+
+
 
 
 

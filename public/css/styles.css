@@ -22,9 +22,16 @@ p, table{
 }
 
 .stamps{
+  min-height: 300px;
   max-height: clamp(400px, 85vw, 700px);
-  overflow: none;
+  overflow-x: auto;
 }
+
+.dropdown-menu {
+	width: max-content;
+}
+
+
 
 
 

@@ -2,111 +2,94 @@
 <html lang="en">
     <head>
       <%- include('partials/head.ejs') %>
-      <title>Dashboard</title>
+      <title>Dashboard</title> 
+      <script type="module">
+        import Tags from "https://cdn.jsdelivr.net/gh/lekoala/bootstrap5-tags@master/tags.js";
+        Tags.init("select");
+      </script>
     </head>
     <%- include('partials/navbar.ejs') %>
-
     <body>
       <main>
-        <!--Outer Container-->
-        <div class="row m-0">
-          <!-- Content -->
-            <div class="display-5 text-start text-dark ps-3px-2 py-2 flex-grow-1">
-              <p class="gradient-icon" style="font-size: 2rem;"><i class="fa-solid fa-user-clock"></i></p> 
-              <%-name %>
-            </div>
-            <!--Start Home Content-->
-            <div class="outer-container">
-            <!--Stopwatch-->
-            <%- include('partials/stopwatch.ejs') %>
-            <!--Start Table-->
-            <div class="table-responsive-md mt-2 w-100">
-            <div class="stamps" id="stamps">
-              <table class="table table-borderless rounded">
-                <thead class="sticky-top text-bg-dark">
-                  <tr>
-                    <th scope = 'col'>Title</th>
-                    <th scope = 'col'>Time</th>
-                    <th scope = 'col'></th>
-                  </tr>
-                </thead>
-                <tbody class="table-borderless text-bg-light" style="--bs-bg-opacity: .3;">
-                <%if(timestamps.length>0){ %>
-                  <% for (var i=timestamps.length-1; i>=0; i--){ %>
-                      <tr class="bg-transparent text-dark">
-                        <td class="col-6 py-0 my-0">
-                          <span class="text-capitalize fw-bold">
-                            <%-timestamps[i].title%>
-                          </span>
-                          <br>
-                          <span>
-                            <%-timestamps[i].date%>
-                          </span>
-                        </td>
-                        <td class="col-4 px-0 py-0 text-start py-0 my-0">
-                          <span class="fs-5">
-                            <%-timestamps[i].elapsedTime%>
-                          </span>
-                        </td>
-                        <td class="col-2 d-flex align-items-center">
-                          <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                            <button class="btn btn-sm btn-secondary" id="editButton" value="<%-timestamps[i]._id%>" onclick="edit()">
+        <div class="display-5 text-start text-dark ps-3 px-2 py-2 flex-grow-1">
+          <p class="gradient-icon" style="font-size: 2rem;"><i class="fa-solid fa-user-clock"></i></p> 
+          <%-name %>
+        </div>
+        <!--Start Home Content-->
+        <div class="outer-container p-2">
+        <!--Stopwatch-->
+        <%- include('partials/stopwatch.ejs') %>
+        <!--Start Table-->
+        <div class="table-responsive-md mt-2 w-100">
+          <div class="stamps" id="stamps">
+            <table class="table table-borderless rounded">
+              <thead class="sticky-top text-bg-dark">
+                <tr>
+                  <th scope = 'col'>Title</th>
+                  <th scope = 'col'>Time</th>
+                  <th scope = 'col'></th>
+                </tr>
+              </thead>
+              <tbody class="table-borderless text-bg-light" style="--bs-bg-opacity: .3;">
+              <%if(timestamps.length>0){ %>
+                <% for (var i=timestamps.length-1; i>=0; i--){ %>
+                    <tr class="bg-transparent text-dark">
+                      <td class="col-6 py-0 my-0">
+                        <span class="text-capitalize fw-bold">
+                          <%-timestamps[i].title%>
+                        </span>
+                        <br>
+                        <span>
+                          <%-timestamps[i].date%>
+                        </span>
+                      </td>
+                      <td class="col-4 px-0 py-0 text-start py-0 my-0">
+                        <span class="fs-5">
+                          <%-timestamps[i].elapsedTime%>
+                        </span>
+                      </td>
+                      <td class="col-2 d-flex align-items-center">
+                        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                          
+                          <div class="btn-group dropstart">
+                            <button type="button" class="btn btn-sm btn-secondary" id="editButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
                               <i class="fa-solid fa-pen fa-sm"></i>
                             </button>
-                            <button class="btn btn-sm btn-dark" id="deleteButton" value="<%-timestamps[i]._id%>" onclick="remove()">
-                              <i class="fa-solid fa-trash fa-sm"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr> 
-                        <td colspan="3" class="py-0 my-0">
-                          <% for (var j=0; j<timestamps[i].tags.length; j++){ %>
-                            <span class="badge rounded-pill text-bg-dark"><%-timestamps[i].tags[j]%></span>
-                          <% } %>
-                          <hr class="border border-dark border-2 border-opacity-60 mt-1 mb-2">
-                        </td>
-                      </tr>
-                  <%}%>
-                <%}else{ %>
-                  <td colspan="3">
-                    <p>No Timestamps Yet!</p>
-                  </td>
-                <%}%>
-                </tbody>
-              </table>
-            </div>
-            </div>
-            <!--End Table-->
-          
-          <!--End Home Content-->                  
-          <div id="stats" style="display:none;">
-            <p>stats content</p>
-          </div>
-          <div id="settings" style="display:none;">
-            <p>settings content</p>
-          </div>
-              <!--End Content-->  
-        </div>
 
-    <!--Modal-->
-<div class="modal fade " id="exampleModal" data-bs-theme="light" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
+                          <button class="btn btn-sm btn-dark" id="deleteButton" value="<%-timestamps[i]._id%>" onclick="remove()" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-trash fa-sm"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr> 
+                      <td colspan="3" class="py-0 my-0">
+                        <% for (var j=0; j<timestamps[i].tags.length; j++){ %>
+                          <span class="badge rounded-pill text-bg-dark"><%-timestamps[i].tags[j]%></span>
+                        <% } %>
+                        <hr class="border border-dark border-2 border-opacity-60 mt-1 mb-2">
+                      </td>
+                    </tr>
+
+
+                    
+                <%}%>
+              <%}else{ %>
+                <td colspan="3">
+                  <p>No Timestamps Yet!</p>
+                </td>
+              <%}%>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!--End Table-->
 
     </main>
     <%- include('partials/footer.ejs') %>
-    <script type = "text/javascript" src ="/js/dashboard.js"></script>
     <script type = "text/javascript" src = "/js/stopwatch.js"></script>
 </body>
 </html>

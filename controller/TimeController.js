@@ -23,7 +23,13 @@ const remove = async(req, res) => {
 }
 
 const edit = async(req,res) => {
-   var updateId = mongoose.Types.ObjectId(req.body.editId);
+   var editValue = mongoose.Types.ObjectId(req.body.editValue);
+   var editId = mongoose.Types.ObjectId(req.body.editId);
+   await User.findOneAndUpdate({_id: req.user.id},
+      {$set: {"timestamps.$[stamp].value": editValue}},
+      {arrayFilters: [{"stamp._id": editId}]}
+   )
+   console.log("edit value: ", req.body.editValue);
    console.log("edit ID: ", req.body.editId);
 }
 
