@@ -38,10 +38,42 @@ const updateDivContent = async(req, res) => {
    res.send(user);
 }
 
+const getTags = async(req,res) => {
+   let user = await User.findById(req.user.id);
+   var allTags = user.timestamps.flatMap(timestamp => {
+      return timestamp.tags.flatMap(tag => {
+         return{
+            id: tag,
+            text: tag
+         }
+      })
+   })
+   var tags = allTags.reduce((unique, add) => {
+      if(!unique.some(tag => tag.id === add.id)){
+         unique.push(add);
+      }
+      return unique;
+   }, []);
+   res.send(tags);
+}
+
+const editTags = async(req,res) => {
+   const user = await User.findById(req.user.id);
+   const timestamp = user.timestamps.find(stamp => stamp._id.equals(req.body.stampId));
+   var tags = timestamp.tags.map(tag => {
+      return {
+         id: tag,
+         text: tag
+      }
+   })
+   console.log("individual timestamp tags: ", tags);
+};
 
 module.exports = {
    stamp,
    remove,
    edit,
-   updateDivContent
+   updateDivContent,
+   getTags,
+   editTags
 };

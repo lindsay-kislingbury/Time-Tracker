@@ -79,7 +79,7 @@ function getShowTime(){
 
 async function send(){
     var title = document.getElementById('title').value;
-    var options = document.getElementById('tags').selectedOptions;
+    var options = document.getElementById('new-tags').selectedOptions;
     var tags = Array.from(options).map(({value})=> value);
     var time = elapsedTime.substr(0,elapsedTime.lastIndexOf(":"));
     var date = new Date().toISOString().slice(0, 10);
@@ -92,6 +92,7 @@ async function send(){
         date: date
     }
     var post = JSON.stringify(postData);
+    console.log(postData);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/time/stamp', true);
     xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
@@ -124,8 +125,6 @@ function clearInputs(){
     $("#tags").empty();
 }
 
-
-
 function updateDiv(){
     $.ajax({
         type: 'GET',
@@ -138,9 +137,35 @@ function updateDiv(){
 }
 
 
+//Select2 New Timestamp Tags
+$(document).ready(function(){
+    allTags = [];
+    $.get('/time/getTags', function(data){
+        allTags = data;
+        console.log("tags on client side: ", allTags);
+        $('#new-tags').select2( {
+            data: allTags,
+            multiple: true,
+            width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+            placeholder: $( this ).data( 'placeholder' ),
+            closeOnSelect: false,
+            theme: 'bootstrap-5',
+            tags: true,
+            tokenSeparators: [',', ' '],
+        });
+    });
+});
 
 
+//Get tags for a single timestamp to edit
+$('#editButton').click(function() {
+    const stampId = document.getElementById('editButton').value;
+    console.log("stampId: ", stampId);
+    $.post('/time/editTags', {stampId: stampId}),
+    function(data){
+        console.log("returned tags: ", data);
+    }
+})
 
 
-
-
+  

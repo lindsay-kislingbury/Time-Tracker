@@ -1,40 +1,34 @@
 <div class="stopwatch">
-  <div class="py-3 px-3 mt-2 border border-dark border-2 border-opacity-50 text-bg-light m-auto">
+  <div class="py-3 px-3 mt-2 border border-dark border-2 rounded text-bg-light m-auto">
     <div class="container p-0 min-w-60vw">
       <form>
-        <div class="mh-30 d-flex flex-wrap">
+        <!--Title & Tags-->
+        <div class="d-flex flex-wrap">
           <!--Title Input-->
-          <div class="input-group input-group-md mb-3">
-            <span class="input-group-text border-dark-subtle">
+          <div class="input-group mb-3">
+            <span class="input-group-text border-secondary">
               <i class="fa-solid fa-pen-to-square"></i>
             </span>
-            <input type="text" class="form-control border-dark-subtle" id="title" maxlength="25">
+            <input type="text" class="form-control border-secondary" id="title" maxlength="25">
           </div>
-          <!--Category Input-->
-          <div class="input-group input-group-md">
-            <div class="input-group input-group-md mb-3 me-1">
-              <span class="input-group-text border-dark-subtle">
-                <i class="fa-solid fa-tags"></i>
-              </span>
-              <select class="form-select" id="tags" multiple data-placeholder="Add some tags..." data-allow-new="true" data-separator=" |,|  " data-badge-style="secondary" fuzzy="true" data-allow-clear="true" data-showDropIcon="true">
-                <%timestamps.forEach(timestamp =>{%>
-                  <%timestamp.tags.forEach(tag =>{%>
-                    <option value='<%- tag %>' data-id=""><%- tag %></option>
-                  <%})%>
-                <%});%>
-              </select>
-            </div>
+          <!--Tags Input-->
+          <div class="input-group mb-3">
+            <span class="input-group-text border-secondary">
+              <i class="fa-solid fa-tags"></i>
+            </span>
+            <select class="form-select from-select-sm" name="new-tags" id="new-tags" data-placeholder="Add some tags..." multiple>
+            </select>
           </div>
         </div>
     
-      
-        <div class="container-fluid">
-          <div class="card-header border border-dark-subtle align-items-center border-bottom text-bg-light m-0 p-0">
+        <!--Timer-->
+        <div class="container-fluid border border-2 border-dark-subtle rounded">
+          <div class="card-header border-bottom border-2 border-dark-subtle align-items-center text-bg-light m-0 p-0">
             <div class="timer px-8" onclick="startTimer()">
               00:00:00:00
             </div>
           </div>   
-          <div class="card-body d-flex border-end border-dark-subtle border-start border-bottom justify-content-around align-items-center text-bg-light p-0">
+          <div class="card-body d-flex justify-content-around align-items-center text-bg-light p-0">
             <div class="startTimer reset px-2" onclick="startTimer()">
               <i class="fas fa-play"></i>
             </div>
@@ -44,24 +38,14 @@
             <div class="resetTimer reset px-2" onclick="resetTimer()">
               Reset
             </div>
-            <div class="vr border border-1 border-secondary"></div>
+            <div class="vr border border-1 border-dark"></div>
             <button type="button" class="btn fs-1" onclick="send()">
               <i class="fa-solid fa-floppy-disk" style="color:#7a487a;"></i>
             </button>
           </div>
         </div>
+
       </form>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-    <!--Time Container-->
-
-  <!--End Card-->

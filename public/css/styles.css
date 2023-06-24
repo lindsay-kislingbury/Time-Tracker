@@ -27,13 +27,6 @@ p, table{
   overflow-x: auto;
 }
 
-.dropdown-menu {
-	width: max-content;
-}
-
-
-
-
 
 .display-1{
   font-family: 'Staatliches', cursive !important;
@@ -128,6 +121,19 @@ p, table{
   height:100%;
 }
 
+.select2-selection{
+  border-color: #6c757d !important;
+  border-width: 2px !important;
+}
+
+
+
+
+
+
+
+
+
 /*Timer Buttons*/
 .timer, .reset {
   display: flex;
@@ -164,7 +170,7 @@ p, table{
   }
   .stopwatch{
     display:inline-block;
-    width:50vw;
+    width:60vw;
   }
   
 }
