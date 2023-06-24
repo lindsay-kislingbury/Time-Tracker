@@ -94,14 +94,14 @@ async function send(){
     var post = JSON.stringify(postData);
     console.log(postData);
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/time/stamp', true);
+    xhr.open('POST', '/time/create', true);
     xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
     xhr.send(post);
     clearInputs();    
     updateDiv();
 }
 
-//EDIT STAMPS
+//REMOVE STAMP
 function remove(){
     var xhr = new window.XMLHttpRequest();
     xhr.open('POST', '/time/remove', true);
@@ -139,12 +139,10 @@ function updateDiv(){
 
 //Select2 New Timestamp Tags
 $(document).ready(function(){
-    allTags = [];
-    $.get('/time/getTags', function(data){
-        allTags = data;
-        console.log("tags on client side: ", allTags);
+    $.get('/time/loadAllTags', function(data){
+        tags = data.map((data) => ({"id": data, "text": data}));
         $('#new-tags').select2( {
-            data: allTags,
+            data: tags,
             multiple: true,
             width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
             placeholder: $( this ).data( 'placeholder' ),
@@ -157,15 +155,33 @@ $(document).ready(function(){
 });
 
 
+
 //Get tags for a single timestamp to edit
-$('#editButton').click(function() {
+function openEditModal(){
     const stampId = document.getElementById('editButton').value;
     console.log("stampId: ", stampId);
-    $.post('/time/editTags', {stampId: stampId}),
-    function(data){
-        console.log("returned tags: ", data);
-    }
-})
+    $.ajax({
+        type: 'POST',
+        dataType:'json',
+        url: '/time/getOneStampTags',
+        data: {stampId: stampId},
+        success: function(data){
+            tags = data.tags.map((data) => ({"id": data, "text": data, "selected": true}));
+            $('#edit-tags').select2( {
+                data: tags,
+                multiple: true,
+                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+                closeOnSelect: false,
+                theme: 'bootstrap-5',
+                tags: true,
+                tokenSeparators: [',', ' '],
+                dropdownParent: $('#editModal')
+            });
+            $('#edit-title').val(data.title);
+        }
+    })
+    updateDiv();
+}
 
 
   

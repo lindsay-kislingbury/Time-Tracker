@@ -30,7 +30,7 @@
                             <td class="col-2 d-flex align-items-center">
                                 <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
                                     <div class="btn-group dropstart">
-                                        <button type="button" class="btn btn-sm btn-secondary"  id="editButton" value="<%-timestamps[i]._id%>" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <button type="button" class="btn btn-sm btn-secondary"  id="editButton" value="<%-timestamps[i]._id%>" onclick="openEditModal()" data-bs-toggle="modal" data-bs-target="#editModal">
                                             <i class="fa-solid fa-pen fa-sm"></i>
                                         </button>
                                     <button class="btn btn-sm btn-dark" id="deleteButton" value="<%-timestamps[i]._id%>" onclick="remove()" data-bs-toggle="dropdown" aria-expanded="false">

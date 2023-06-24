@@ -3,11 +3,27 @@
     <div class="modal-dialog modal-dialog-centered" >
         <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              ...
+              
+                <!--Title & Tags-->
+                <!--Title Input-->
+                <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text border-secondary">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </span>
+                <input type="text" class="form-control border-secondary" id="edit-title" maxlength="25">
+                </div>
+                <!--Tags Input-->
+                <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text border-secondary">
+                    <i class="fa-solid fa-tags"></i>
+                </span>
+                <select class="form-select" name="edit-tags" id="edit-tags" data-placeholder="Add some tags..." multiple>
+                </select>
+                </div>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn text-light" style="background-color:#7a487a;">Save changes</button>

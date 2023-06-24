@@ -6,13 +6,20 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(express.static(__dirname + '/public'));
 
-const {stamp,remove,edit,updateDivContent, getTags, editTags} = require("../controller/TimeController");
+const {
+    createStamp,
+    removeStamp,
+    editStamp,
+    updateDivContent,
+    getAllTags,
+    getTimestampdata
+} = require("../controller/TimeController");
 
-router.post('/stamp', stamp);
-router.post('/remove', remove);
-router.post('/edit', edit);
+router.post('/create', createStamp);
+router.post('/remove', removeStamp);
+router.post('/edit', editStamp);
 router.all('/update', updateDivContent);
-router.all('/getTags', getTags);
-router.all('/editTags', editTags);
+router.all('/loadAllTags', getAllTags);
+router.all('/getOneStampTags', getTimestampdata);
 
 module.exports = router;
