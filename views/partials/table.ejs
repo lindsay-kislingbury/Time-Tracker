@@ -1,59 +1,60 @@
 <!--Table-->
-<div class="table-responsive-md ms-2 mt-2 w-100">
-    <div class="stamps" id="stamps">
-        <table class="table table-borderless rounded">
-            <thead class="sticky-top text-bg-dark">
-                <tr>
-                <th scope = 'col'>Title</th>
-                <th scope = 'col'>Time</th>
-                <th scope = 'col'></th>
-                </tr>
-            </thead>
-            <tbody class="table-borderless text-bg-light" style="--bs-bg-opacity: .3;">
-                <%if(timestamps.length>0){ %>
-                    <% for (var i=timestamps.length-1; i>=0; i--){ %>
-                        <tr class="bg-transparent text-dark">
-                            <td class="col-6 py-0 my-0">
-                                <span class="text-capitalize fw-bold">
-                                    <%-timestamps[i].title%>
-                                </span>
-                                <br>
-                                <span>
-                                    <%-timestamps[i].date%>
-                                </span>
-                            </td>
-                            <td class="col-4 px-0 py-0 text-start py-0 my-0">
-                                <span class="fs-5">
-                                    <%-timestamps[i].elapsedTime%>
-                                </span>
-                            </td>
-                            <td class="col-2 d-flex align-items-center">
-                                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                    <div class="btn-group dropstart">
-                                        <button type="button" class="btn btn-sm btn-secondary"  id="editButton" value="<%-timestamps[i]._id%>" onclick="openEditModal()" data-bs-toggle="modal" data-bs-target="#editModal">
+<div class="container px-0 mx-0" id="table">
+    <div class="table-responsive-md w-100">
+        <div class="container px-0" id="stamps">
+            <table class="table table-borderless rounded">
+                <thead class="sticky-top text-bg-dark">
+                    <tr>
+                    <th scope = 'col'>Title</th>
+                    <th scope = 'col'>Time</th>
+                    <th scope = 'col'></th>
+                    </tr>
+                </thead>
+                <tbody class="table-borderless" style="background-color: rgba(255, 255, 255, 0.3);">
+                    <%if(timestamps.length>0){ %>
+                        <% for (var i=timestamps.length-1; i>=0; i--){ %>
+                            <tr class="bg-transparent text-dark">
+                                <td class="col-6 py-0 my-0">
+                                    <span class="text-capitalize fw-bold">
+                                        <%-timestamps[i].title%>
+                                    </span>
+                                    <br>
+                                    <span>
+                                        <%-timestamps[i].date%>
+                                    </span>
+                                </td>
+                                <td class="col-4 px-0 py-0 text-start py-0 my-0">
+                                    <span class="fs-5">
+                                        <%-new Date(timestamps[i].elapsedTime * 1000).toISOString().slice(11, 19);%>
+                                    </span>
+                                </td>
+                                <td class="col-2 d-flex align-items-center">
+                                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                        <button type="button" class="btn btn-md btn-secondary" onclick="openEditModal('<%=timestamps[i]._id%>')" data-bs-toggle="modal" data-bs-target="#editModal">
                                             <i class="fa-solid fa-pen fa-sm"></i>
                                         </button>
-                                    <button class="btn btn-sm btn-dark" id="deleteButton" value="<%-timestamps[i]._id%>" onclick="remove()" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-trash fa-sm"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr> 
-                            <td colspan="3" class="py-0 my-0">
-                                <% for (var j=0; j<timestamps[i].tags.length; j++){ %>
-                                    <span class="badge rounded-pill text-bg-dark"><%-timestamps[i].tags[j]%></span>
-                                <% } %>
-                                <hr class="border border-dark border-2 border-opacity-60 mt-1 mb-2">
-                            </td>
-                        </tr>
+                                        <button class="btn btn-md btn-dark" id="deleteButton" onclick="remove('<%-timestamps[i]._id%>')" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-trash fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr> 
+                                <td colspan="3" class="py-0 my-0">
+                                    <% for (var j=0; j<timestamps[i].tags.length; j++){ %>
+                                        <span class="badge badge-secondary rounded-pill"><%-timestamps[i].tags[j]%></span>
+                                    <% } %>
+                                    <hr class="border border-dark border-2 border-opacity-60 mt-1 mb-2">
+                                </td>
+                            </tr>
+                        <%}%>
+                    <%}else{ %>
+                        <td colspan="3">
+                            <p>No Timestamps Yet!</p>
+                        </td>
                     <%}%>
-                <%}else{ %>
-                    <td colspan="3">
-                        <p>No Timestamps Yet!</p>
-                    </td>
-                <%}%>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

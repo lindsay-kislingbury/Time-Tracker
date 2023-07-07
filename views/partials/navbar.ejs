@@ -1,30 +1,24 @@
-<nav class="navbar navbar-expand-lg py-1 px-3 bg-white border border-bottom">
+<nav class="navbar navbar-expand-lg mb-4 top-nav">
     <div class="container-fluid">
-        <a class="navbar-brand pt-2" href="/auth/">
-            <h1 class="gradient-text">time tracker</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <a class="navbar-brand" href="/">time tracker</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
             <% if(title == "Home"){ %>
-                <li class="nav-item">
+                <a class="nav-link">
                     <%- include('loginForm.ejs') %>
-                </li>
-                <li class="nav-item">
+                </a>
+                <a class="nav-link">
                     <%- include('registerForm.ejs') %>
-                </li>
+                </a>
             <% } %>
             <% if(title == "Dashboard") {%>
-                <li class="nav-item">
-                    <a class="nav-link" href="/auth/logout">Logout</a>
-                </li>
+                <a class="nav-link" href="/auth/logout">Logout</a>
             <% } %>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-          </ul>
+            <a class="nav-link" href="#">About</a>
         </div>
       </div>
+    </div>
   </nav>

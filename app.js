@@ -7,23 +7,13 @@ const passport = require("./services/passport");
 const AuthRoute = require("./routes/auth");
 const TimeRoute = require("./routes/time");
 const path = require('path');
-
-
-//deprecated
 mongoose.set('strictQuery', true);
 
 //Database config
 const {MONGO_URI, SECRET} = require("./config");
-
-//Port
 const PORT = process.env.PORT || 4000;
-
-//Initialize App
 const app = express()
-
-//JSON
 app.use(express.json());
-
 
 //Configure Session
 app.use(
@@ -54,14 +44,8 @@ mongoose
     .then(() => console.log("connected to database"))
     .catch((e) => console.error(e));
 
-//Home Page
 app.get('/', function (req, res) {
     res.redirect('/auth');
-})
-
-//Dashboard
-app.get('/dashboard', function(req, res) {
-    res.render('dashboard', {title: 'Dashboard', })
 })
 
 app.listen(4000, '0.0.0.0'), () => {

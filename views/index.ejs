@@ -4,7 +4,7 @@
       <%- include('partials/head.ejs') %>
     <title>Home</title>
     </head>
-    <%- include('partials/navbar.ejs') %>
+      <%- include('partials/navbar.ejs') %>
     <% if(message != "valid"){ %>
       <div class="container-sm">
         <div class="alert alert-danger rounded-0 border-white bg-transparent alert-dismissible fade show d-flex align-items-center" role="alert">
@@ -15,11 +15,18 @@
     <% } %>
     <body>
       <main>
-        <div class="container-sm text-center mt-3">
-          <p class="gradient-icon" style="font-size: 6rem;"><i class="fa-solid fa-stopwatch"></i></p>
-          <h1 class="display-1 fs-1 my-0">track<span class="gradient-text"> time</span> <br>
+        <div class="container-sm text-left ps-4 my-5 py-5">
+          <h1 class="display-1 my-0 text-capitalize" id="tagline"><span class="colored-text title-text">track time</span> <br>
           for any reason, anywhere.</h1>
-          <p class="text">Track time spent on activities and gain insight into Lorem ipsum </p>
+          <p>Track time spent on activities. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
+          <div class="container px-0 mx-0">
+            <button type="button" class="btn shadow-button" id="">
+              Quick Start
+            </button>
+            <button type="button" class="btn shadow-button" id="">
+              Login
+            </button>
+          </div>
         </div>
         
 

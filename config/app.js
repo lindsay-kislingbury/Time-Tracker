@@ -59,11 +59,6 @@ app.get('/', function (req, res) {
     res.redirect('/auth');
 })
 
-//Dashboard
-app.get('/dashboard', function(req, res) {
-    res.render('dashboard', {title: 'Dashboard', })
-})
-
 app.listen(4000, '0.0.0.0'), () => {
     console.log(`listening on ${PORT}`)
 }

@@ -1,0 +1,43 @@
+<div class="container mx-0 px-0" id="styled-tab-content">
+  <ul class="nav nav-pills justify-content-around" role="tablist">
+   <div class="d-flex">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard-tab-pane" type="button" role="tab" aria-controls="dashboard-tab-pane" aria-selected="true" onclick="showTimer()">
+        <i class="fa-solid fa-stopwatch"></i>
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="charts-tab" data-bs-toggle="tab" data-bs-target="#charts-tab-pane" type="button" role="tab" aria-controls="charts-tab-pane" aria-selected="false" onclick="showCharts()">
+        <i class="fa-solid fa-chart-simple"></i>
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="charts-tab" data-bs-toggle="tab" data-bs-target="#charts-tab-pane" type="button" role="tab" aria-controls="charts-tab-pane" aria-selected="false" onclick="showCharts()">
+        <i class="fa-solid fa-user"></i>
+      </a>
+    </li>
+   </div>
+    
+  </ul>
+
+  <div class="tab-content pt-0 mt-0" id="dash-tab-content">
+  
+    <div class="tab-pane fade show active" id="dashboard-tab-pane" role="tabpanel" aria-labelledby="dashboard-tab" tabindex="0">
+      <div class="container-lg" id="dashboard-container">
+        <!--Stopwatch-->
+        <%- include('stopwatch.ejs') %>
+        <!--Table-->
+        <%- include('table.ejs') %>
+        <!--Modal-->
+        <%- include('edit-modal.ejs') %>
+      </div>
+    </div>
+  
+    <div class="tab-pane fade show" id="charts-tab-pane" role="tabpanel" aria-labelledby="charts-tab" tabindex="0">
+      <div class="charts-container px-2">
+        ...
+      </div>
+    </div>
+  
+  </div>
+</div>

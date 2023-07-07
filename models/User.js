@@ -8,11 +8,11 @@ const UserSchema = new Schema(
         username: String,
         name: String,
         password: String,
-        timestamps: [ {
+        timestamps: [{
             title: String,
             tags: [String],
             date: String,
-            elapsedTime: String
+            elapsedTime: Number,
         }],
     },
     {

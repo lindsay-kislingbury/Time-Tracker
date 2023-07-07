@@ -7,20 +7,12 @@
     <%- include('partials/navbar.ejs') %>
     <body>
       <main>
-        <div class="display-5 text-start text-dark ps-3 px-2 py-2 flex-grow-1">
-          <p class="gradient-icon" style="font-size: 2rem;"><i class="fa-solid fa-user-clock"></i></p> 
-          <%-name %>
-        </div>
-        <div class="outer-container p-2">
-          <!--Stopwatch-->
-          <%- include('partials/stopwatch.ejs') %>
-          <!--Table-->
-          <%- include('partials/table.ejs') %>
-          <!--Modal-->
-          <%- include('partials/edit-modal.ejs') %>
+        <div class="container" id="outer-container">
+          <%- include('partials/dashboard-nav.ejs') %>
         </div>
       </main>
     <%- include('partials/footer.ejs') %>
     <script type = "text/javascript" src = "/js/stopwatch.js"></script>
+    <script type = "text/javascript" src="/js/content.js"></script>
   </body>
 </html>

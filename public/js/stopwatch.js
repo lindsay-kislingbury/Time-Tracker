@@ -1,4 +1,3 @@
-
 var startTimerButton = document.querySelector('.startTimer');
 var pauseTimerButton = document.querySelector('.pauseTimer');
 var timerDisplay = document.querySelector('.timer');
@@ -11,7 +10,6 @@ var savedTime;
 var hours;
 var minutes;
 var seconds;
-var milliseconds;
 var elapsedTime;
 var paused = 0;
 var running = 0;
@@ -19,11 +17,9 @@ var running = 0;
 function startTimer(){
     if(!running){
         startTime = new Date().getTime();
-        tInterval = setInterval(getShowTime, 1);// change 1 to 1000 above to run script every second instead of every millisecond. one other change will be needed in the getShowTime() function below for this to work. see comment there.   
+        tInterval = setInterval(getShowTime, 1000);// change 1 to 1000 above to run script every second instead of every millisecond. one other change will be needed in the getShowTime() function below for this to work. see comment there.   
         paused = 0;
         running = 1;
-        timerDisplay.style.background = "rgb(116,235,213)";
-        timerDisplay.style.background = "radial-gradient(circle, rgba(131,72,109,0.3), rgba(0,0,0,0))";
         startTimerButton.classList.add('lighter');
         pauseTimerButton.classList.remove('lighter');
         startTimerButton.style.cursor = "auto";
@@ -52,8 +48,7 @@ function pauseTimer(){
     difference = 0;
     paused = 0;
     running = 0;
-    timerDisplay.innerHTML = '00:00:00:00';
-    timerDisplay.style.background = "transparent";
+    timerDisplay.innerHTML = '00:00:00';
     timerDisplay.style.cursor = "pointer";
     startTimerButton.style.cursor = "pointer";
     pauseTimerButton.style.cursor = "auto";
@@ -67,13 +62,13 @@ function getShowTime(){
         difference =  updatedTime - startTime;
     }
     hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    console.log("hours: ", hours);
     minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     seconds = Math.floor((difference % (1000 * 60)) / 1000);
-    milliseconds = Math.floor((difference % (1000 * 60)) / 100);hours = (hours < 10) ? "0" + hours : hours;
+    hours = (hours < 10) ? "0" + hours : hours;
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
-    milliseconds = (milliseconds < 100) ? (milliseconds < 10) ? "00" + milliseconds : "0" + milliseconds : milliseconds;
-    elapsedTime = hours + ':' + minutes + ':' + seconds + ':' + milliseconds;
+    elapsedTime = hours + ':' + minutes + ':' + seconds;
     timerDisplay.innerHTML = elapsedTime;
 }
 
@@ -81,10 +76,8 @@ async function send(){
     var title = document.getElementById('title').value;
     var options = document.getElementById('new-tags').selectedOptions;
     var tags = Array.from(options).map(({value})=> value);
-    var time = elapsedTime.substr(0,elapsedTime.lastIndexOf(":"));
+    var time = (hours * 3600) + (minutes * 60) + seconds;
     var date = new Date().toISOString().slice(0, 10);
-    
-    console.log(date);
     var postData = {
         title: title,
         tags: tags,
@@ -92,38 +85,50 @@ async function send(){
         date: date
     }
     var post = JSON.stringify(postData);
-    console.log(postData);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/time/create', true);
     xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
     xhr.send(post);
+    resetTimer();
     clearInputs();    
     updateDiv();
 }
 
-//REMOVE STAMP
-function remove(){
-    var xhr = new window.XMLHttpRequest();
-    xhr.open('POST', '/time/remove', true);
-    xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-    xhr.send(JSON.stringify({"deleteId": deleteButton.value}));
+
+function remove(deleteId){
+    console.log(deleteId);
+    $.ajax({
+        type: 'POST',
+        url: '/time/remove',
+        cache: false,
+        data: {
+            deleteId: deleteId,
+        }
+    })  
     updateDiv();
 }
 
-function edit(){
-    console.log("inside edit client side");
-    
-    //var xhr = new window.XMLHttpRequest();
-    //xhr.open('POST', '/time/edit', true);
-    //xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-    //xhr.send(JSON.stringify({"editValue": editValue,"editId": editButton.value}));
-}
-
-
 function clearInputs(){
     $('#title').val('');
-    $("#tags").empty();
+    $("#new-tags").empty();
 }
+
+//limit numeric input
+function maxLengthCheck(object) {
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+    
+  function isNumeric (evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode (key);
+    var regex = /[0-9]|\./;
+    if ( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
 
 function updateDiv(){
     $.ajax({
@@ -136,6 +141,9 @@ function updateDiv(){
     });
 }
 
+function formatTime(totSeconds){
+    return new Date(totSeconds * 1000).toISOString().slice(11, 19);
+}
 
 //Select2 New Timestamp Tags
 $(document).ready(function(){
@@ -144,22 +152,20 @@ $(document).ready(function(){
         $('#new-tags').select2( {
             data: tags,
             multiple: true,
-            width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
             placeholder: $( this ).data( 'placeholder' ),
             closeOnSelect: false,
             theme: 'bootstrap-5',
             tags: true,
             tokenSeparators: [',', ' '],
+            
         });
     });
 });
 
-
-
-//Get tags for a single timestamp to edit
-function openEditModal(){
-    const stampId = document.getElementById('editButton').value;
-    console.log("stampId: ", stampId);
+//Load data for edit modal
+function openEditModal(stampId){
+    $('#edit-tags').val('');
+    
     $.ajax({
         type: 'POST',
         dataType:'json',
@@ -170,18 +176,52 @@ function openEditModal(){
             $('#edit-tags').select2( {
                 data: tags,
                 multiple: true,
-                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
                 closeOnSelect: false,
                 theme: 'bootstrap-5',
                 tags: true,
                 tokenSeparators: [',', ' '],
                 dropdownParent: $('#editModal')
             });
+            $('#edit-time').val(data.time);
             $('#edit-title').val(data.title);
+            $('#edit-date').val(data.date);
+            $('#edit-button').val(stampId); 
         }
     })
+}
+
+function edit(){
+    var stampId = document.getElementById('edit-button').value;
+    var title = document.getElementById('edit-title').value;
+    var options = document.getElementById('edit-tags').selectedOptions;
+    var tags = Array.from(options).map(({value})=> value);
+    var date = document.getElementById('edit-date').value;
+    var timeInput = document.getElementById('edit-time').value;
+    var timeParts = timeInput.split(':');
+    var time = (timeParts[0]) * 3600 + timeParts[1] * 60 + timeParts[2] * 1;
+    console.log('time: ', time);
+    var postData = {
+        stampId: stampId,
+        title: title,
+        tags: tags,
+        time: time,
+        date: date
+    }
+    var post = JSON.stringify(postData);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/time/edit', true);
+    xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
+    xhr.send(post);
     updateDiv();
+    $('#editModal').modal('hide');
 }
 
 
-  
+
+//INPUT MASK
+var timeInput = document.getElementById("edit-time");
+
+var im = new Inputmask("99:99:99",{numericInput: true, placeholder:'0'});
+im.mask(timeInput);
+
+

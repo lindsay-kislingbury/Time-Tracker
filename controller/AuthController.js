@@ -3,12 +3,9 @@ let msg = "valid";
 
 
 const loginCheck = async (req, res) => {
-    console.log(req.body);
     if(!req.user){
-        msg = "valid";
-        return res.render('index', 
-        {
-            message: msg,
+        return res.render('index', {
+            message: "valid",
             title: "Home"
             
         });
@@ -30,20 +27,18 @@ const dashboard = async(req, res) => {
     });
 }
 
+
 const invalidLogin = (req, res) => {
-    msg = "Incorrect Email or Password";
-    res.render('index', 
-    {
-        message: msg,
+    res.render('index', {
+        message: "Incorrect Email or Password",
         title: "Home"
     });
 }
 
 const signupCheck = (req, res) => {
-    msg = "valid";
     res.render('index', 
     {
-        message: msg,
+        message: "valid",
         title: "Home"
     });
 }
@@ -51,10 +46,8 @@ const signupCheck = (req, res) => {
 const signup = async (req, res) => {
     const {username, name, password} = req.body;
     if(req.body.password != req.body.confirmPassword){
-        let msg = "confirm password does not match";
-        return res.render('index', 
-        {
-            message: msg,
+        return res.render('index', {
+            message: "confirm password does not match",
             title: "Home"
         });
     }
@@ -65,17 +58,14 @@ const signup = async (req, res) => {
             await newUser.save();
             return res.redirect('/');
         }
-        let msg = "the user with this email already exists"
-        return res.render('index', 
-        {
-            message: msg,
+        return res.render('index', {
+            message: "the user with this email already exists",
             title: "Home"
         });
     }
     catch(error){
-        msg = "some error occurred";
         return res.render('index', {
-            message: msg,
+            message: "an error occured",
             title: "Home"
         });
     }

@@ -2,9 +2,14 @@ const express = require("express");
 const passport = require("passport");
 const bodyParser = require('body-parser');
 const {check, validationResult} = require("express-validator"); //  TODO: ADD VALIDATION
-
-//Controller Functions
-const {logout, dashboard, signup, loginCheck, signupCheck, invalidLogin} = require("../controller/AuthController");
+const {
+  logout, 
+  dashboard, 
+  signup, 
+  loginCheck, 
+  signupCheck, 
+  invalidLogin
+} = require("../controller/AuthController");
 
 //Initalize Router
 const router = express.Router();
@@ -13,20 +18,12 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.use(express.static(__dirname + '/public'));
 
 
-// /#
+//Routes
 router.get('/', loginCheck);
-
 router.get('/dashboard', dashboard);
-
-// /auth/logout
 router.get('/logout', logout);
-
-// /auth/signup
 router.get('/register', signupCheck);
-
 router.post("/signup", signup);
-
-// /auth/login
 router.post(
     "/login",
     passport.authenticate("local", {
@@ -36,9 +33,6 @@ router.post(
     }),
     loginCheck
 );
-
-
-//Invalid Login
 router.get('/invalidLogin', invalidLogin);
 
 

@@ -1,50 +1,48 @@
 <div class="stopwatch">
-  <div class="py-3 px-3 mt-2 border border-dark border-2 rounded text-bg-light m-auto">
-    <div class="container p-0 min-w-60vw">
+  <div class="border border-secondary border-1 text-bg-light rouned m-auto" id="timer-box">
+    <div class="container p-0">
       <form>
         <!--Title & Tags-->
         <div class="d-flex flex-wrap">
           <!--Title Input-->
-          <div class="input-group mb-3">
+          <div class="input-group input-group mb-2">
             <span class="input-group-text border-secondary">
               <i class="fa-solid fa-pen-to-square"></i>
             </span>
-            <input type="text" class="form-control border-secondary" id="title" maxlength="25">
+            <input type="text" class="form-control border-secondary" id="title" maxlength="25" placeholder="Title">
           </div>
           <!--Tags Input-->
-          <div class="input-group mb-3">
+          <div class="input-group input-group mb-2">
             <span class="input-group-text border-secondary">
               <i class="fa-solid fa-tags"></i>
             </span>
-            <select class="form-select" name="new-tags" id="new-tags" data-placeholder="Add some tags..." multiple>
+            <select class="form-select w-auto" name="new-tags" id="new-tags" data-placeholder="Tags" multiple>
             </select>
           </div>
         </div>
-    
         <!--Timer-->
         <div class="container-fluid border border-2 border-dark-subtle rounded">
           <div class="card-header border-bottom border-2 border-dark-subtle align-items-center text-bg-light m-0 p-0">
-            <div class="timer px-8" onclick="startTimer()">
-              00:00:00:00
+            <div class="timer" onclick="startTimer()">
+              00:00:00
             </div>
           </div>   
           <div class="card-body d-flex justify-content-around align-items-center text-bg-light p-0">
-            <div class="startTimer reset px-2" onclick="startTimer()">
+            <div class="startTimer reset" onclick="startTimer()">
               <i class="fas fa-play"></i>
             </div>
-            <div class="pauseTimer reset px-2" onclick="pauseTimer()">
+            <div class="pauseTimer reset" onclick="pauseTimer()">
               <i class="fas fa-pause"></i>
             </div>
-            <div class="resetTimer reset px-2" onclick="resetTimer()">
-              Reset
+            <div class="resetTimer reset" onclick="resetTimer()">
+              <i class="fa-solid fa-rotate-right"></i>
             </div>
             <div class="vr border border-1 border-dark"></div>
-            <button type="button" class="btn fs-1" onclick="send()">
-              <i class="fa-solid fa-floppy-disk" style="color:#7a487a;"></i>
+            <button type="button" class="btn fs-1 floppy" onclick="send()">
+              <i class="fa-solid fa-floppy-disk"></i>
             </button>
           </div>
         </div>
-
       </form>
     </div>
   </div>

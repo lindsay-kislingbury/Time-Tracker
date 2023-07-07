@@ -1,35 +1,47 @@
-<!-- Vertically centered modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-dialog modal-dialog-centered modal-md" >
         <div class="modal-content">
             <div class="modal-header">
+                <h2 class="text-center my-0">Edit Timestamp</h2>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              
-                <!--Title & Tags-->
                 <!--Title Input-->
-                <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text border-secondary">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </span>
-                <input type="text" class="form-control border-secondary" id="edit-title" maxlength="25">
+                <div class="input-group input-group-md mb-3">
+                    <span class="input-group-text border-secondary">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <input type="text" class="form-control border-secondary" id="edit-title" maxlength="25">
                 </div>
                 <!--Tags Input-->
-                <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text border-secondary">
-                    <i class="fa-solid fa-tags"></i>
-                </span>
-                <select class="form-select" name="edit-tags" id="edit-tags" data-placeholder="Add some tags..." multiple>
-                </select>
+                <div class="input-group input-group-md mb-3">
+                    <span class="input-group-text border-secondary">
+                        <i class="fa-solid fa-tags"></i>
+                    </span>
+                    <select class="form-select" name="edit-tags" id="edit-tags" multiple>
+                    </select>
                 </div>
-
+                <div class="container edit-inputs d-flex p-0">
+                    <!--Date Input-->
+                    <div class="input-group input-group-md flex-grow-1 mb-3 me-1">
+                        <span class="input-group-text border-secondary">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input type="date" class="form-control border-secondary" id="edit-date" maxlength="25">
+                    </div>
+                    <!--Time Input-->
+                    <div class="input-group input-group-md w-auto mb-3">
+                        <span class="input-group-text border-secondary">
+                            <i class="fa-solid fa-stopwatch"></i>
+                        </span>
+                            <input class="form-control border-secondary text-start" type="tel" id="edit-time" dir="rtl">
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn text-light" style="background-color:#7a487a;">Save changes</button>
+              <button type="button" id="edit-button" class="btn shadow-button" value="" onclick="edit()">Save</button>
             </div>
-          </div>
-      
+        </div>
     </div>
 </div>
 
