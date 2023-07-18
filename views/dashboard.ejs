@@ -8,11 +8,28 @@
     <body>
       <main>
         <div class="container" id="outer-container">
-          <%- include('partials/dashboard-nav.ejs') %>
+          <div class="container h-100 w-100" id="wrapper-dashboard">
+            <!--Stopwatch-->
+            <%- include('partials/stopwatch.ejs') %>
+            <!--Table-->
+            <%- include('partials/table.ejs') %>
+          </div>
+
+          <div class ="container" id="wrapper-charts">
+            charts will be here
+          </div>
+          <div class ="container-fluid" id="wrapper-list">
+            <!--Table-->
+            <%- include('partials/list.ejs') %>
+          </div>
         </div>
+
+        <!--Modal-->
+        <%- include('partials/dash-edit-modal.ejs') %>
+        <%- include('partials/list-edit-modal.ejs') %>
       </main>
-    <%- include('partials/footer.ejs') %>
-    <script type = "text/javascript" src = "/js/stopwatch.js"></script>
-    <script type = "text/javascript" src="/js/content.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.5/b-2.4.1/date-1.5.1/fc-4.3.0/fh-3.4.0/r-2.5.0/sc-2.2.0/sl-1.7.0/datatables.js"></script>
+    <script type = "text/javascript" src = "/js/timer-helpers.js"></script>
+    <script type = "text/javascript" src="/js/content-helpers.js"></script>
   </body>
 </html>

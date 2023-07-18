@@ -11,14 +11,14 @@
                     <span class="input-group-text border-secondary">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </span>
-                    <input type="text" class="form-control border-secondary" id="edit-title" maxlength="25">
+                    <input type="text" class="form-control border-secondary" id="dash-edit-title" maxlength="25">
                 </div>
                 <!--Tags Input-->
                 <div class="input-group input-group-md mb-3">
                     <span class="input-group-text border-secondary">
                         <i class="fa-solid fa-tags"></i>
                     </span>
-                    <select class="form-select" name="edit-tags" id="edit-tags" multiple>
+                    <select class="form-select" name="edit-tags" id="dash-edit-tags" multiple>
                     </select>
                 </div>
                 <div class="container edit-inputs d-flex p-0">
@@ -27,20 +27,20 @@
                         <span class="input-group-text border-secondary">
                             <i class="fa-solid fa-calendar-days"></i>
                         </span>
-                        <input type="date" class="form-control border-secondary" id="edit-date" maxlength="25">
+                        <input type="date" class="form-control border-secondary" id="dash-edit-date" maxlength="25">
                     </div>
                     <!--Time Input-->
                     <div class="input-group input-group-md w-auto mb-3">
                         <span class="input-group-text border-secondary">
                             <i class="fa-solid fa-stopwatch"></i>
                         </span>
-                        <input class="form-control border-secondary text-start" name="time-input" type="tel" id="edit-time" dir="rtl">
+                        <input class="form-control border-secondary text-start" name="time-input" type="tel" id="dash-edit-time" dir="rtl">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="remove-button" class="btn shadow-button pe-2" val="" style="background-color: #b33951 !important;" onclick="remove()">Delete</button>
-                <button type="button" id="edit-button" class="btn shadow-button" val="" onclick="edit()">Save</button>
+                <button type="button" id="dash-remove-button" class="btn shadow-button pe-2" val="" style="background-color: #b33951 !important;" onclick="remove('dash')">Delete</button>
+                <button type="button" id="dash-edit-button" class="btn shadow-button" val="" onclick="edit('dash')">Save</button>
             </div>            
         </div>
     </div>

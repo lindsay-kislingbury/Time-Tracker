@@ -11,7 +11,7 @@ const {
     editStamp,
     updateDivContent,
     getAllTags,
-    getTimestampdata
+    getTimestampdata,
 } = require("../controller/TimeController");
 
 router.post('/create', createStamp);

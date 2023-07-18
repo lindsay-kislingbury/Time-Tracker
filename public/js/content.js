@@ -1,7 +1,0 @@
-function showCharts(){
-    
-}
-
-function showTimer(){
-
-}

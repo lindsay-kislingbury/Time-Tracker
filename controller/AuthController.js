@@ -19,10 +19,12 @@ const dashboard = async(req, res) => {
     user = req.user;
     userData = await User.findById(user.id);
     count = userData.timestamps.length; 
+    
     res.render('dashboard', 
     {   
         title: 'Dashboard',
         name: userData.name,
+        count: count,
         timestamps: userData.timestamps,
     });
 }

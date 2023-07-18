@@ -1,24 +1,48 @@
-<nav class="navbar navbar-expand-lg mb-4 top-nav">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">time tracker</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <% if(title == "Home"){ %>
-                <a class="nav-link">
-                    <%- include('loginForm.ejs') %>
-                </a>
-                <a class="nav-link">
-                    <%- include('registerForm.ejs') %>
-                </a>
-            <% } %>
-            <% if(title == "Dashboard") {%>
-                <a class="nav-link" href="/auth/logout">Logout</a>
-            <% } %>
-            <a class="nav-link" href="#">About</a>
+<nav class="navbar top-nav text-dark">
+    <div class="container-fluid px-1 d-flex flex-nowrap justify-content-space-between">
+
+      <div class="container p-0 m-0">
+        <span class="text-dark">
+          <button class="navbar-toggler text-dark ps-1 p-0 border-0 me-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#top-nav">
+            <span><i class="fa-solid fa-caret-down"></i></span>
+          </button>
+          <a class="m-0" href="/">time tracker</span>
+        </span>
+
+        <div class="collapse navbar-collapse" id="top-nav">
+          <div class="navbar-nav me-auto">
+              <% if(title == "Home"){ %>
+                  <a class="nav-link">
+                      <%- include('loginForm.ejs') %>
+                  </a>
+                  <a class="nav-link">
+                      <%- include('registerForm.ejs') %>
+                  </a>
+              <% } %>
+              <% if(title == "Dashboard") {%>
+                  <a class="nav-link" href="/auth/logout">Logout</a>
+              <% } %>
+              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#">Settings</a>
+          </div>
         </div>
       </div>
+    <div class="navbar-buttons d-flex flex-nowrap">
+      <div class="btn-group btn-group-lg pe-1" role="group">
+        <button type="button" class="btn active btn-outline-dark" id="dashboard-button" autocomplete="off" checked>
+          <i class="fa-solid fa-stopwatch"></i>
+        </button>
+
+        <button type="button" class="btn btn-outline-dark" id="list-button" autocomplete="off">
+          <i class="fa-solid fa-list"></i>
+        </button>
+      
+        <button type="button" class="btn btn-outline-dark" id="charts-button" autocomplete="off">
+          <i class="fa-solid fa-chart-pie"></i>
+        </button>
+
+      </div>
     </div>
-  </nav>
+  </div>
+</nav>
