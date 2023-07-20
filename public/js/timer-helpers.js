@@ -69,7 +69,6 @@ function getShowTime(){
         difference =  updatedTime - startTime;
     }
     hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    console.log("hours: ", hours);
     minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     seconds = Math.floor((difference % (1000 * 60)) / 1000);
     hours = (hours < 10) ? "0" + hours : hours;
@@ -81,7 +80,6 @@ function getShowTime(){
 
 function checkValidInput(element){
     var titleInputField = document.getElementById(element);
-    console.log("value: ", titleInputField.value);
     if(titleInputField.value != ''){
         titleInputField.classList.remove('is-invalid');
     }

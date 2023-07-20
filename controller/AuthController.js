@@ -16,6 +16,9 @@ const loginCheck = async (req, res) => {
 };
 
 const dashboard = async(req, res) => {
+    if(!req.user){
+       return res.redirect('/');
+    }
     user = req.user;
     userData = await User.findById(user.id);
     count = userData.timestamps.length; 

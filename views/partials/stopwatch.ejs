@@ -1,5 +1,5 @@
 <div class="stopwatch">
- <div class="border border-dark border-1 text-bg-light rouned m-auto" id="timer-box">
+ <div class="border border-dark border-1 text-bg-light rouned m-auto shadow-box" id="timer-box">
     <div class="container">
 
       <ul class="nav nav-tabs timer-navs" id="timer-navs" role="tablist">
@@ -15,6 +15,7 @@
         </li>
       </ul>
       
+      <!--TIMER INPUT-->
       <div class="tab-content bg-white border-bottom border-start border-end" id="tab-content">
         <div class="tab-pane fade show active p-1" id="timer-tab-pane" role="tabpanel" aria-labelledby="timer-tab" tabindex="0">
           <form>
@@ -60,7 +61,7 @@
                     </div> 
                   </div>
                   <div class="vr border border-dark border-1"></div>
-                  <button type="button" class="btn fs-1 floppy" onclick="timerSend()">
+                  <button type="button" class="btn fs-1 floppy" onclick="send('timer')">
                     <i class="fa-solid fa-floppy-disk"></i>
                   </button>  
                 </div>
@@ -68,6 +69,7 @@
           </form>
         </div>
 
+        <!--ADD INPUT-->
         <div class="tab-pane fade p-1" id="add-tab-pane" role="tabpanel" aria-labelledby="add-tab" tabindex="0">
           <!--Title Input-->
           <div class="input-group input-group-md mb-1">
@@ -109,7 +111,7 @@
               </div>
           <!--Submit Button-->
           <div class="container-fluid d-flex justify-content-end">
-            <button type="button" id="" class="btn shadow-button fs-6" value="" onclick="addSend()">
+            <button type="button" id="" class="btn shadow-button fs-6" value="" onclick="send('add')">
               Save
             </button>
           </div>

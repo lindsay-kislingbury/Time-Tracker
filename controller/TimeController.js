@@ -54,7 +54,6 @@ const editStamp = async(req,res) => {
 
 const updateDivContent = async(req, res) => {
    let user = await User.findById(req.user.id);
-   console.log(user);
    res.send(user);
 }
 
@@ -74,7 +73,7 @@ const getAllTags = async(req,res) => {
    }
 }
 
-const getTimestampdata = async(req,res) => {
+const getTimeStampData = async(req,res) => {
    try{
       const user = await User.findById(req.user.id);
       const timestamp = user.timestamps.find(stamp => {
@@ -98,5 +97,5 @@ module.exports = {
    editStamp,
    updateDivContent,
    getAllTags,
-   getTimestampdata,
+   getTimeStampData,
 };

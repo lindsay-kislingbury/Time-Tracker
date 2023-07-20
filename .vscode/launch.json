@@ -2,12 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "chrome",
-            "url": "http://localhost:4000",
-            "webRoot": "${workspaceFolder}"
+          "type": "chrome",
+          "request": "attach",
+          "port": 4000,
+          "name": "Attach Chrome",
+          "url": "http://localhost:4000/",
+          "webRoot": "${workspaceFolder}"
         }
-
-    ]
+      ]
+      
   }
