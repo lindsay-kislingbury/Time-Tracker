@@ -73,17 +73,17 @@ const getAllTags = async(req,res) => {
    }
 }
 
-const getTimeStampData = async(req,res) => {
+const getOneEntry = async(req,res) => {
    try{
       const user = await User.findById(req.user.id);
       const timestamp = user.timestamps.find(stamp => {
          return stamp._id.equals(req.body.stampId)
       });
       res.send({
-         tags: timestamp.tags, 
-         title: timestamp.title, 
          date: timestamp.date,
-         time: timestamp.elapsedTime
+         title: timestamp.title,
+         time: timestamp.elapsedTime,
+         tags: timestamp.tags, 
       });
    } catch(error) {
       console.log(error);
@@ -97,5 +97,5 @@ module.exports = {
    editStamp,
    updateDivContent,
    getAllTags,
-   getTimeStampData,
+   getOneEntry,
 };

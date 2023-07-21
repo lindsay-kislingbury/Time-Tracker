@@ -1,3 +1,4 @@
+//Section Navigation Button Listeners
 $(document).ready(function(){
     $('#dashboard-button').click(function(){
         toggleSections('#wrapper-dashboard');
@@ -27,6 +28,7 @@ function toggleButtons(activeButton){
     $(activeButton).addClass('active');
 }
 
+//DataTables Initializaiton
 $(document).ready(function () {
     $('#list-table').DataTable({
         "ajax": {
@@ -39,7 +41,7 @@ $(document).ready(function () {
                         'title': json.timestamps[i].title,
                         'time': new Date(json.timestamps[i].elapsedTime * 1000).toISOString().slice(11, 19),
                         'date': new Date(json.timestamps[i].date).toLocaleDateString(),
-                        'tags': json.timestamps[i].tags.join(' ,'),
+                        'tags': json.timestamps[i].tags.join(', '),
                         'stampId': json.timestamps[i]._id,
                     })
                 }
@@ -49,6 +51,8 @@ $(document).ready(function () {
         responsive: true,
         "lengthChange": false,
         "bInfo" : false,
+        "pageLength": 10,
+        scrollY: '60vh',
         "columns": [
             {"data": null, "defaultContent": ""},
             {"data": "title"},
@@ -70,10 +74,32 @@ $(document).ready(function () {
     });
 });
 
+//Select2 Tags Initializaiton
 $(document).ready(function () {
-    loadTags();
+    $.get('/time/loadAllTags', function(data){
+        tags = data.map((data) => ({"id": data, "text": data}));
+        $('#new-tags').select2({
+            data: tags,
+            multiple: true,
+            placeholder: $( this ).data('placeholder'),
+            closeOnSelect: false,
+            theme: 'bootstrap-5',
+            tags: true,
+            tokenSeparators: [',', ' '],
+        });
+        $('#add-tags').select2({
+            data: tags,
+            multiple: true,
+            placeholder: $( this ).data('placeholder'),
+            closeOnSelect: false,
+            theme: 'bootstrap-5',
+            tags: true,
+            tokenSeparators: [',', ' '],
+        });
+    });
 })
 
+//Edit Modal Helpers
 $("#editModal").on("hide.bs.modal", function () {
     $("#edit-tags").empty().trigger('change')
 });
@@ -124,11 +150,11 @@ function validateTimerInput(){
 }
 
 function stringDateToUTC(dateString){
-    var date = dateString.split('-');
+    var dateParts = dateString.split('-');
     date = new Date();
-    date.setFullYear(dateString[0]);
-    date.setMonth(dateString[1]);
-    date.setDate(dateString[2]);
+    date.setFullYear(dateParts[0]);
+    date.setMonth(dateParts[1]);
+    date.setDate(dateParts[2]);
     return date;
 }
 
@@ -136,8 +162,11 @@ function cnvToTotalSeconds(hours, minutes, seconds){
     return ((hours * 3600) + (minutes * 60) + seconds * 1);
 }
 
-function updateDiv(){
-    console.log('entered update div')
+function cnvToTimeString(seconds){
+    return new Date(seconds * 1000).toISOString().slice(11, 19);
+}
+
+function update(){
     $.ajax({
         type: 'GET',
         dataType: 'json', 
@@ -161,56 +190,41 @@ function clearAddInputs(){
     $("#add-tags").empty();
 }
 
-function loadTags(){
+
+function openModal(stampId){
     $.get('/time/loadAllTags', function(data){
         tags = data.map((data) => ({"id": data, "text": data}));
-        $('#new-tags').select2({
+        $('#edit-tags').select2({
             data: tags,
             multiple: true,
-            placeholder: $( this ).data('placeholder'),
-            closeOnSelect: false,
-            theme: 'bootstrap-5',
-            tags: true,
-            tokenSeparators: [',', ' '],
-        });
-        $('#add-tags').select2({
-            data: tags,
-            multiple: true,
-            placeholder: $( this ).data('placeholder'),
+            placeholder: $(this).data('placeholder'),
             closeOnSelect: false,
             theme: 'bootstrap-5',
             tags: true,
             tokenSeparators: [',', ' '],
         });
     });
-}
-
-function openModal(stampId){
+    var editTags = $('#edit-tags');
     $.ajax({
         type: 'POST',
-        dataType:'json',
-        url: '/time/getOneStampTags',
+        url: '/time/getOneEntry',
         data: {stampId: stampId},
-        success: function(data){
-            tags = data.tags.map((data) => ({"id": data, "text": data, "selected": true}));
-            console.log("tags: ", tags)
-            $('#edit-tags').select2({
-                data: tags,
-                multiple: true,
-                closeOnSelect: false,
-                theme: 'bootstrap-5',
-                tags: true,
-                tokenSeparators: [',', ' '],
-                dropdownParent: $('#editModal'),
-            });
-            var date = data.date.slice(0, 10).split('-');
-            $('#edit-date').val(date[0] +'-'+ date[1] +'-'+ date[2]);
-            $('#edit-time').val(data.time);
-            $('#edit-title').val(data.title);
-            $('#button-edit').val(stampId);
-            $('#button-remove').val(stampId); 
-        }
-    })
+    }).then(function (data) {
+        data.tags.forEach(tag => {
+            var option = new Option(tag, tag, true, true);
+            editTags.append(option).trigger('change');
+            editTags.trigger({
+                type: 'select2:select',
+                params: tag
+            })
+        });
+        var date = data.date.slice(0, 10).split('-');
+        $('#edit-date').val(date[0] +'-'+ date[1] +'-'+ date[2]);
+        $('#edit-time').val(data.time);
+        $('#edit-title').val(data.title);
+        $('#button-edit').val(stampId);
+        $('#button-remove').val(stampId); 
+    });
 }
 
 function buildNewEntry(type){
@@ -268,7 +282,6 @@ function buildEditEntry(){
 
 async function send(type){
     var postData = buildNewEntry(type);
-    console.log("post: ", postData)
     if(postData){
         var post = JSON.stringify(postData);
         var xhr = new XMLHttpRequest();
@@ -281,7 +294,7 @@ async function send(type){
         }else{
             clearAddInputs(); 
         }
-        updateDiv();
+        update();
         loadTags();
     }
 }
@@ -294,7 +307,7 @@ function edit(){
         xhr.open('POST', '/time/edit', true);
         xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
         xhr.send(post);
-        updateDiv();
+        update()
         $('#editModal').modal('hide');
     }
 }
@@ -309,9 +322,14 @@ function remove(){
             deleteId: stampId,
         }
     })  
-    updateDiv();
+    update()
     $('#editModal').modal('hide');
 }
+
+
+
+
+
 
 
 

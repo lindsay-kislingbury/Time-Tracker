@@ -11,14 +11,14 @@ const {
     editStamp,
     updateDivContent,
     getAllTags,
-    getTimeStampData,
+    getOneEntry,
 } = require("../controller/TimeController");
 
 router.post('/create', createStamp);
 router.post('/remove', removeStamp);
 router.post('/edit', editStamp);
 router.all('/update', updateDivContent);
-router.all('/loadAllTags', getAllTags);
-router.all('/getOneStampTags', getTimeStampData);
+router.get('/loadAllTags', getAllTags);
+router.post('/getOneEntry', getOneEntry);
 
 module.exports = router;
