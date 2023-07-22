@@ -14,15 +14,31 @@ function renderChart(data, labels) {
 
 
 function loadDefaultChart(){
-    $.get('/time/update', function(data){
-        chartData = {
-            
+    $.get('/time/getAllEntries', function(data){
+        const output = {};
+        console.log('all timestamps: ', data.timestamps)
+        data.timestamps.forEach(entry => {
+            entry.tags.forEach(tag => {
+                if(output[tag] != null){
+                    output[tag] += entry.elapsedTime
+                } else {
+                    output[tag] = entry.elapsedTime
+                }
+            })
+        });
+        let chartData = [];
+        for([key, value] of Object.entries(output)){
+            result.push({tag: key, totalTime: value})
         }
+        console.log('result: ', chartData)
+        return chartData;
     });
 }
 
 $("#renderBtn").click(function(){
-    loadDefaultChart();
+    chartData = loadDefaultChart();
+
+    
 });
 
 

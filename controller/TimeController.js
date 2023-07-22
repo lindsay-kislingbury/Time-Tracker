@@ -86,8 +86,17 @@ const getOneEntry = async(req,res) => {
          tags: timestamp.tags, 
       });
    } catch(error) {
-      console.log(error);
       res.status(500).json({message: "Error getting data for one timestamp"})
+   }
+}
+
+const getAllEntries = async(req, res) => {
+   try{
+      const user = await User.findById(req.user.id);
+      res.send({timestamps: user.timestamps});
+   }
+   catch(error){
+      res.status(500).json({message: "Error getting all entries"});
    }
 }
 
@@ -98,4 +107,5 @@ module.exports = {
    updateDivContent,
    getAllTags,
    getOneEntry,
+   getAllEntries,
 };
