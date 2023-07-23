@@ -1,15 +1,15 @@
 <div class="stopwatch">
  <div class="border border-dark border-1 text-bg-light rouned m-auto shadow-box" id="timer-box">
-    <div class="container">
+    <div class="container p-0">
 
       <ul class="nav nav-tabs timer-navs" id="timer-navs" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active link-dark fw-semibold" id="timer-tab" data-bs-toggle="tab" data-bs-target="#timer-tab-pane" type="button" role="tab" aria-controls="timer-tab-pane" aria-selected="true">
+          <button class="nav-link active link-dark fw-semibold py-1" id="timer-tab" data-bs-toggle="tab" data-bs-target="#timer-tab-pane" type="button" role="tab" aria-controls="timer-tab-pane" aria-selected="true">
             Stopwatch
           </button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link link-dark fw-semibold" id="add-tab" data-bs-toggle="tab" data-bs-target="#add-tab-pane" type="button" role="tab" aria-controls="add-tab-pane" aria-selected="false">
+          <button class="nav-link link-dark fw-semibold py-1" id="add-tab" data-bs-toggle="tab" data-bs-target="#add-tab-pane" type="button" role="tab" aria-controls="add-tab-pane" aria-selected="false">
             Add
           </button>
         </li>
@@ -27,9 +27,15 @@
                   <i class="fa-solid fa-pen-to-square"></i>
                 </span>
                 <input type="text" class="form-control border-secondary" id="new-title" aria-describedby="title-feedback" maxlength="25" placeholder="Title" onfocusout="checkValidInput('new-title')">
-                <div class="invalid-feedback" id="title-feedback">
-                  Please Enter A Title
-                </div>
+              </div>
+              <!--Project Input-->
+              <div class="input-group input-group mb-1">
+                <span class="input-group-text border-secondary">
+                  <i class="fa-regular fa-folder-open"></i>
+                </span>
+                <select class="form-select" name="new-project" id="new-project" data-placeholder="Project"></select>
+                <option></option>  
+              </select>
               </div>
               <!--Tags Input-->
               <div class="input-group input-group mb-1">
@@ -39,10 +45,11 @@
                 <select class="form-select w-auto" name="new-tags" id="new-tags" data-placeholder="Tags" multiple>
                 </select>
               </div>
+
             </div>
             <!--Timer-->
-              <div class="container rounded m-auto mb-0">
-                <div class="card-header border-bottom border-2 border-dark-subtle align-items-center text-dark m-0 py-1">
+              <div class="container-sm timer-controls rounded m-auto mb-0">
+                <div class="card-header border-bottom border-2 border-dark-subtle align-items-center text-dark m-0">
                   <div class="timer" onclick="startTimer()">
                     <span class="text timer-digits text-secondary" id="timer-digits">00:00:00</span>
                   </div>
@@ -61,7 +68,7 @@
                     </div> 
                   </div>
                   <div class="vr border border-dark border-1"></div>
-                  <button type="button" class="btn fs-1 floppy" onclick="send('timer')">
+                  <button type="button p-0" class="btn fs-1 floppy" onclick="send('new')">
                     <i class="fa-solid fa-floppy-disk"></i>
                   </button>  
                 </div>
@@ -77,9 +84,15 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </span>
             <input type="text" id="add-title" class="form-control border-secondary" aria-describedby="title-feedback" maxlength="25" placeholder="Title" onfocusout="checkValidInput('add-title')">
-            <div class="invalid-feedback" id="title-feedback">
-              Please Enter A Title
-            </div>
+          </div>
+          <!--Project Input-->
+          <div class="input-group input-group mb-1">
+            <span class="input-group-text border-secondary">
+              <i class="fa-regular fa-folder-open"></i>
+            </span>
+            <select class="form-select" name="add-project" id="add-project" data-placeholder="Project"></select>
+              <option></option>    
+            </select>
           </div>
           <!--Tags Input-->
           <div class="input-group input-group-md flex-nowrap mb-1">
@@ -89,26 +102,21 @@
             <select class="form-select" name="add-tags" id="add-tags" data-placeholder="Tags" multiple>
             </select>
           </div>
-          <!--Date Input-->
-          <div class="input-group input-group-md flex-grow-1 mb-1">
-            <span class="input-group-text border-secondary">
-                <i class="fa-solid fa-calendar-days"></i>
-            </span>
-            <input type="date" class="form-control border-secondary" id="add-date" aria-describedby="date-feedback" onfocusout="checkValidInput('add-date')">
-            <div class="invalid-feedback" id="date-feedback">
-              Please Enter A Date
-            </div>
-          </div>
-          <!--Time Input-->
-          <div class="input-group input-group-md w-auto mb-1">
-            <span class="input-group-text border-secondary">
-                <i class="fa-solid fa-stopwatch"></i>
-            </span>
+
+          <!--Date/Time Container-->
+          <div class="input-group mb-2">
+            <!--Date Input-->
+              <span class="input-group-text border-secondary">
+                  <i class="fa-solid fa-calendar-days"></i>
+              </span>
+              <input type="date" class="form-control border-secondary" id="add-date" placeholder="mm/dd/yyyy" aria-describedby="date-feedback" onfocusout="checkValidInput('add-date')">
+            <!--Time Input-->
+            
+              <span class="input-group-text border-secondary">
+                  <i class="fa-solid fa-stopwatch"></i>
+              </span>
                 <input class="form-control border-secondary text-start" name="time-input" id="add-time" type="tel" dir="rtl" placeholder="00:00:00" aria-describedby="time-feedback" onfocusout="checkValidInput('add-time')">
-                <div class="invalid-feedback" id="time-feedback">
-                  Please Enter A Time
-                </div>
-              </div>
+          </div>
           <!--Submit Button-->
           <div class="container-fluid d-flex justify-content-end">
             <button type="button" id="" class="btn shadow-button fs-6" value="" onclick="send('add')">

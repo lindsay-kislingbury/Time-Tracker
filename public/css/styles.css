@@ -192,6 +192,9 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   box-shadow: -3px 3px 0 #292b2c;
 }
 
+.timer-controls{
+  max-width: 300px !important;
+}
 
 .timer-navs{
   font-family: 'Outfit', sans-serif !important;
@@ -265,7 +268,7 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
 
 
 /*Stamps Table*/
-#stamps{
+#recent-table{
   overflow-y: auto;
 }
 
@@ -295,10 +298,14 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   }
   #timer-box{
     padding: 4px;
+    width: 97%;
   }
-  #table{
+  #recent-table{
     margin-top: 5px !important;
     margin-left: 0px !important;
+    max-height: -moz-calc(100vh - 330px);
+    max-height: -webkit-calc(100vh - 330px);
+    max-height: calc(100vh - 330px)
   }
   .edit-inputs{
     flex-direction: column !important;
@@ -313,11 +320,6 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   .timer-buttons{
     width:min-content !important;
     font-size: 1rem !important;
-  }
-  #stamps{
-    max-height: -moz-calc(100vh - 330px);
-    max-height: -webkit-calc(100vh - 330px);
-    max-height: calc(100vh - 330px)
   }
   .navbar-toggler{
     padding: 1 !important;
@@ -346,7 +348,7 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
     flex-wrap: nowrap;
   }
   #timer-box{
-    min-width: 280px;
+    min-width: 300px;
     padding: 10px !important;
   }
   .stopwatch{
@@ -357,10 +359,13 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
     flex-direction: row !important;
     flex-wrap: nowrap !important;
   }
-  #table{
+  #recent-table{
     max-width: 50vw;
     margin-top: 0 !important;
     margin-left: 5px !important;
+    max-height: -moz-calc(100vh - 65px);
+    max-height: -webkit-calc(100vh - 65px);
+    max-height: calc(100vh - 65px)
   }
   #styled-tab-content .tab-content{
     padding : 5px 15px;
@@ -371,11 +376,6 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   .timer-buttons{
     width:100% !important;
     font-size: 1.5rem !important;
-  }
-  #stamps{
-    max-height: -moz-calc(100vh - 65px);
-    max-height: -webkit-calc(100vh - 65px);
-    max-height: calc(100vh - 65px)
   }
   .navbar{
     padding: 6px 15px 6px 15px !important;

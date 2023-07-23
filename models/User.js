@@ -10,6 +10,7 @@ const UserSchema = new Schema(
         password: String,
         timestamps: [{
             title: String,
+            project: String,
             tags: [String],
             date: Date,
             elapsedTime: Number,

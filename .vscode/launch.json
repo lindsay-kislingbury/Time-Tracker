@@ -1,14 +1,12 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-          "type": "chrome",
-          "request": "attach",
-          "port": 4000,
-          "name": "Attach Chrome",
-          "url": "http://localhost:4000/",
-          "webRoot": "${workspaceFolder}"
-        }
-      ]
-      
-  }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch my cool app",
+      "url": "http://localhost:4000",
+      "webRoot": "${workspaceFolder}/app"
+    }
+  ]
+}

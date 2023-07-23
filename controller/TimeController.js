@@ -3,9 +3,10 @@ const User = require('../models/User');
 
 const createStamp = async (req, res) => {
    try{
-      const {title, tags, date, elapsedTime} = req.body;
+      const {title, project, tags, date, elapsedTime} = req.body;
       const timestamp = {
          title: title,
+         project: project,
          tags: tags,
          date: date,
          elapsedTime: elapsedTime,
@@ -66,7 +67,13 @@ const getAllTags = async(req,res) => {
          })
       })
       const tags = [...new Set(allTags)];
-      res.send(tags);
+      const projects = user.timestamps.flatMap(timestamp => {
+         return timestamp.project;
+      })
+      res.send({
+         tags: tags,
+         projects: projects
+      });
    } catch(error) {
       console.log(error);
       res.status(500).json({message: "Error getting all tags for user"})
@@ -84,6 +91,7 @@ const getOneEntry = async(req,res) => {
          title: timestamp.title,
          time: timestamp.elapsedTime,
          tags: timestamp.tags, 
+         project: timestamp.project
       });
    } catch(error) {
       res.status(500).json({message: "Error getting data for one timestamp"})
