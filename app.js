@@ -16,12 +16,14 @@ const app = express()
 app.use(express.json());
 
 //Configure Session
+var sessionDay = 86400000;
 app.use(
     session({
         secret: SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: {secure: false}, //secure: true is https
+        maxAge: sessionDay,
         store: MongoStore.create({mongoUrl: MONGO_URI})
     })
 );

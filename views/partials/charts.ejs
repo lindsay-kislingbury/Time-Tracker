@@ -1,19 +1,65 @@
-<div class="container-fluid">
-    <div class="container">
-        <canvas class="default-chart"></canvas>
-        
-    </div>
 
-    <div class="container">
-        <button id="renderBtn">
-            Test Chart
-        </button>
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
+    
+<div class="text-bg-light border border-dark border-1 shadow-box p-1" id="chart-navbar">
+    <ul class="nav nav-tabs timer-navs fs-4" id="timer-navs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active link-dark fw-semibold py-1" id="donut-tab" data-bs-toggle="tab" data-bs-target="#donut-tab-pane" type="button" role="tab" aria-controls="donut-tab-pane" aria-selected="true">
+            <i class="fa-solid fa-chart-pie fa-fw"></i>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link link-dark fw-semibold py-1" id="bar-tab" data-bs-toggle="tab" data-bs-target="#bar-tab-pane" type="button" role="tab" aria-controls="bar-tab-pane" aria-selected="false">
+            <i class="fa-solid fa-chart-simple fa-faw"></i>
+            </button>
+        </li>
+        <li class="nav-item ms-auto">
+            <button type="button" id="chart-reset-btn" class="btn btn-outline-dark me-1">
+                Reset
+            </button>
+        </li>
+    </ul>
+    <div class="tab-pane bg-white border-bottom border-start border-end p-1" id="chart-choices">
+        <!--Range Input-->
+        <div class="input-group input-group-lg mb-1">
+            <span class="input-group-text border-secondary">
+                <i class="fa-solid fa-calendar-week"></i>
+            </span>
+            <select class="form-select border-secondary form-control rounded-end" id="range-selector" autocomplete="off">
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month" selected>This Month</option>
+                <option value="year">This Year</option>
+                <option value="all">All Time</option>
+                <option value="range">Custom Range</option>
+            </select>
+            <div class="input-group" id="rangeOption" style="display: none;">
+                <input type="date" class="form-control border-secondary" value="00/00/00" placeholder="mm/dd/yyyy" id="range-start">
+                <span class="input-group-text border-secondary">To</span>
+                <input type="date" class="form-control border-secondary" value="00/00/00" placeholder="mm/dd/yyyy" id="range-end">
+                <button class="btn btn-secondary" id="submit-range-btn">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
-    </div>
 
+        <div class="dropdown align-content-center" id="projects-container">
+            <a class="btn dropdown-toggle w-100 border border-secondary border-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="options-header">Included Projects</a>
+            <div class="w-100 dropdown-menu px-2 border-1 border-top-0 rounded-top-0">
+                <div class="containter-fluid d-flex flex-wrap justify-content-center" id="project-choices"></div>
+            </div>
+            
+        </div>
+
+    </div>
 </div>
+
+<div id="charts" class="container-fluid rounded">
+    <div class="chart-container mx-auto">
+        <canvas id="chart-canvas"></canvas>
+    </div>
+</div>
+        
+
 
 
 

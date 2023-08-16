@@ -1,13 +1,14 @@
 const User = require("../models/User");
+const TempUser = require("../models/TempUser");
+const passport = require("passport");
 let msg = "valid";
 
-
 const loginCheck = async (req, res) => {
+    console.log('req in logincheck: ', req.body)
     if(!req.user){
         return res.render('index', {
             message: "valid",
             title: "Home"
-            
         });
     }
     else{
@@ -48,8 +49,16 @@ const signupCheck = (req, res) => {
     });
 }
 
+const tempSignup = async (req, res) => {
+    const {username, name, password} = req.body;
+    newUser = new TempUser({username, name, password});
+    await newUser.save();
+}
+
+
 const signup = async (req, res) => {
     const {username, name, password} = req.body;
+    console.log('req.body: ', req.body)
     if(req.body.password != req.body.confirmPassword){
         return res.render('index', {
             message: "confirm password does not match",
@@ -87,9 +96,10 @@ const logout = (req, res, next) => {
 
 module.exports = {
     signup,
+    tempSignup,
     dashboard,
     logout,
     loginCheck,
     signupCheck,
-    invalidLogin
+    invalidLogin,
   };

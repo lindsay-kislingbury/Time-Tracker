@@ -10,7 +10,7 @@ const {
     removeStamp,
     editStamp,
     updateDivContent,
-    getAllTags,
+    getAllTagsAndProjects,
     getOneEntry,
     getAllEntries,
 } = require("../controller/TimeController");
@@ -19,7 +19,7 @@ router.post('/create', createStamp);
 router.post('/remove', removeStamp);
 router.post('/edit', editStamp);
 router.get('/update', updateDivContent);
-router.get('/loadAllTags', getAllTags);
+router.get('/loadAllTags', getAllTagsAndProjects);
 router.post('/getOneEntry', getOneEntry);
 router.get('/getAllEntries', getAllEntries);
 

@@ -1,48 +1,53 @@
-<nav class="navbar top-nav text-dark">
-    <div class="container-fluid px-1 d-flex flex-nowrap justify-content-space-between">
-
-      <div class="container p-0 m-0">
-        <span class="text-dark">
-          <button class="navbar-toggler text-dark ps-1 p-0 border-0 me-2" type="button" data-bs-toggle="collapse"
-            data-bs-target="#top-nav">
-            <span><i class="fa-solid fa-caret-down"></i></span>
-          </button>
-          <a class="m-0" href="/">time tracker</span>
-        </span>
-
-        <div class="collapse navbar-collapse" id="top-nav">
-          <div class="navbar-nav me-auto">
-              <% if(title == "Home"){ %>
-                  <a class="nav-link">
-                      <%- include('loginForm.ejs') %>
-                  </a>
-                  <a class="nav-link">
-                      <%- include('registerForm.ejs') %>
-                  </a>
-              <% } %>
-              <% if(title == "Dashboard") {%>
-                  <a class="nav-link" href="/auth/logout">Logout</a>
-              <% } %>
-              <a class="nav-link" href="#">About</a>
-              <a class="nav-link" href="#">Settings</a>
-          </div>
-        </div>
-      </div>
-    <div class="navbar-buttons d-flex flex-nowrap">
-      <div class="btn-group btn-group-lg pe-1" role="group">
-        <button type="button" class="btn active btn-outline-dark" id="dashboard-button" autocomplete="off" checked>
-          <i class="fa-solid fa-stopwatch"></i>
+<nav class="navbar navbar-expand-lg pb-2 bg-transparent text-dark">
+  <div class="container-fluid px-1">
+    <ul class="nav navbar-nav w-60">
+      <span>
+        <button class="navbar-toggler text-dark border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#top-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
         </button>
-
-        <button type="button" class="btn btn-outline-dark" id="list-button" autocomplete="off">
-          <i class="fa-solid fa-list"></i>
-        </button>
-      
-        <button type="button" class="btn btn-outline-dark" id="charts-button" autocomplete="off">
-          <i class="fa-solid fa-chart-pie"></i>
-        </button>
-
-      </div>
+        <a class="navbar-brand" href="#">time tracker</a>
+      </span>
+    </ul>
+    <div class="collapse navbar-collapse" id="top-nav">
+      <ul class="list-inline mt-1 mb-0 d-flex align-items-center ps-1">
+        <% if(title == "Home"){ %>
+        <li class="nav-item dropdown pe-3">
+          <%- include('loginForm.ejs') %>
+        </li>
+        <li class="nav-item pe-3">
+          <%- include('registerForm.ejs') %>
+        </li>
+        <% } %>
+        <% if(title == "Dashboard") {%>
+        <li class="nav-item pe-3">
+          <a class="nav-link" href="#">Settings</a>
+        </li>
+        <% } %>
+        <li class="nav-item pe-3">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item pe-3">
+          <a class="nav-link" href="/auth/logout">Logout</a>
+        </li>
+      </ul>
     </div>
+    <ul class="nav navbar-nav navbar-right align-self-baseline">
+      <div class="navbar-buttons container-fluid d-flex flex-nowrap">
+        <%if(title=='Dashboard'){%>
+          <div class="btn-group btn-group-lg pe-1" role="group">
+            <button type="button" class="btn active btn-outline-dark" id="dashboard-button" autocomplete="off" checked>
+              <i class="fa-solid fa-stopwatch"></i>
+            </button>
+            <button type="button" class="btn btn-outline-dark" id="charts-button" autocomplete="off">
+              <i class="fa-solid fa-chart-pie"></i>
+            </button>
+            <button type="button" class="btn btn-outline-dark" id="list-button" autocomplete="off">
+              <i class="fa-solid fa-list"></i>
+            </button>
+          </div>
+        <%}%>
+      </div>
+    </ul>
+
   </div>
 </nav>

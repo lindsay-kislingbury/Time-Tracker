@@ -1,16 +1,28 @@
-<div class="dropdown">
-  <button type="button" class="btn bg-transparent dropdown-toggle ps-0 border-0" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-    Login
-  </button>
-  <form class="dropdown-menu dropdown-menu-lg p-4 text-bg-light" action="/auth/login" method="post">
-    <div class="mb-3">
-      <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
-      <input type="email"  name="username" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
+<a href= "" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
+  Login
+</a>
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="loginModalLabel">Login</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="text-bg-light" action="/auth/login" method="post">
+          <div class="mb-3">
+            <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
+            <input type="email"  name="username" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
+            <input type="password" name="password"  class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
+          </div>
+            <button type="submit" class="btn btn-dark">Sign in</button>
+        </form>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
-      <input type="password" name="password"  class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
-    </div>
-      <button type="submit" class="btn btn-dark">Sign in</button>
-  </form>
+  </div>
 </div>
+  
+  

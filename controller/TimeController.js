@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
+const dayjs = require('dayjs')
 
 const createStamp = async (req, res) => {
    try{
@@ -39,6 +40,7 @@ const editStamp = async(req,res) => {
       const editId = mongoose.Types.ObjectId(req.body.stampId);
       const timestamp = {
          title: req.body.title,
+         project: req.body.project,
          tags: req.body.tags,
          date: req.body.date,
          elapsedTime: req.body.time,
@@ -58,29 +60,32 @@ const updateDivContent = async(req, res) => {
    res.send(user);
 }
 
-const getAllTags = async(req,res) => {
+const getAllTagsAndProjects = async(req,res) => {
    try{
       const user = await User.findById(req.user.id);
       const allTags = user.timestamps.flatMap(timestamp => {
          return timestamp.tags.flatMap(tag => {
             return tag;
          })
-      })
+      });
       const tags = [...new Set(allTags)];
-      const projects = user.timestamps.flatMap(timestamp => {
-         return timestamp.project;
-      })
+      const projects = [];
+      user.timestamps.forEach(timestamp => {
+         if(!projects.includes(timestamp.project)){
+            projects.push(timestamp.project);
+         }
+      });
       res.send({
          tags: tags,
          projects: projects
       });
    } catch(error) {
       console.log(error);
-      res.status(500).json({message: "Error getting all tags for user"})
+      res.status(500).json({message: "Error getting all tags for user"});
    }
 }
 
-const getOneEntry = async(req,res) => {
+const getOneEntry = async(req, res) => {
    try{
       const user = await User.findById(req.user.id);
       const timestamp = user.timestamps.find(stamp => {
@@ -108,12 +113,13 @@ const getAllEntries = async(req, res) => {
    }
 }
 
+
 module.exports = {
    createStamp,
    removeStamp,
    editStamp,
    updateDivContent,
-   getAllTags,
+   getAllTagsAndProjects,
    getOneEntry,
    getAllEntries,
 };

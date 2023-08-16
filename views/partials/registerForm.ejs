@@ -1,24 +1,35 @@
-<div class="dropdown">
-  <button type="button" class="btn bg-transparent dropdown-toggle ps-0 border-0" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-    Register
-  </button>
-  <form class="dropdown-menu p-4 text-bg-light" action="/auth/signup" method="post">
-      <div class="mb-3">
-      <label for="username" class="form-label">Email address</label>
-      <input type="email"  name="username" class="form-control" id="username" placeholder="email@example.com">
+<a href= "" class="nav-link" data-bs-toggle="modal" data-bs-target="#registerModal">
+  Register
+</a>
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="registerModalLabel">Register</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="text-bg-light" action="/auth/signup" method="post">
+          <div class="mb-3">
+            <label for="username" class="form-label">Email address</label>
+            <input type="email"  name="username" class="form-control" id="username" placeholder="email@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name"  class="form-control" id="name" placeholder="Name">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password"  class="form-control" id="password" placeholder="Password">
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" name="confirmPassword"  class="form-control" id="confirmPassword" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-dark">Register</button>
+        </form>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" name="name"  class="form-control" id="name" placeholder="Name">
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" name="password"  class="form-control" id="password" placeholder="Password">
-    </div>
-    <div class="mb-3">
-      <label for="confirmPassword" class="form-label">Confirm Password</label>
-      <input type="password" name="confirmPassword"  class="form-control" id="confirmPassword" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-dark">Register</button>
-  </form>
+  </div>
 </div>
+  

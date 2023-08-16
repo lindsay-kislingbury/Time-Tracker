@@ -5,6 +5,7 @@ const {check, validationResult} = require("express-validator"); //  TODO: ADD VA
 const {
   logout, 
   dashboard, 
+  tempSignup,
   signup, 
   loginCheck, 
   signupCheck, 
@@ -24,6 +25,7 @@ router.get('/dashboard', dashboard);
 router.get('/logout', logout);
 router.get('/register', signupCheck);
 router.post("/signup", signup);
+router.post("/tempSignup", tempSignup);
 router.post(
     "/login",
     passport.authenticate("local", {

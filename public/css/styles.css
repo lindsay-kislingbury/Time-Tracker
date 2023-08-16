@@ -1,7 +1,7 @@
 
 /*Global*/
 .hidden {
-  display: none;
+  display: none !important;
 }
 html{
   height: 100%;
@@ -30,12 +30,20 @@ p, table{
   font-family: 'Rubik', sans-serif !important;
 }
 
-.top-nav{
-  background-color: transparent;
-}
-
 .input-group{
   font-family: 'Rubik', sans-serif;
+}
+
+.dropdown-menu{
+  border-width: 1px !important;
+  border-color: #000 !important;
+  inset: -2px auto auto 0px !important;
+}
+
+
+
+.hide{
+  display: none !important;
 }
 
 /*Title Page*/
@@ -59,12 +67,22 @@ button:active:focus {
 }
 
 /*Navbar*/
+nav a.navbar-brand{
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+}
 nav a{
   text-decoration: none !important;
-  font-family: 'Outfit', sans-serif !important;
-  font-size: 1.2rem;
-  font-weight: 600; 
+  font-family: 'Roboto Mono', monospace;
   color: #000;
+}
+nav a:hover{
+  font-weight: 600 !important;
+}
+
+#reigsterModal, #loginModal{
+  font-family: 'Outfit', sans-serif !important;
 }
 
 #tagline{
@@ -82,6 +100,10 @@ nav a{
       1px -1px 0 #000,
       -1px 1px 0 #000,
       1px 1px 0 #000;
+}
+
+.dropdown-menu{
+  width: max-content !important;
 }
 
 /*Footer*/
@@ -104,10 +126,10 @@ nav a{
 }
 
 #wrapper-charts{
-  display: none;
+  display: flex;
   margin-top: 5px;
   flex-direction: row;
-  flex-wrap: wrap;
+  height: 100%;
 }
 
 #list{
@@ -122,10 +144,6 @@ nav a{
 table.dataTable > tbody > tr.child span.dtr-title{
   min-width: fit-content !important;
   margin-right:4px !important;
-}
-
-#wrapper-list{
-  display: none;
 }
 
 table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTable.dtr-column > tbody > tr > th.dtr-control::before, table.dataTable.dtr-column > tbody > tr > td.control::before, table.dataTable.dtr-column > tbody > tr > th.control::before{
@@ -266,17 +284,65 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   width: fit-content !important;
 }
 
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-left: 0 !important;
+}
+
 
 /*Stamps Table*/
 #recent-table{
   overflow-y: auto;
 }
 
-.badge-secondary{ /*Tag badges*/
-  font-weight: 300 !important;
-  background-color: #2660a4 !important;
+.time-font{
+  font-family: 'Roboto Mono', monospace !important;
+  font-weight: 600;
 }
 
+.badge-secondary{/*Project badge*/
+  color: #000 !important;
+  font-weight: 200 !important;
+  background-color: rgba(247, 247, 247, 0.392) !important;
+}
+
+.badge-primary{/*Tag badges*/
+  font-weight: 600 !important;
+  background-color: rgba(38, 96, 164, 0.76) !important;
+}
+
+
+#recent-table::-webkit-scrollbar {
+  width: 8px;
+  background-color: #F5F5F5;
+}
+
+/*Chart*/
+.chart-container{
+  position: relative; 
+}
+#charts{
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+#options-header{
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 600;
+}
+.dropdown-menu{
+  border-width: 1px !important;
+  border-color: #000 !important;
+  inset: -2px auto auto 0px !important;
+}
+
+.badge-nav{
+  background-color: rgba(247, 247, 247, 0.8) !important;
+  color:#212529 !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 600 !important;
+}
+
+#project-choices{
+  font-family: 'Rubik', sans-serif !important;
+}
 
 /*Edit Modal*/
 .form-control{
@@ -287,7 +353,7 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
 
 /*Media Breakpoints*/
 /*Phones*/
-@media only screen and (min-width:320px)  {
+@media (min-width:320px)  {
   #wrapper-dashboard{
     display: flex;
     flex-direction: row;
@@ -305,7 +371,7 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
     margin-left: 0px !important;
     max-height: -moz-calc(100vh - 330px);
     max-height: -webkit-calc(100vh - 330px);
-    max-height: calc(100vh - 330px)
+    max-height: calc(100vh - 330px);
   }
   .edit-inputs{
     flex-direction: column !important;
@@ -317,6 +383,13 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   .nav-pills .nav-link{
     padding: 0 10px 0 10px;
   }
+  .navbar-buttons{
+    padding: 0 !important;
+  }
+  .navbar-brand{
+    width:fit-content !important;
+  }
+  
   .timer-buttons{
     width:min-content !important;
     font-size: 1rem !important;
@@ -324,9 +397,11 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   .navbar-toggler{
     padding: 1 !important;
   }
+  #top-nav{
+    order: 2;
+  }
   #wrapper-list{
     width: 100%;
-    padding: 5px;
   }
   table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control::before{
     margin: 0 !important;
@@ -339,30 +414,53 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
     padding: 5px 2px 5px 2px;
     margin: 0;
   }
+  #wrapper-charts{
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: center;
+  }
+  #chart-canvas{
+    padding: 4px;
+  }
+  #chart-navbar{
+    width: 97%;
+    margin-bottom: .5rem;
+  }
+  .chart-container{
+    height: calc(100vh - 330px);
+    min-height: 300px;
+    width: 95vw;
+  }
+  #projects-container{
+    font-size: 0.9rem !important;
+  }
 }
 
 /*Tablet,  Desktop*/
 @media (min-width:768px)  {
+  #outer-container{
+    padding: 0 10px 0 10px !important;
+    max-width: 1200px;
+  }
   #wrapper-dashboard{
     display: flex;
     flex-wrap: nowrap;
+    justify-content: center;
   }
   #timer-box{
-    min-width: 300px;
     padding: 10px !important;
-  }
-  .stopwatch{
-    width: 35vw;
-    max-width: 330px;
+    max-width: 350px;
   }
   .edit-inputs{
     flex-direction: row !important;
     flex-wrap: nowrap !important;
   }
   #recent-table{
-    max-width: 50vw;
+    max-width: 675px;
     margin-top: 0 !important;
-    margin-left: 5px !important;
+    margin-left: 10px !important;
     max-height: -moz-calc(100vh - 65px);
     max-height: -webkit-calc(100vh - 65px);
     max-height: calc(100vh - 65px)
@@ -378,16 +476,32 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
     font-size: 1.5rem !important;
   }
   .navbar{
-    padding: 6px 15px 6px 15px !important;
+    padding: 6px 35px 6px 35px !important;
   }
   .navbar-buttons{
     padding-right: 20px;
   }
-  #wrapper-list{
-    max-width: 90vw;
+  #top-nav{
+    order: 0;
   }
   table.dataTable > tbody > tr.child span.dtr-title{
     margin-left: 10px !important;
+  }
+  #wrapper-charts{
+    flex-wrap: nowrap;
+  }
+  .chart-container{
+    height: 80vh;
+    width: 40vw;
+  }
+  #chart-canvas{
+    padding: 10px;
+  }
+  #chart-navbar{
+    min-width: 380px;
+    margin-right: 10px !important;
+    margin-bottom: auto;
+    width: 25vw;
   }
   #wrapper-list{
     padding: 0 5vw 0 5vw;
@@ -396,14 +510,3 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
     padding: 5px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-

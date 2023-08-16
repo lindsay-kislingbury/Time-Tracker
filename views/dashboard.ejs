@@ -8,22 +8,22 @@
     <body>
       <main>
         <div class="container" id="outer-container">
-          <div class="container h-100 w-100 wrapper" id="wrapper-dashboard">
+          <!--Dashboard-->
+          <div class="h-100 w-100 wrapper" id="wrapper-dashboard">
             <!--Stopwatch-->
             <%- include('partials/stopwatch.ejs') %>
-            <!--Table-->
-            <%- include('partials/table.ejs') %>
+            <!--Dashboard Table-->
+            <%- include('partials/dashboard-table.ejs') %>
           </div>
-
-          <div class ="container wrapper" id="wrapper-charts">
-            <%-include('partials/charts.ejs') %>
-          </div>
-          <div class ="container-fluid wrapper" id="wrapper-list">
-            <!--Table-->
+          <!--Data Table-->
+          <div class ="container-fluid wrapper hide" id="wrapper-list"> 
             <%- include('partials/list.ejs') %>
           </div>
+          <!--Charts-->
+          <div class ="container wrapper hide" id="wrapper-charts">
+            <%-include('partials/charts.ejs') %>
+          </div>
         </div>
-
         <!--Modal-->
         <%- include('partials/edit-modal.ejs') %>
       </main>
@@ -31,5 +31,7 @@
     <script type = "text/javascript" src = "/js/timer-helpers.js"></script>
     <script type = "text/javascript" src="/js/content-helpers.js"></script>
     <script type = "text/javascript" src="/js/chart-helpers.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/dayjs@1.11.9/dayjs.min.js "></script>
+    
   </body>
 </html>

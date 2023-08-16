@@ -1,5 +1,5 @@
 <!--Table-->
-<div class="container px-0 mx-0 overflow-auto" id="recent-table">
+<div class="container-fluid px-0 mx-0 overflow-auto" id="recent-table">
     <table class="table table-borderless rounded" id="stamps">
         <thead class="sticky-top text-bg-dark py-0">
             <tr>
@@ -9,7 +9,7 @@
         <tbody class="table-borderless" style="background-color: rgba(255, 255, 255, 0.3);">
             <%if(count<=0){%>
                 <td colspan="4">
-                    <p>No Timestamps Yet!</p>
+                    <p class="text-center">No Entries Yet</p>
                 </td>
             <%}else{%>
                 <%if(count>10){%>
@@ -17,18 +17,14 @@
                 <%}%>
                 <% for (var i=count-1; i>=0; i--){%>
                     <tr class="bg-transparent text-dark">
-                        <td class="col-3 py-0 my-0">
+                        <td class="col-4 py-0 my-0 align-middle">
                             <span class="text-capitalize fw-bold">
                                 <%-timestamps[i].title%>
                             </span>
-                            <br>
-                            <span>
-                                <%-timestamps[i].date.toLocaleDateString('es-pa');%>
-                            </span>
                         </td>
-                        <td class="col-2 px-0 py-0 text-start my-0 align-middle">
-                            <span class="fs-5">
-                                <%-new Date(timestamps[i].elapsedTime * 1000).toISOString().slice(11, 19);%>
+                        <td class="col-1 p-0 text-start m-0 align-middle">
+                            <span class="time-font fs-5">
+                                <%-new Date(timestamps[i].elapsedTime * 1000).toISOString().slice(11, 19)%>
                             </span>
                         </td>
                         <td class="col-1 align-end">
@@ -37,12 +33,15 @@
                             </button>
                         </td>
                     </tr>
-                    <tr> 
+                    <tr class="p-0 m-0"> 
                         <td colspan="4" class="py-0 my-0">
+                            <span class="text-capitalize badge badge-primary">
+                                <%-timestamps[i].project%>
+                            </span>
                             <% for (var j=0; j<timestamps[i].tags.length; j++){ %>
                                 <span class="badge badge-secondary rounded-pill"><%-timestamps[i].tags[j]%></span>
                             <% } %>
-                            <hr class="border border-dark border-2 border-opacity-60 mt-1 mb-2">
+                            <hr class="border border-dark border-2 mt-1 mb-2">
                         </td>
                     </tr>
                 <%}%>
