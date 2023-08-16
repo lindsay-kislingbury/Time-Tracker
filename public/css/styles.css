@@ -365,6 +365,7 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   #timer-box{
     padding: 4px;
     width: 97%;
+    max-width: 450px;
   }
   #recent-table{
     margin-top: 5px !important;
@@ -426,12 +427,12 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   }
   #chart-navbar{
     width: 97%;
+    max-width: 450px;
     margin-bottom: .5rem;
   }
   .chart-container{
     height: calc(100vh - 330px);
     min-height: 300px;
-    width: 95vw;
   }
   #projects-container{
     font-size: 0.9rem !important;
@@ -439,7 +440,7 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
 }
 
 /*Tablet,  Desktop*/
-@media (min-width:768px)  {
+@media (min-width:970px)  {
   #outer-container{
     padding: 0 10px 0 10px !important;
     max-width: 1200px;
@@ -492,7 +493,6 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   }
   .chart-container{
     height: 80vh;
-    width: 40vw;
   }
   #chart-canvas{
     padding: 10px;

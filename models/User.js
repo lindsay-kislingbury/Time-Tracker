@@ -15,11 +15,21 @@ const UserSchema = new Schema(
             date: Date,
             elapsedTime: Number,
         }],
+        createdAt: { 
+            type: Date, 
+            default: Date.now 
+        },
+        expireAt: { 
+            type: Date, 
+            default: undefined 
+        } 
     },
     {
         collection: 'users'
     }
 );
+
+UserSchema.index({ "expireAt": 1 }, { expireAfterSeconds: 0 });
 
 UserSchema.pre("save", async function(next) {
     const user = this;
@@ -45,5 +55,7 @@ UserSchema.methods.comparePassword = async function(password) {
         return false;
     }
 };
+
+
 
 module.exports = mongoose.model("user", UserSchema);

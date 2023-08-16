@@ -1,6 +1,6 @@
 const User = require("../models/User");
-const TempUser = require("../models/TempUser");
 const passport = require("passport");
+const { v4: uuidv4 } = require('uuid');
 let msg = "valid";
 
 const loginCheck = async (req, res) => {
@@ -23,7 +23,6 @@ const dashboard = async(req, res) => {
     user = req.user;
     userData = await User.findById(user.id);
     count = userData.timestamps.length; 
-    
     res.render('dashboard', 
     {   
         title: 'Dashboard',
@@ -50,15 +49,25 @@ const signupCheck = (req, res) => {
 }
 
 const tempSignup = async (req, res) => {
-    const {username, name, password} = req.body;
-    newUser = new TempUser({username, name, password});
+    const {name, password} = req.body;
+    //var expireTime = new Date(Date.now() + 24 * 60 * 60 * 1000) 1 day
+    var expireTime = new Date(Date.now() + 2 * 60 * 1000); //2 minutes
+    var username = uuidv4();
+    newUser = new User({
+        username: username,
+        name: name, 
+        password: password,
+        expireAt: expireTime 
+    });
+    console.log('new user: ', newUser)
     await newUser.save();
+    res.send({username: username})
 }
 
 
 const signup = async (req, res) => {
+    console.log('entered normal signup')
     const {username, name, password} = req.body;
-    console.log('req.body: ', req.body)
     if(req.body.password != req.body.confirmPassword){
         return res.render('index', {
             message: "confirm password does not match",

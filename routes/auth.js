@@ -25,16 +25,10 @@ router.get('/dashboard', dashboard);
 router.get('/logout', logout);
 router.get('/register', signupCheck);
 router.post("/signup", signup);
-router.post("/tempSignup", tempSignup);
-router.post(
-    "/login",
-    passport.authenticate("local", {
-      failureMessage: "Invalid username or password", 
-      failureRedirect: "/auth/invalidLogin",
-      failureFlash: true
-    }),
-    loginCheck
+router.post("/tempSignup", tempSignup, 
+  
 );
+router.post("/login", passport.authenticate("local"), loginCheck);
 router.get('/invalidLogin', invalidLogin);
 
 
