@@ -1,6 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("../models/User");
+const { v4: uuidv4 } = require('uuid');
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
@@ -18,7 +19,7 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-passport.use(new LocalStrategy(
+passport.use('local-login', new LocalStrategy(
     {
         usernameField: 'username',
         passwordField: 'password',
@@ -26,12 +27,68 @@ passport.use(new LocalStrategy(
     async (username, password, done) => {
       try {
         const user = await User.findOne({"username": username});
-        if (!user) return done(null, false);
-
+        if (!user) return done(null, false, {message: 'Incorrect Username or Password'});
         const passwordMatch = await user.comparePassword(password);
-        if (!passwordMatch) return done(null, false);
-
+        if (!passwordMatch) return done(null, false, {message: 'Incorrect Username or Password'});
         return done(null, user);
+      } 
+      catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
+passport.use('local-signup', new LocalStrategy(
+    {
+        usernameField: 'username',
+        passwordField: 'password',
+        passReqToCallback: true,
+    },
+    async (req, username, password, done) => {
+      const name = req.body.name;
+      const confirmPassword = req.body.confirmPassword;
+      if(password != confirmPassword){
+        console.log('not match password branch')
+        return(done, null, false, {message: 'Confirm Password Does Not Match'})
+      }
+      try {
+        var newUser;
+        const user = await User.findOne({"username": username});
+        if (user) return done (null, false, {message: 'A User With This Email Already Exists'})
+        console.log('creating branch')
+        newUser = new User({username, name, password});
+        await newUser.save();
+        console.log('newUser: ', newUser)
+        return done(null, newUser);
+      } 
+      catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
+passport.use('local-temp-signup', new LocalStrategy(
+    {
+      usernameField: 'username',
+      passwordField: 'password',
+      passReqToCallback: true,
+    },
+    async (req, username, password, done) => {
+      const name = req.body.name;
+      const id = uuidv4();
+      console.log('nanoid: ', username);
+      try {
+        var newUser = new User({
+          username: id,
+          name: name,
+          password: password,
+          expireAt: new Date(Date.now() + 86400000), //1 day
+        });
+        await newUser.save();
+        console.log('newUser: ', newUser)
+        return done(null, newUser);
       } 
       catch (err) {
         return done(err);

@@ -5,24 +5,30 @@
     <title>Home</title>
     </head>
       <%- include('partials/navbar.ejs') %>
-    <% if(message != "valid"){ %>
+    <% if(message.length > 0){ %>
       <div class="container-sm">
-        <div class="alert alert-danger rounded-0 border-white bg-transparent alert-dismissible fade show d-flex align-items-center" role="alert">
-              <div class="container-sm text-center"><%- message %></div>
+        <div class="alert alert-light alert-dismissible border border-dark fade in show d-flex align-items-center" role="alert">
+              <div class="container-sm text-center text-danger fw-semibold"><%-message%></div>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>  
       </div>
     <% } %>
-    <body>
+    <body id="dashboard">
       <main>
         <div class="container-sm text-left ps-4 my-5 py-5">
           <h1 class="display-1 my-0 text-capitalize" id="tagline"><span class="colored-text title-text">track time</span> <br>
           for any reason, anywhere.</h1>
-          <p>Track time spent on activities  </p>
+          <p>Start the stopwatch for real-time precision, log activities manually for flexibility, and uncover insightful charts to visualize your time. </p>
           <div class="container px-0 mx-0">
-            <button type="button" class="btn shadow-button" id="quick-start-button">
-              Quick Start
-            </button>
+            <form action="/auth/tempSignup" method="post">
+              <input type="hidden" name="username" value="Guest">
+              <input type="hidden" name="name" value="Guest">
+              <input type="hidden" name="password" value="guest">
+              <button type="submit" class="btn shadow-button" id="quick-start-button">
+                Quick Start
+              </button>
+            </form>
+
           </div>
         </div>
         

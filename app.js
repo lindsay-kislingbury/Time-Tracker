@@ -1,8 +1,14 @@
 //Imports
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+
 const express = require('express');
 const mongoose = require ("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const flash = require('connect-flash');
 const passport = require("./services/passport");
 const AuthRoute = require("./routes/auth");
 const TimeRoute = require("./routes/time");
@@ -14,6 +20,9 @@ const {MONGO_URI, SECRET} = require("./config");
 const PORT = process.env.PORT || 4000;
 const app = express()
 app.use(express.json());
+
+//Connect-Flash
+app.use(flash());
 
 //Configure Session
 var sessionDay = 86400000;

@@ -1,13 +1,10 @@
 const User = require("../models/User");
-const passport = require("passport");
-const { v4: uuidv4 } = require('uuid');
-let msg = "valid";
 
 const loginCheck = async (req, res) => {
-    console.log('req in logincheck: ', req.body)
     if(!req.user){
-        return res.render('index', {
-            message: "valid",
+        res.render('index', 
+        {
+            message: req.flash('error'),
             title: "Home"
         });
     }
@@ -17,9 +14,6 @@ const loginCheck = async (req, res) => {
 };
 
 const dashboard = async(req, res) => {
-    if(!req.user){
-       return res.redirect('/');
-    }
     user = req.user;
     userData = await User.findById(user.id);
     count = userData.timestamps.length; 
@@ -32,68 +26,6 @@ const dashboard = async(req, res) => {
     });
 }
 
-
-const invalidLogin = (req, res) => {
-    res.render('index', {
-        message: "Incorrect Email or Password",
-        title: "Home"
-    });
-}
-
-const signupCheck = (req, res) => {
-    res.render('index', 
-    {
-        message: "valid",
-        title: "Home"
-    });
-}
-
-const tempSignup = async (req, res) => {
-    const {name, password} = req.body;
-    //var expireTime = new Date(Date.now() + 24 * 60 * 60 * 1000) 1 day
-    var expireTime = new Date(Date.now() + 2 * 60 * 1000); //2 minutes
-    var username = uuidv4();
-    newUser = new User({
-        username: username,
-        name: name, 
-        password: password,
-        expireAt: expireTime 
-    });
-    console.log('new user: ', newUser)
-    await newUser.save();
-    res.send({username: username})
-}
-
-
-const signup = async (req, res) => {
-    console.log('entered normal signup')
-    const {username, name, password} = req.body;
-    if(req.body.password != req.body.confirmPassword){
-        return res.render('index', {
-            message: "confirm password does not match",
-            title: "Home"
-        });
-    }
-    try{
-        let user = await User.findOne({username});
-        if(!user) {
-            let newUser = new User({username, name, password});
-            await newUser.save();
-            return res.redirect('/');
-        }
-        return res.render('index', {
-            message: "the user with this email already exists",
-            title: "Home"
-        });
-    }
-    catch(error){
-        return res.render('index', {
-            message: "an error occured",
-            title: "Home"
-        });
-    }
-};
-
 const logout = (req, res, next) => {
     req.logout(function(err){
         if(err){
@@ -104,11 +36,7 @@ const logout = (req, res, next) => {
 };
 
 module.exports = {
-    signup,
-    tempSignup,
     dashboard,
     logout,
     loginCheck,
-    signupCheck,
-    invalidLogin,
   };

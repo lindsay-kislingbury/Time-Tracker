@@ -5,11 +5,7 @@ const {check, validationResult} = require("express-validator"); //  TODO: ADD VA
 const {
   logout, 
   dashboard, 
-  tempSignup,
-  signup, 
   loginCheck, 
-  signupCheck, 
-  invalidLogin
 } = require("../controller/AuthController");
 
 //Initalize Router
@@ -23,13 +19,25 @@ router.use(express.static(__dirname + '/public'));
 router.get('/', loginCheck);
 router.get('/dashboard', dashboard);
 router.get('/logout', logout);
-router.get('/register', signupCheck);
-router.post("/signup", signup);
-router.post("/tempSignup", tempSignup, 
-  
+router.all("/login", 
+  passport.authenticate("local-login", {
+    successRedirect: '/auth/dashboard',
+    failureRedirect: '/',
+    failureFlash: true,
+  })
 );
-router.post("/login", passport.authenticate("local"), loginCheck);
-router.get('/invalidLogin', invalidLogin);
+router.all("/signup",
+  passport.authenticate("local-signup", {
+    successRedirect: '/auth/dashboard',
+    failureRedirect: '/',
+    failureFlash: true,
+  })
+);
+router.all("/tempSignup", 
+  passport.authenticate("local-temp-signup", {
+    successRedirect: '/auth/dashboard',
+  })
+);
 
 
 module.exports = router;
