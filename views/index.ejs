@@ -6,32 +6,88 @@
     </head>
       <%- include('partials/navbar.ejs') %>
     <% if(message.length > 0){ %>
-      <div class="container-sm">
+      <div class="container-fluid">
         <div class="alert alert-light alert-dismissible border border-dark fade in show d-flex align-items-center" role="alert">
               <div class="container-sm text-center text-danger fw-semibold"><%-message%></div>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>  
       </div>
     <% } %>
-    <body id="dashboard">
+    <body>
       <main>
-        <div class="container-sm text-left ps-4 my-5 py-5">
-          <h1 class="display-1 my-0 text-capitalize" id="tagline"><span class="colored-text title-text">track time</span> <br>
-          for any reason, anywhere.</h1>
-          <p>Start the stopwatch for real-time precision, log activities manually for flexibility, and uncover insightful charts to visualize your time. </p>
-          <div class="container px-0 mx-0">
-            <form action="/auth/tempSignup" method="post">
-              <input type="hidden" name="username" value="Guest">
-              <input type="hidden" name="name" value="Guest">
-              <input type="hidden" name="password" value="guest">
-              <button type="submit" class="btn shadow-button" id="quick-start-button">
-                Quick Start
-              </button>
-            </form>
+        <div class="outer-container">
+          <div class="container scrolling-page" id="wrapper-index">
+            <div class="text-left py-5" >
+              <h1 class="display-1 my-0 text-capitalize" id="tagline"><span class="colored-text title-text">track time</span> <br>
+              for any reason, anywhere.</h1>
+              Start the stopwatch for real-time precision, log activities manually for flexibility, and uncover insightful charts to visualize your time.
+              <div class="container px-0 mx-0">
+                <form action="/auth/tempSignup" method="post">
+                  <input type="hidden" name="username" value="Guest">
+                  <input type="hidden" name="name" value="Guest">
+                  <input type="hidden" name="password" value="guest">
+                  <button type="submit" class="btn shadow-button" id="quick-start-button">
+                    Quick Start
+                  </button>
+                </form>
+              </div>
+            </div>
 
-          </div>
+            <div class="d-grid grid gap-0 row-gap-5" id="index-cards">
+
+              <div class="index-card-body me-auto rounded p-3">
+                  <div class="row d-flex">
+                    <div class="col-lg-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
+                        <img class="img-fluid w-100" src="img/timetracker-stopwatch.png">
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 d-flex flex-column justify-content-center">
+                      <h6 class="index-card-header p-2">Stopwatch</h6>
+                      <p class="p-2"> 
+                        Use the built-in stopwatch or input entries manually. Categorize your entries by adding a Project and some tags to stay organized.
+                        You can select from existing projects and tags or create new ones as needed.
+                      </p>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="index-card-body ms-auto rounded p-3">
+                <div class="index-card-content">
+                  <div class="row d-flex">
+                    <div class="col-lg-4 col-md-4 col-sm-12 d-flex align-items-center">
+                        <img class="img-fluid w-100" src="img/timetracker-chart-1.png">
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 d-flex flex-column justify-content-center">
+                      <h6 class="index-card-header pt-2">Charts</h6>
+                      <p> 
+                        Visualize your time with charts that are generated instantly.
+                        Build charts specific to your needs using the date range selector and selecting included projects.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="index-card-body me-auto rounded p-3">
+                <div class="index-card-content">
+                  <div class="row d-flex">
+                    <div class="col-lg-4 col-md-4 col-sm-12 d-flex align-items-center">
+                        <img class="img-fluid w-100" src="img/timetracker-list.png">
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 d-flex flex-column justify-content-center">
+                      <h6 class="index-card-header pt-2">Details</h6>
+                      <p> 
+                        Stay organized and see the big picture with Details. 
+                        View and make changes to all of your entries. Find entries by title, tag, or project using the search bar and sort entries by date, title, or project. 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
-        
+       
+
+
 
       </main>
         <%- include('partials/footer.ejs') %>

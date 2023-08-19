@@ -364,7 +364,7 @@ function remove(){
     $('#editModal').modal('hide');
 }
 
-//ABOUT PAGE
+
 
 
 

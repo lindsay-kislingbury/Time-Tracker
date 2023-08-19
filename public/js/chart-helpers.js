@@ -114,11 +114,13 @@ function rangeOptionCheck(){
 }
 
 function loadProjects(data){
+    console.log('data: ', data)
     $('input.project-checkbox').each(function(){
         $(this).attr('disabled','disabled');
     });
     data.forEach(project => {
-        var checkbox = $('input.project-checkbox[value='+project+']');
+        var checkbox = $('input.project-checkbox[value="'+project+'"]');
+        console.log('checkbox: ', checkbox)
         if(checkbox.length){
             checkbox.removeAttr('disabled');
         }else{
@@ -277,6 +279,7 @@ function loadChart(range){
         url: '/time/getAllEntries',
         success: function(d){  
             chartData = parseChartData(d, range);
+            console.log('chart data: ', chartData)
             var labels = [], data = [];
             labels = Object.keys(chartData);
             data = Object.values(chartData);
