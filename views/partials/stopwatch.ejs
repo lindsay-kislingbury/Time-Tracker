@@ -18,18 +18,25 @@
         <!--Title, Project & Tags-->
         <div class="d-flex flex-wrap">
           <!--Title Input-->
-          <div class="input-group input-group mb-1">
+          <div class="input-group input-group-md mb-1">
             <span class="input-group-text border-secondary">
-              <i class="fa-solid fa-pen-to-square fa-fw"></i>
+                <i class="fa-solid fa-pen-to-square fa-fw"></i>
             </span>
-            <input type="text" class="form-control border-secondary validate" id="new-title" aria-describedby="title-feedback" maxlength="25" placeholder="Title" onfocusout="checkValidInput('new-title')">
+            <input type="text" id="new-title" class="form-control border-secondary validate" maxlength="30" placeholder="Title" onfocusout="checkValidInput('add-title')" required>
+            <div class="invalid-feedback">
+              Please add a title.
+            </div>
           </div>
+
           <!--Project Input-->
           <div class="input-group input-group mb-1">
             <span class="input-group-text border-secondary">
               <i class="fa-regular fa-folder-open fa-fw"></i>
             </span>
-            <select class="form-select" name="new-project" id="new-project" data-placeholder="Project"></select> 
+            <select class="form-select project-input" name="new-project" id="new-project" data-placeholder="Project" required></select> 
+            <div class="invalid-feedback">
+              Please add a project.
+            </div>
           </div>
           <!--Tags Input-->
           <div class="input-group input-group mb-1">
@@ -69,22 +76,31 @@
 
     <!--ADD INPUT-->
     <div class="tab-pane fade p-1" id="add-tab-pane" role="tabpanel" aria-labelledby="add-tab" tabindex="0">
+      
       <!--Title Input-->
       <div class="input-group input-group-md mb-1">
         <span class="input-group-text border-secondary">
             <i class="fa-solid fa-pen-to-square fa-fw"></i>
         </span>
-        <input type="text" id="add-title" class="form-control border-secondary validate" aria-describedby="title-feedback" maxlength="25" placeholder="Title" onfocusout="checkValidInput('add-title')">
+        <input type="text" id="add-title" class="form-control border-secondary validate" maxlength="30" placeholder="Title" onfocusout="checkValidInput('add-title')" required>
+        <div class="invalid-feedback">
+          Please add a title.
+        </div>
       </div>
+
       <!--Project Input-->
       <div class="input-group input-group mb-1">
         <span class="input-group-text border-secondary">
           <i class="fa-regular fa-folder-open fa-fw"></i>
         </span>
-        <select class="form-select" name="add-project" id="add-project" data-placeholder="Project">
-          <option></option>    
+        <select class="form-select rounded project-input" name="add-project" id="add-project" data-placeholder="Project" required>
+          <option selected disabled value=""></option>    
         </select>
+        <div class="invalid-feedback">
+          Please add a project.
+        </div>
       </div>
+      
       <!--Tags Input-->
       <div class="input-group input-group-md flex-nowrap mb-1">
         <span class="input-group-text border-secondary">
@@ -94,19 +110,32 @@
       </div>
 
       <!--Date/Time Container-->
-      <div class="input-group mb-2">
-        <!--Date Input-->
-        <span class="d-flex">
-          <span class="input-group-text border-secondary rounded-end-0">
-            <i class="fa-solid fa-calendar-days fa-fw"></i>
-          </span>
-          <input type="date" class="form-control validate rounded-0 border border-start-0 border-secondary" id="add-date" placeholder="mm/dd/yyyy" aria-describedby="date-feedback" onfocusout="checkValidInput('add-date')">
-        </span>
-        <!--Time Input-->
-        <span class="input-group-text border-secondary">
-            <i class="fa-solid fa-stopwatch fa-fw"></i>
-        </span>
-        <input class="form-control border-secondary text-start validate" name="time-input" id="add-time" type="tel" dir="rtl" placeholder="00:00:00" aria-describedby="time-feedback" onfocusout="checkValidInput('add-time')">
+
+
+      <div class="row g-0">
+        <div class="col d-flex flex-nowrap">
+          <div class="input-group">
+            <span class="input-group-text border-secondary rounded-end-0">
+              <i class="fa-solid fa-calendar-days fa-fw"></i>
+            </span>
+            <input type="date" class="form-control validate rounded-0 border-secondary border-end-0" id="add-date" placeholder="mm/dd/yyyy" onfocusout="checkValidInput('add-date')" required>
+            <div class="invalid-feedback">
+              Please add the date.
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex flex-nowrap">
+          <div class="input-group">
+            <span class="input-group-text border-secondary rounded-0">
+              <i class="fa-solid fa-stopwatch fa-fw"></i>
+            </span>
+            <input class="form-control border-secondary rounded rounded-start-0 text-start validate" name="time-input" id="add-time" type="tel" dir="rtl" placeholder="00:00:00" onfocusout="checkValidInput('add-time')" required>
+            <div class="invalid-feedback">
+              Please add total time.
+            </div>
+          </div>
+
+        </div>
       </div>
       <!--Submit Button-->
       <div class="container-fluid d-flex justify-content-end">

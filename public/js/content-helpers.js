@@ -17,6 +17,11 @@ $(document).ready(function(){
         $('#range-start').val('');
         $('#range-end').val('');
     });
+    $('select.project-input').on('change', function() {
+        if($(this).val()){
+            $(this).removeClass('is-invalid');
+        }
+    });
 });
 
 function toggleSections(visibleDiv){
@@ -140,6 +145,8 @@ function initializeTags(){
     });
 }
 
+
+
 //Edit Modal Helpers
 $("#editModal").on("hide.bs.modal", function () {
     $("#edit-tags").empty().trigger('change')
@@ -201,7 +208,6 @@ function update(){
         }
     });
 }
-
 
 
 function clearAllInputs(){
@@ -287,7 +293,7 @@ function buildAddEntry(){
     var timeInput = document.getElementById('add-time').value.split(':');
     var options = document.getElementById('add-tags').selectedOptions;
     var inputTitle = document.getElementById('add-title').value;
-    var inputProject = document.getElementById('add-project').value;
+    var inputProject = document.getElementById('add-project').value; 
     var postData = ({
         title: inputTitle[0].toUpperCase() + inputTitle.substring(1),
         project: inputProject[0].toUpperCase() + inputProject.substring(1),
@@ -315,6 +321,9 @@ function buildEditEntry(){
 }
 
 async function send(type){
+    if(!$('#'+type+'-project').val()){
+        $('#'+type+'-project').addClass('is-invalid')
+    }
     var valid = validateInputs(type);
     var postData;
     if(valid){
