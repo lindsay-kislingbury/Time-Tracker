@@ -74,11 +74,27 @@ p, table{
 
 /*About Page*/
 .about-container{
+  max-width: max-content;
+  padding: 2rem;
   display: flex;
-  padding-top: 2rem;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   background-color: rgba(248, 249, 250, 0.6) !important;
+}
+
+.social-container a:link,
+.social-container a:link,
+.social-container a:visited,
+.social-container a:active
+.social-container a:hover{
+  color: black;
+}
+
+.social-container{
+  max-width: 200px;
+  font-size: 1.5rem;
 }
 
 /*Title Page*/
