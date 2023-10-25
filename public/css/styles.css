@@ -58,9 +58,6 @@ p, table{
   font-size: 1.3rem !important;
 }
 
-
-
-
 .input-group{
   font-family: 'Rubik', sans-serif;
 }
@@ -71,10 +68,17 @@ p, table{
   inset: -2px auto auto 0px !important;
 }
 
-
-
 .hide{
   display: none !important;
+}
+
+/*About Page*/
+.about-container{
+  display: flex;
+  padding-top: 2rem;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(248, 249, 250, 0.6) !important;
 }
 
 /*Title Page*/
@@ -492,7 +496,7 @@ table.dataTable.dtr-column > tbody > tr > td.dtr-control::before, table.dataTabl
   }
   #timer-box{
     padding: 10px !important;
-    max-width: 350px;
+    max-width: 420px;
   }
   .edit-inputs{
     flex-direction: row !important;

@@ -49,17 +49,14 @@ passport.use('local-signup', new LocalStrategy(
       const name = req.body.name;
       const confirmPassword = req.body.confirmPassword;
       if(password != confirmPassword){
-        console.log('not match password branch')
         return(done, null, false, {message: 'Confirm Password Does Not Match'})
       }
       try {
         var newUser;
         const user = await User.findOne({"username": username});
         if (user) return done (null, false, {message: 'A User With This Email Already Exists'})
-        console.log('creating branch')
         newUser = new User({username, name, password});
         await newUser.save();
-        console.log('newUser: ', newUser)
         return done(null, newUser);
       } 
       catch (err) {
@@ -78,7 +75,6 @@ passport.use('local-temp-signup', new LocalStrategy(
     async (req, username, password, done) => {
       const name = req.body.name;
       const id = uuidv4();
-      console.log('nanoid: ', username);
       try {
         var newUser = new User({
           username: id,
@@ -87,7 +83,6 @@ passport.use('local-temp-signup', new LocalStrategy(
           expireAt: new Date(Date.now() + 86400000), //1 day
         });
         await newUser.save();
-        console.log('newUser: ', newUser)
         return done(null, newUser);
       } 
       catch (err) {

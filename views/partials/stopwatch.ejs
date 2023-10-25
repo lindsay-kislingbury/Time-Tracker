@@ -46,6 +46,7 @@
             <select class="form-select w-auto" name="new-tags" id="new-tags" data-placeholder="Tags" multiple></select>
           </div>
         </div>
+
         <!--Timer-->
         <div class="container-sm timer-controls rounded m-auto mb-0">
           <div class="card-header border-bottom border-2 border-dark-subtle align-items-center text-dark m-0">
@@ -110,15 +111,13 @@
       </div>
 
       <!--Date/Time Container-->
-
-
       <div class="row g-0">
         <div class="col d-flex flex-nowrap">
           <div class="input-group">
             <span class="input-group-text border-secondary rounded-end-0">
               <i class="fa-solid fa-calendar-days fa-fw"></i>
             </span>
-            <input type="date" class="form-control validate rounded-0 border-secondary border-end-0" id="add-date" placeholder="mm/dd/yyyy" onfocusout="checkValidInput('add-date')" required>
+            <input type="date" class="form-control validate rounded-0 border-secondary border-end-0" id="add-date" onfocusout="checkValidInput('add-date')" required>
             <div class="invalid-feedback">
               Please add the date.
             </div>

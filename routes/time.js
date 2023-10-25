@@ -19,7 +19,7 @@ router.post('/create', createStamp);
 router.post('/remove', removeStamp);
 router.post('/edit', editStamp);
 router.get('/update', updateDivContent);
-router.get('/loadAllTags', getAllTagsAndProjects);
+router.get('/loadAllTagsandProjects', getAllTagsAndProjects);
 router.post('/getOneEntry', getOneEntry);
 router.get('/getAllEntries', getAllEntries);
 

@@ -36,6 +36,7 @@ function toggleButtons(activeButton){
     $(activeButton).addClass('active');
 }
 
+
 //DataTables Initializaiton
 $(document).ready(function () {
     $('#list-table').DataTable({
@@ -87,19 +88,17 @@ $(document).ready(function () {
     });
 });
 
+
 //Select2 Tags Initializaiton
 $(document).ready(function () {
     clearAllInputs();
     initializeTags();
 });
 
-
-
 function initializeTags(){
-    $.get('/time/loadAllTags', function(data){
-        tags = data.tags.map((data) => ({"id": data, "text": data}));
+    $.get('/time/loadAllTagsandProjects', function(data){
         $('#new-tags').select2({
-            data: tags,
+            data: data.tags,
             multiple: true,
             placeholder: $( this ).data('placeholder'),
             closeOnSelect: false,
@@ -109,9 +108,9 @@ function initializeTags(){
             allowClear: true,
         });
         $('#add-tags').select2({
-            data: tags,
+            data: data.tags,
             multiple: true,
-            placeholder: $( this ).data('placeholder'),
+            placeholder: $(this).data('placeholder'),
             closeOnSelect: false,
             theme: 'bootstrap-5',
             tags: true,
@@ -120,7 +119,7 @@ function initializeTags(){
         });
         $('#new-project').prepend('<option value=""></option>').select2({
             data: data.projects,
-            placeholder: $( this ).data('placeholder'),
+            placeholder: $(this).data('placeholder'),
             allowClear: true,
             theme: 'bootstrap-5',
             tags: true,
@@ -144,7 +143,6 @@ function initializeTags(){
         })
     });
 }
-
 
 
 //Edit Modal Helpers
@@ -201,14 +199,12 @@ function update(){
         dataType: 'json', 
         url: '/time/update',
         success: function(data){
-            $("#stamps").load(location.href+" #stamps>*",function(){
-                initializeTags();
-            });
+            $("#stamps").load(location.href+" #stamps>*","");
             $('#list-table').DataTable().ajax.reload();
         }
     });
+    initializeTags();
 }
-
 
 function clearAllInputs(){
     $('#new-title').val('');
@@ -222,7 +218,7 @@ function clearAllInputs(){
 }
 
 function loadEditTags(){
-    $.get('/time/loadAllTags', function(data){
+    $.get('/time/loadAllTagsandProjects', function(data){
         tags = data.tags.map((data) => ({"id": data, "text": data}));
         $('#edit-tags').select2({
             data: tags,
@@ -304,6 +300,7 @@ function buildAddEntry(){
     return postData;
 }
 
+
 function buildEditEntry(){
     var options = document.getElementById('edit-tags').selectedOptions;
     var timeParts = document.getElementById('edit-time').value.split(':');
@@ -331,8 +328,6 @@ async function send(type){
             postData = buildNewEntry();
         }else if(type == 'add'){
             postData = buildAddEntry();
-        }else if(type == 'edit'){
-            postData = buildEditEntry();
         }else{
             console.log('invalid submit type');
         }

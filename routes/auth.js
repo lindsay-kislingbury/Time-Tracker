@@ -17,6 +17,9 @@ router.use(express.static(__dirname + '/public'));
 
 //Routes
 router.get('/', loginCheck);
+router.get('/about', (req, res) => {
+  res.render('about', {title: 'About'});
+});
 router.get('/dashboard', dashboard);
 router.get('/logout', logout);
 router.all("/login", 
