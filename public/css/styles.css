@@ -157,12 +157,6 @@ nav a:hover{
   width: max-content !important;
 }
 
-/*Footer*/
-.bi {
-  vertical-align: -.125em;
-  fill: currentColor;
-}
-
 /*Outer Containers*/
 #outer-container{
   padding: 0px;
